@@ -20,3 +20,12 @@ To clean up the resources
 $ npx sst remove
 $ npx sst remove --stage prod
 ```
+
+## TODO
+
+add eslint airbnb pretier and precommit hook
+
+https://www.reactnativeschool.com/how-to-setup-path-alias-in-a-react-native-typescript-app
+
+styled system with typescript
+https://dev.to/timrichter/how-to-use-styled-system-with-typescript-2fjo

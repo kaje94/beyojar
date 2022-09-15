@@ -1,7 +1,10 @@
-import { FontAwesome } from '@expo/vector-icons';
-import * as Font from 'expo-font';
-import * as SplashScreen from 'expo-splash-screen';
-import { useEffect, useState } from 'react';
+// TODO: need to use react-query
+import { FontAwesome } from "@expo/vector-icons";
+import * as Font from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect, useState } from "react";
+
+const fontsFolderPath = "../src/assets/fonts/";
 
 export default function useCachedResources() {
   const [isLoadingComplete, setLoadingComplete] = useState(false);
@@ -15,7 +18,10 @@ export default function useCachedResources() {
         // Load fonts
         await Font.loadAsync({
           ...FontAwesome.font,
-          'space-mono': require('../assets/fonts/SpaceMono-Regular.ttf'),
+          "rubik-light": require(fontsFolderPath + "Rubik-Light.ttf"),
+          "rubik-regular": require(fontsFolderPath + "Rubik-Regular.ttf"),
+          "rubik-medium": require(fontsFolderPath + "Rubik-Medium.ttf"),
+          "rubik-bold": require(fontsFolderPath + "Rubik-Bold.ttf"),
         });
       } catch (e) {
         // We might want to provide this error information to an error reporting service
