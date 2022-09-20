@@ -10,9 +10,10 @@ import en from "./en.json";
 // https://github.com/0xClpz/i18next-react-native-async-storage
 
 i18n.use(initReactI18next).init({
-  fallbackLng: "en",
-  resources: { en },
-  debug: true,
+    compatibilityJSON: "v3",
+    fallbackLng: "en",
+    resources: { en },
+    debug: true,
 });
 
 export default i18n;

@@ -1,0 +1,1 @@
+export { withTouchable } from "./WithTouchable";

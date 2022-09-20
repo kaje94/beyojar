@@ -29,3 +29,6 @@ https://www.reactnativeschool.com/how-to-setup-path-alias-in-a-react-native-type
 
 styled system with typescript
 https://dev.to/timrichter/how-to-use-styled-system-with-typescript-2fjo
+
+need to complete remaining prettier setup with git hook and eslint
+https://prettier.io/docs/en/install.html
