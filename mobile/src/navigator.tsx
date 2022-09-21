@@ -13,7 +13,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { HomeScreen } from "@src/screens";
 import { useTheme } from "styled-components";
 
-export enum screens {
+export enum Screens {
     home = "home",
 }
 
@@ -33,7 +33,7 @@ export const Navigation: React.FC = () => {
         <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
             <Stack.Navigator>
                 <Stack.Screen
-                    name={screens.home}
+                    name={Screens.home}
                     component={HomeScreen}
                     options={{ headerShown: false }}
                 />
