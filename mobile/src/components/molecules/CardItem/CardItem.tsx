@@ -1,8 +1,9 @@
 import React from "react";
+import { useTheme } from "styled-components";
+
 import fonts from "@src/assets/fonts";
 import { Box, Text } from "@src/components/atoms";
 import { fontSize, spacing } from "@src/utils/theme";
-import { useTheme } from "styled-components";
 
 export const CardItem: React.FC = () => {
     const { pallette } = useTheme();

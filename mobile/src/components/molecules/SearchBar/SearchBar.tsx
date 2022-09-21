@@ -1,12 +1,12 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TextInput as TextInputNative } from "react-native";
+import { useTheme } from "styled-components";
+
 import { BackIcon, CloseIcon, MenuIcon, SearchIcon } from "@src/assets/icons";
 import { AnimatedBox, FlexBox, TextInput } from "@src/components/atoms";
 import { useBackPress } from "@src/hooks";
 import { spacing } from "@src/utils/theme";
-import { useTheme } from "styled-components";
-
 import { useSearchBarAnimated } from "./animatedHook";
 
 export const SearchBar: React.FC = () => {
@@ -58,20 +58,22 @@ export const SearchBar: React.FC = () => {
                 )}
 
                 <TextInput
-                    accessibilityLabel="Search bar field"
-                    accessibilityHint="Notes will be filtered based on this search input"
                     inputRef={keyboardRef}
                     onFocus={onTextInputFocus}
                     onBlur={onTextInputBlur}
                     onChangeText={onTextChange}
                     value={searchText}
-                    placeholder={t("components.searchPlaceholder")}
+                    placeholder={t("components.searchBar.placeholder")}
                     returnKeyType="search"
                     keyboardType="web-search"
                     spellCheck={false}
                     flex={1}
                     marginLeft={spacing.small}
                     selectionColor={pallette.primary.dark}
+                    accessibilityHint={t("components.searchBar.inputA11yHint")}
+                    accessibilityLabel={t(
+                        "components.searchBar.inputA11yLabel"
+                    )}
                 />
 
                 {!isFocused && <SearchIcon onPress={onSearchPress} />}

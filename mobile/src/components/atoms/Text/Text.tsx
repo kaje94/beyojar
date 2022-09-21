@@ -1,7 +1,5 @@
 import React from "react";
 import { TextProps } from "react-native";
-import fonts from "@src/assets/fonts";
-import { fontSize, spacing } from "@src/utils/theme";
 import styled from "styled-components/native";
 import {
     borders,
@@ -17,6 +15,9 @@ import {
     typography,
     TypographyProps,
 } from "styled-system";
+
+import fonts from "@src/assets/fonts";
+import { fontSize, spacing } from "@src/utils/theme";
 
 type Props = TextProps &
     ColorProps &

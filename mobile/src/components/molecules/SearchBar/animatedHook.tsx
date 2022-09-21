@@ -1,8 +1,9 @@
 import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
-import { animationDurations } from "@src/utils/theme";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { useTheme } from "styled-components";
+
+import { animationDurations } from "@src/utils/theme";
 
 const colorRanges = { onBlur: 0, onFocus: 100 };
 

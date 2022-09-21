@@ -1,8 +1,9 @@
 import React, { PropsWithChildren } from "react";
 import { ColorSchemeName, useColorScheme } from "react-native";
-import { IThemePallet, themePallets } from "@src/utils/theme";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
+
+import { IThemePallet, themePallets } from "@src/utils/theme";
 
 // Default theme interface has been overwritten
 // by ITheme mobile/src/types/styled.d.ts

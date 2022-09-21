@@ -1,5 +1,6 @@
 import React, { ComponentType, FC } from "react";
 import { AccessibilityRole, GestureResponderEvent } from "react-native";
+
 import { Touchable } from "@src/components/atoms";
 
 interface WithTouchableProps {

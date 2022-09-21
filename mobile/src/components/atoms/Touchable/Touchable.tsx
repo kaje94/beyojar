@@ -1,6 +1,5 @@
 import React, { PropsWithChildren } from "react";
 import { TouchableOpacityProps } from "react-native";
-import { spacing } from "@src/utils/theme";
 import styled from "styled-components/native";
 import {
     borders,
@@ -14,6 +13,8 @@ import {
     space,
     SpaceProps,
 } from "styled-system";
+
+import { spacing } from "@src/utils/theme";
 
 type Props = TouchableOpacityProps &
     ColorProps &

@@ -1,5 +1,6 @@
 import React, { FC } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+
 import { SafeAreaBox } from "@src/components/atoms";
 import { CardItem, SearchBar } from "@src/components/molecules";
 import { NavigatorParamList, Screens } from "@src/navigator";

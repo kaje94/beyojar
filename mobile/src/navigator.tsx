@@ -10,8 +10,9 @@ import {
     NavigationContainer,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen } from "@src/screens";
 import { useTheme } from "styled-components";
+
+import { HomeScreen } from "@src/screens";
 
 export enum Screens {
     home = "home",
