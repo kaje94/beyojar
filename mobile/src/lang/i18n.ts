@@ -1,5 +1,7 @@
-import i18n from "i18next";
+/* eslint-disable import/extensions */
 import { initReactI18next } from "react-i18next";
+import i18n from "i18next";
+
 import en from "./en.json";
 
 // creating a language detection plugin using expo

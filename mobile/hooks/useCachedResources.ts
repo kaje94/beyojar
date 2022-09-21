@@ -1,3 +1,4 @@
+/* eslint-disable */
 // TODO: need to use react-query
 import { FontAwesome } from "@expo/vector-icons";
 import * as Font from "expo-font";

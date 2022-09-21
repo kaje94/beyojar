@@ -1,8 +1,8 @@
-import React, { ReactNode } from "react";
-import { ThemeProvider as StyledThemeProvider } from "styled-components";
+import React, { PropsWithChildren } from "react";
 import { ColorSchemeName, useColorScheme } from "react-native";
-import { IThemePallet, themePallets } from "../utils/theme";
+import { IThemePallet, themePallets } from "@src/utils/theme";
 import { StatusBar } from "expo-status-bar";
+import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 // Default theme interface has been overwritten
 // by ITheme mobile/src/types/styled.d.ts
@@ -11,18 +11,18 @@ export interface ITheme {
     pallette: IThemePallet;
 }
 
-const ThemeProvider = ({ children }: { children: ReactNode }) => {
+const ThemeProvider = ({ children }: PropsWithChildren) => {
     const themeMode = useColorScheme() as NonNullable<ColorSchemeName>;
-    // todo: add statusbar
+
     return (
         <StyledThemeProvider
             theme={{
-                mode: themeMode || "lightd",
+                mode: themeMode || "light",
                 pallette: themePallets.light,
             }}
         >
             {children}
-            <StatusBar />
+            <StatusBar animated />
         </StyledThemeProvider>
     );
 };

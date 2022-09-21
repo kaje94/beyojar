@@ -1,19 +1,17 @@
-import { ReactNode } from "react";
+import React, { PropsWithChildren } from "react";
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 import {
-    // props
-    color,
-    space,
-    layout,
-    flexbox,
     borders,
-    // prop interfaces
-    ColorProps,
-    SpaceProps,
-    LayoutProps,
-    FlexboxProps,
     BordersProps,
+    color,
+    ColorProps,
+    flexbox,
+    FlexboxProps,
+    layout,
+    LayoutProps,
+    space,
+    SpaceProps,
 } from "styled-system";
 
 type Props = ViewProps &
@@ -21,9 +19,7 @@ type Props = ViewProps &
     SpaceProps &
     LayoutProps &
     FlexboxProps &
-    BordersProps & {
-        children?: ReactNode;
-    };
+    BordersProps;
 
 const StyledBox = styled.View<Props>`
     ${color}
@@ -33,11 +29,11 @@ const StyledBox = styled.View<Props>`
     ${borders}
 `;
 
-export const Box: React.FC<Props> = (props) => {
+export const Box: React.FC<PropsWithChildren<Props>> = (props) => {
     return <StyledBox {...props} />;
 };
 
-export const FlexBox: React.FC<Props> = ({
+export const FlexBox: React.FC<PropsWithChildren<Props>> = ({
     display = "flex",
     flexDirection = "row",
     alignItems = "center",

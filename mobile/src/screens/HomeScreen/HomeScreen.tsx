@@ -1,32 +1,19 @@
-import React, { FC, useState } from "react";
-import { StyleSheet } from "react-native";
-
-import { Text, View } from "../../../components/Themed";
-import { NavigatorParamList, screens } from "../../navigator";
+import React, { FC } from "react";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
-import { SearchBar } from "../../components/molecules/SearchBar/SearchBar";
+import { SafeAreaBox } from "@src/components/atoms";
+import { CardItem, SearchBar } from "@src/components/molecules";
+import { NavigatorParamList, screens } from "@src/navigator";
 
 export const HomeScreen: FC<
     NativeStackScreenProps<NavigatorParamList, screens.home>
 > = () => {
     return (
-        <View>
-            <Text>Home screen</Text>
+        <SafeAreaBox>
             <SearchBar />
-        </View>
+            <CardItem />
+            <CardItem />
+        </SafeAreaBox>
     );
 };
 
 export default HomeScreen;
-
-// export default function TabOneScreen({
-//     navigation,
-// }: RootTabScreenProps<"TabOne">) {
-//     const { t } = useTranslation();
-
-//     return (
-//         <View style={styles.container}>
-//             <Text>Home screen</Text>
-//         </View>
-//     );
-// }

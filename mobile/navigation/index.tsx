@@ -1,3 +1,4 @@
+/* eslint-disable */
 /**
  * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
  * https://reactnavigation.org/docs/getting-started

@@ -1,0 +1,66 @@
+{
+    "extends": [
+        "airbnb",
+        "airbnb/hooks",
+        "plugin:@typescript-eslint/recommended",
+        "prettier",
+        "plugin:prettier/recommended",
+        "plugin:react-native/all",
+        "plugin:react-native-a11y/all"
+    ],
+    "plugins": [
+        "@typescript-eslint",
+        "react",
+        "react-native",
+        "prettier",
+        "simple-import-sort"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "ecmaFeatures": { "jsx": true },
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "project": "./tsconfig.json"
+    },
+    "rules": {
+        "import/no-unresolved": "off",
+        "react/prop-types": "off",
+        "no-shadow": "off",
+        "no-use-before-define": "off",
+        "@typescript-eslint/no-shadow": ["error"],
+        "import/extensions": ["error", "never"],
+        "prettier/prettier": ["error", { "tabWidth": 4 }],
+        "import/prefer-default-export": "off",
+        "react-hooks/exhaustive-deps": "off",
+        "react/jsx-props-no-spreading": "off",
+        "react/require-default-props": "off",
+        "react/jsx-filename-extension": [
+            "warn",
+            { "extensions": [".ts", ".tsx"] }
+        ],
+        "react/function-component-definition": [
+            "error",
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
+        ],
+        "simple-import-sort/imports": [
+            "error",
+            {
+                "groups": [
+                    // Packages `react` related packages come first.
+                    ["^react", "^@?\\w"],
+                    // Internal packages.
+                    ["^(@|components)(/.*|$)"],
+                    // Parent imports. Put `..` last.
+                    ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
+                    // Other relative imports. Put same-folder imports and `.` last.
+                    ["^\\./(?=.*/)(?!/?$)", "^\\.(?!/?$)", "^\\./?$"],
+                    // Side effect imports.
+                    ["^\\u0000"]
+                ]
+            }
+        ]
+    }
+}

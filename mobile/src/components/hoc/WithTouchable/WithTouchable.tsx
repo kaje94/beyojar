@@ -1,19 +1,27 @@
-import React, { FC, ComponentType } from "react";
+import React, { ComponentType, FC } from "react";
+import { AccessibilityRole, GestureResponderEvent } from "react-native";
 import { Touchable } from "@src/components/atoms";
-import { GestureResponderEvent } from "react-native";
 
 interface WithTouchableProps {
     onPress?: (event: GestureResponderEvent) => void;
+    accessibilityRole?: AccessibilityRole;
 }
 
 export const withTouchable =
     <P extends object>(
         Component: ComponentType<P>
     ): FC<P & WithTouchableProps> =>
-    ({ onPress, ...props }: WithTouchableProps) => {
+    ({
+        onPress,
+        accessibilityRole = "button",
+        ...props
+    }: WithTouchableProps) => {
         if (onPress) {
             return (
-                <Touchable onPress={onPress}>
+                <Touchable
+                    accessibilityRole={accessibilityRole}
+                    onPress={onPress}
+                >
                     <Component {...(props as P)} />
                 </Touchable>
             );

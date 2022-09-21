@@ -43,7 +43,7 @@ export const themePallets: IThemePallets = {
             main: "#b9cab9",
             dark: "#97a397",
         },
-        background: "#e6f0eb",
+        background: "#eceeed",
         black: commonTheme.colors.black,
         white: commonTheme.colors.white,
     },
@@ -53,13 +53,19 @@ export const spacing = {
     none: 0,
     tiny: 1,
     small: 2,
-    medium: 4,
-    large: 8,
-    huge: 16,
+    medium: 3,
+    large: 4,
+    huge: 6,
 };
 
 export const fontSize = {
     small: 14,
     medium: 16,
     large: 20,
+};
+
+export const animationDurations = {
+    fast: 200,
+    medium: 400,
+    slow: 800,
 };

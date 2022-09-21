@@ -1,3 +1,4 @@
+/* eslint-disable */
 // TODO: need to remove if its not used
 /**
  * Learn more about deep linking with React Navigation

@@ -1,5 +1,5 @@
-import React, { MutableRefObject, PropsWithChildren } from "react";
-import { TextInput as TextInputNative, TextInputProps } from "react-native";
+import React from "react";
+import { TextProps } from "react-native";
 import fonts from "@src/assets/fonts";
 import { fontSize, spacing } from "@src/utils/theme";
 import styled from "styled-components/native";
@@ -18,18 +18,15 @@ import {
     TypographyProps,
 } from "styled-system";
 
-type Props = TextInputProps &
+type Props = TextProps &
     ColorProps &
     SpaceProps &
     LayoutProps &
     FlexboxProps &
     BordersProps &
-    TypographyProps & {
-        inputRef?: MutableRefObject<TextInputNative | undefined>;
-    };
+    TypographyProps;
 
-const StyledTextInput = styled.TextInput<Props>`
-    text-decoration: none;
+const StyledText = styled.Text<Props>`
     ${color}
     ${space}
     ${layout}
@@ -38,16 +35,13 @@ const StyledTextInput = styled.TextInput<Props>`
     ${typography}
 `;
 
-export const TextInput: React.FC<PropsWithChildren<Props>> = ({
-    inputRef,
+export const Text: React.FC<Props> = ({
     padding = spacing.tiny,
     fontFamily = fonts.regular,
     ...props
 }) => {
     return (
-        <StyledTextInput
-            ref={inputRef}
-            underlineColorAndroid="transparent"
+        <StyledText
             fontSize={fontSize.medium}
             fontFamily={fontFamily}
             padding={padding}

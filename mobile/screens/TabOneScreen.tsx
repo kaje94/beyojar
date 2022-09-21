@@ -1,4 +1,6 @@
+/* eslint-disable */
 // TODO: need to remove
+
 import React, { useState } from "react";
 import { StyleSheet, TouchableOpacity } from "react-native";
 import { StatusBar } from "expo-status-bar";

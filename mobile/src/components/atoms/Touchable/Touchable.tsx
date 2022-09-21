@@ -1,21 +1,18 @@
-import { spacing } from "@src/utils/theme";
-import { ReactNode } from "react";
+import React, { PropsWithChildren } from "react";
 import { TouchableOpacityProps } from "react-native";
+import { spacing } from "@src/utils/theme";
 import styled from "styled-components/native";
 import {
-    // props
-    color,
-    space,
-    layout,
-    flexbox,
     borders,
-    // prop interfaces
-    ColorProps,
-    SpaceProps,
-    LayoutProps,
-    FlexboxProps,
     BordersProps,
-    backgroundColor,
+    color,
+    ColorProps,
+    flexbox,
+    FlexboxProps,
+    layout,
+    LayoutProps,
+    space,
+    SpaceProps,
 } from "styled-system";
 
 type Props = TouchableOpacityProps &
@@ -23,9 +20,7 @@ type Props = TouchableOpacityProps &
     SpaceProps &
     LayoutProps &
     FlexboxProps &
-    BordersProps & {
-        children?: ReactNode;
-    };
+    BordersProps;
 
 const StyledTouchableOpacity = styled.TouchableOpacity<Props>`
     ${color}
@@ -35,15 +30,9 @@ const StyledTouchableOpacity = styled.TouchableOpacity<Props>`
     ${borders}
 `;
 
-export const Touchable: React.FC<Props> = ({
+export const Touchable: React.FC<PropsWithChildren<Props>> = ({
     padding = spacing.tiny,
     ...props
 }) => {
-    return (
-        <StyledTouchableOpacity
-            padding={padding}
-            backgroundColor={backgroundColor}
-            {...props}
-        />
-    );
+    return <StyledTouchableOpacity padding={padding} {...props} />;
 };

@@ -1,9 +1,11 @@
 import * as React from "react";
 import Svg, { Path } from "react-native-svg";
-import { commonTheme } from "@src/utils/theme";
 import { Box } from "@src/components/atoms";
-import { withTouchable } from "@src/components/hoc/WithTouchable";
-import { IconProps } from ".";
+import { withTouchable } from "@src/components/hoc";
+import { commonTheme } from "@src/utils/theme";
+
+import { IconProps } from "./interface";
+
 const { colors, icon } = commonTheme;
 
 export const BackIcon = withTouchable(

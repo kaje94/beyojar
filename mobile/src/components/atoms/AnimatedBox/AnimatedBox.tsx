@@ -1,19 +1,17 @@
-import { ReactNode } from "react";
+import React, { PropsWithChildren } from "react";
 import { Animated, ViewProps } from "react-native";
 import styled from "styled-components/native";
 import {
-    // props
-    color,
-    space,
-    layout,
-    flexbox,
     borders,
-    // prop interfaces
-    ColorProps,
-    SpaceProps,
-    LayoutProps,
-    FlexboxProps,
     BordersProps,
+    color,
+    ColorProps,
+    flexbox,
+    FlexboxProps,
+    layout,
+    LayoutProps,
+    space,
+    SpaceProps,
 } from "styled-system";
 
 type Props = Animated.AnimatedProps<ViewProps> &
@@ -21,9 +19,7 @@ type Props = Animated.AnimatedProps<ViewProps> &
     SpaceProps &
     LayoutProps &
     FlexboxProps &
-    BordersProps & {
-        children?: ReactNode;
-    };
+    BordersProps;
 
 const AnimatedStyledBox = styled(Animated.View)<Props>`
     ${color}
@@ -33,6 +29,6 @@ const AnimatedStyledBox = styled(Animated.View)<Props>`
     ${borders}
 `;
 
-export const AnimatedBox: React.FC<Props> = (props) => {
+export const AnimatedBox: React.FC<PropsWithChildren<Props>> = (props) => {
     return <AnimatedStyledBox {...props} />;
 };

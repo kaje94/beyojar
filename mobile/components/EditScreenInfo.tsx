@@ -1,3 +1,4 @@
+/* eslint-disable */
 // TODO: need to remove
 
 import * as WebBrowser from "expo-web-browser";

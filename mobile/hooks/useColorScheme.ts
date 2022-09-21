@@ -1,3 +1,4 @@
+/* eslint-disable */
 import {
     ColorSchemeName,
     useColorScheme as _useColorScheme,

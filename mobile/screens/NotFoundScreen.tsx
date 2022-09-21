@@ -1,3 +1,4 @@
+/* eslint-disable */
 // TODO: need to remove
 
 import { StyleSheet, TouchableOpacity } from "react-native";

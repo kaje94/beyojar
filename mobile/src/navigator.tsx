@@ -5,12 +5,12 @@
  */
 import * as React from "react";
 import {
-    NavigationContainer,
-    DefaultTheme,
     DarkTheme,
+    DefaultTheme,
+    NavigationContainer,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { HomeScreen } from "./screens";
+import { HomeScreen } from "@src/screens";
 import { useTheme } from "styled-components";
 
 export enum screens {
@@ -21,19 +21,24 @@ export type NavigatorParamList = {
     home: undefined;
 };
 
-export default function Navigation() {
-    const { mode } = useTheme();
-    return (
-        <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
-            <Stack.Navigator>
-                <Stack.Screen name={screens.home} component={HomeScreen} />
-            </Stack.Navigator>
-        </NavigationContainer>
-    );
-}
-
 /**
  * A root stack navigator is often used for displaying modals on top of all other content.
  * https://reactnavigation.org/docs/modal
  */
 const Stack = createNativeStackNavigator<NavigatorParamList>();
+
+export const Navigation: React.FC = () => {
+    const { mode } = useTheme();
+    return (
+        <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
+            <Stack.Navigator>
+                <Stack.Screen
+                    name={screens.home}
+                    component={HomeScreen}
+                    options={{ headerShown: false }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
+};
+export default Navigation;

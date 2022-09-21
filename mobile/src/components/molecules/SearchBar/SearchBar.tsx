@@ -1,16 +1,13 @@
-import { useState, useRef, useEffect } from "react";
-import { useTheme } from "styled-components/native";
-import {
-    Animated,
-    BackHandler,
-    TextInput as TextInputNative,
-} from "react-native";
-import { FlexBox, TextInput } from "@src/components/atoms";
-import { MenuIcon, SearchIcon, BackIcon, CloseIcon } from "@src/assets/icons";
+import React, { useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { TextInput as TextInputNative } from "react-native";
+import { BackIcon, CloseIcon, MenuIcon, SearchIcon } from "@src/assets/icons";
+import { AnimatedBox, FlexBox, TextInput } from "@src/components/atoms";
+import { useBackPress } from "@src/hooks";
 import { spacing } from "@src/utils/theme";
-import { AnimatedBox } from "@src/components/atoms/AnimatedBox/AnimatedBox";
-import { useCallback } from "react";
+import { useTheme } from "styled-components";
+
+import { useSearchBarAnimated } from "./animatedHook";
 
 export const SearchBar: React.FC = () => {
     const { t } = useTranslation();
@@ -21,56 +18,13 @@ export const SearchBar: React.FC = () => {
     const [isFocused, setIsFocused] = useState(false);
     const [searchText, setSearchText] = useState("");
 
-    // todo: convert to hook?
-    const borderRadius = useRef(new Animated.Value(0)).current;
-    const margin = useRef(new Animated.Value(20)).current;
-    const padding = useRef(new Animated.Value(0)).current;
-    const backgroundAnim = useRef(new Animated.Value(0)).current;
+    const searchBarStyles = useSearchBarAnimated(isFocused);
 
-    const backgroundColor = backgroundAnim.interpolate({
-        inputRange: [0, 100],
-        outputRange: [pallette.background, pallette.secondary.light],
-    });
+    const onTextInputFocus = useCallback(() => setIsFocused(true), []);
 
-    useEffect(() => {
-        Animated.parallel([
-            Animated.timing(borderRadius, {
-                toValue: isFocused ? 0 : 20,
-                duration: 200,
-                useNativeDriver: false,
-            }),
-            Animated.timing(margin, {
-                toValue: isFocused ? 0 : 15,
-                duration: 200,
-                useNativeDriver: false,
-            }),
-            Animated.timing(padding, {
-                toValue: isFocused ? 20 : 5,
-                duration: 200,
-                useNativeDriver: false,
-            }),
-            Animated.timing(backgroundAnim, {
-                toValue: isFocused ? 100 : 0,
-                duration: 200,
-                useNativeDriver: false,
-            }),
-        ]).start();
-    }, [isFocused]);
+    const onTextInputBlur = useCallback(() => setIsFocused(false), []);
 
-    // todo: move to a hook
-    useEffect(() => {
-        if (isFocused) {
-            const backAction = () => {
-                onBackPress();
-                return true;
-            };
-            const backHandler = BackHandler.addEventListener(
-                "hardwareBackPress",
-                backAction
-            );
-            return () => backHandler.remove();
-        }
-    }, [isFocused]);
+    const clearText = useCallback(() => setSearchText(""), []);
 
     const onTextChange = useCallback((text: string) => {
         setSearchText(text);
@@ -88,15 +42,14 @@ export const SearchBar: React.FC = () => {
         keyboardRef?.current?.blur();
     }, []);
 
-    const clearText = useCallback(() => setSearchText(""), []);
+    useBackPress({
+        dependencies: [isFocused],
+        callback: onBackPress,
+        condition: () => isFocused,
+    });
 
-    const onTextInputFocus = useCallback(() => setIsFocused(true), []);
-
-    const onTextInputBlur = useCallback(() => setIsFocused(false), []);
-
-    // todo move border radius & padding
     return (
-        <AnimatedBox style={{ borderRadius, margin, padding, backgroundColor }}>
+        <AnimatedBox style={searchBarStyles}>
             <FlexBox paddingX={spacing.small}>
                 {isFocused ? (
                     <BackIcon onPress={onBackPress} />
@@ -105,6 +58,8 @@ export const SearchBar: React.FC = () => {
                 )}
 
                 <TextInput
+                    accessibilityLabel="Search bar field"
+                    accessibilityHint="Notes will be filtered based on this search input"
                     inputRef={keyboardRef}
                     onFocus={onTextInputFocus}
                     onBlur={onTextInputBlur}
@@ -116,6 +71,7 @@ export const SearchBar: React.FC = () => {
                     spellCheck={false}
                     flex={1}
                     marginLeft={spacing.small}
+                    selectionColor={pallette.primary.dark}
                 />
 
                 {!isFocused && <SearchIcon onPress={onSearchPress} />}
