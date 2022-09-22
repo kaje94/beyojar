@@ -1,8 +1,8 @@
 import React from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 
-import Navigation from "@src/navigator";
-import ThemeProvider from "@src/providers/themeProvider";
+import { Navigation } from "@src/navigator";
+import { ThemeProvider } from "@src/providers/themeProvider";
 // todo: move this hook into src
 import useCachedResources from "./hooks/useCachedResources";
 
@@ -22,4 +22,5 @@ const App = () => {
     );
 };
 
+// eslint-disable-next-line import/no-default-export
 export default App;

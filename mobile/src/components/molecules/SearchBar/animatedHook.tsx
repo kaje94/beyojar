@@ -3,7 +3,7 @@ import { Animated } from "react-native";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { useTheme } from "styled-components";
 
-import { animationDurations } from "@src/utils/theme";
+import { AnimationDuration } from "@src/utils/theme";
 
 const colorRanges = { onBlur: 0, onFocus: 100 };
 
@@ -36,22 +36,22 @@ export const useSearchBarAnimated = (isFocused: boolean) => {
         Animated.parallel([
             Animated.timing(borderRadius, {
                 toValue: isFocused ? borderRadiusFocused : borderRadiusBlurred,
-                duration: animationDurations.fast,
+                duration: AnimationDuration.fast,
                 useNativeDriver: false,
             }),
             Animated.timing(margin, {
                 toValue: isFocused ? marginFocused : marginBlurred,
-                duration: animationDurations.fast,
+                duration: AnimationDuration.fast,
                 useNativeDriver: false,
             }),
             Animated.timing(padding, {
                 toValue: isFocused ? paddingFocussed : paddingBlurred,
-                duration: animationDurations.fast,
+                duration: AnimationDuration.fast,
                 useNativeDriver: false,
             }),
             Animated.timing(backgroundAnim, {
                 toValue: isFocused ? colorRanges.onFocus : colorRanges.onBlur,
-                duration: animationDurations.fast,
+                duration: AnimationDuration.fast,
                 useNativeDriver: false,
             }),
         ]).start();

@@ -10,13 +10,21 @@ import {
     FlexboxProps,
     layout,
     LayoutProps,
+    position,
+    PositionProps,
     space,
     SpaceProps,
 } from "styled-system";
 
-import { spacing } from "@src/utils/theme";
+import { Spacing } from "@src/utils/theme";
 
-type Props = TouchableOpacityProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps;
+type Props = TouchableOpacityProps &
+    ColorProps &
+    SpaceProps &
+    LayoutProps &
+    FlexboxProps &
+    BordersProps &
+    PositionProps;
 
 const StyledTouchableOpacity = styled.TouchableOpacity<Props>`
     ${color}
@@ -24,8 +32,13 @@ const StyledTouchableOpacity = styled.TouchableOpacity<Props>`
     ${layout}
     ${flexbox}
     ${borders}
+    ${position}
 `;
 
-export const Touchable: React.FC<PropsWithChildren<Props>> = ({ padding = spacing.tiny, ...props }) => {
-    return <StyledTouchableOpacity padding={padding} {...props} />;
+export const Touchable: React.FC<PropsWithChildren<Props>> = ({
+    activeOpacity = 0.5,
+    padding = Spacing.tiny,
+    ...props
+}) => {
+    return <StyledTouchableOpacity activeOpacity={activeOpacity} padding={padding} {...props} />;
 };

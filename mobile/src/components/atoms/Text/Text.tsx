@@ -16,8 +16,8 @@ import {
     TypographyProps,
 } from "styled-system";
 
-import fonts from "@src/assets/fonts";
-import { fontSize, spacing } from "@src/utils/theme";
+import { FontFamily } from "@src/assets/fonts";
+import { FontSize, Spacing } from "@src/utils/theme";
 
 type Props = TextProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps & TypographyProps;
 
@@ -30,6 +30,6 @@ const StyledText = styled.Text<Props>`
     ${typography}
 `;
 
-export const Text: React.FC<Props> = ({ padding = spacing.tiny, fontFamily = fonts.regular, ...props }) => {
-    return <StyledText fontSize={fontSize.medium} fontFamily={fontFamily} padding={padding} {...props} />;
+export const Text: React.FC<Props> = ({ padding = Spacing.tiny, fontFamily = FontFamily.regular, ...props }) => {
+    return <StyledText fontSize={FontSize.medium} fontFamily={fontFamily} padding={padding} {...props} />;
 };

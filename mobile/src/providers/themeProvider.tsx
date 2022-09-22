@@ -3,23 +3,25 @@ import { ColorSchemeName, useColorScheme } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
-import { IThemePallet, themePallets } from "@src/utils/theme";
+import { getShadow, IShadow, IThemePallet, ThemePallets } from "@src/utils/theme";
 
 // Default theme interface has been overwritten
-// by ITheme mobile/src/types/styled.d.ts
+// by ITheme mobile/src/utils/styled.d.ts
 export interface ITheme {
     mode: ColorSchemeName;
     pallette: IThemePallet;
+    shadow: IShadow;
 }
 
-const ThemeProvider = ({ children }: PropsWithChildren) => {
+export const ThemeProvider = ({ children }: PropsWithChildren) => {
     const themeMode = useColorScheme() as NonNullable<ColorSchemeName>;
-
+    const selectedTheme = ThemePallets.light;
     return (
         <StyledThemeProvider
             theme={{
                 mode: themeMode || "light",
-                pallette: themePallets.light,
+                pallette: selectedTheme,
+                shadow: getShadow(selectedTheme.black),
             }}
         >
             {children}
@@ -27,5 +29,3 @@ const ThemeProvider = ({ children }: PropsWithChildren) => {
         </StyledThemeProvider>
     );
 };
-
-export default ThemeProvider;

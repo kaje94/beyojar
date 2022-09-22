@@ -9,13 +9,7 @@
         "plugin:react-native/all",
         "plugin:react-native-a11y/all"
     ],
-    "plugins": [
-        "@typescript-eslint",
-        "react",
-        "react-native",
-        "prettier",
-        "simple-import-sort"
-    ],
+    "plugins": ["@typescript-eslint", "react", "react-native", "prettier", "simple-import-sort"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": { "jsx": true },
@@ -29,13 +23,12 @@
         "react-hooks/exhaustive-deps": "off",
         "react/jsx-props-no-spreading": "off",
         "react/require-default-props": "off",
+        "import/no-default-export": ["error"],
+        "@typescript-eslint/no-unused-vars": ["error"],
         "@typescript-eslint/no-shadow": ["error"],
         "import/extensions": ["error", "never"],
         "prettier/prettier": ["error", { "tabWidth": 4, "printWidth": 120 }],
-        "react/jsx-filename-extension": [
-            "error",
-            { "extensions": [".ts", ".tsx"] }
-        ],
+        "react/jsx-filename-extension": ["error", { "extensions": [".ts", ".tsx"] }],
         "react/function-component-definition": [
             "error",
             {

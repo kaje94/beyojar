@@ -6,12 +6,12 @@ import { useTheme } from "styled-components";
 import { BackIcon, CloseIcon, MenuIcon, SearchIcon } from "@src/assets/icons";
 import { AnimatedBox, FlexBox, TextInput } from "@src/components/atoms";
 import { useBackPress } from "@src/hooks";
-import { spacing } from "@src/utils/theme";
+import { Spacing } from "@src/utils/theme";
 import { useSearchBarAnimated } from "./animatedHook";
 
 export const SearchBar: React.FC = () => {
     const { t } = useTranslation();
-    const { pallette } = useTheme();
+    const { pallette, shadow } = useTheme();
 
     const keyboardRef = useRef<TextInputNative>();
 
@@ -49,8 +49,8 @@ export const SearchBar: React.FC = () => {
     });
 
     return (
-        <AnimatedBox style={searchBarStyles}>
-            <FlexBox paddingX={spacing.small}>
+        <AnimatedBox style={{ ...searchBarStyles, ...shadow.small }}>
+            <FlexBox paddingX={Spacing.small}>
                 {isFocused ? (
                     <BackIcon touchable={{ onPress: onBackPress }} />
                 ) : (
@@ -68,7 +68,7 @@ export const SearchBar: React.FC = () => {
                     keyboardType="web-search"
                     spellCheck={false}
                     flex={1}
-                    marginLeft={spacing.small}
+                    marginLeft={Spacing.small}
                     selectionColor={pallette.primary.dark}
                     accessibilityHint={t("components.searchBar.inputA11yHint")}
                     accessibilityLabel={t("components.searchBar.inputA11yLabel")}

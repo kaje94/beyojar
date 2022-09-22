@@ -1,30 +1,34 @@
 import React from "react";
+import { TouchableOpacityProps } from "react-native";
 import { useTheme } from "styled-components";
 
-import fonts from "@src/assets/fonts";
-import { Box, Text } from "@src/components/atoms";
-import { fontSize, spacing } from "@src/utils/theme";
+import { FontFamily } from "@src/assets/fonts";
+import { Text, Touchable } from "@src/components/atoms";
+import { FontSize, Spacing } from "@src/utils/theme";
 
-export const CardItem: React.FC = () => {
-    const { pallette } = useTheme();
+export const CardItem = (props: TouchableOpacityProps) => {
+    const { pallette, shadow } = useTheme();
 
     // todo: border radius from constants
     return (
-        <Box
+        <Touchable
+            accessibilityRole="button"
             backgroundColor={pallette.white}
-            marginX={spacing.medium}
-            marginY={spacing.small}
-            paddingX={spacing.medium}
-            paddingY={spacing.small}
+            marginX={Spacing.medium}
+            marginY={Spacing.small}
+            paddingX={Spacing.medium}
+            paddingY={Spacing.small}
             borderRadius={6}
+            style={shadow.small}
+            {...props}
         >
-            <Text fontFamily={fonts.medium}>Some text</Text>
-            <Text fontSize={fontSize.small} numberOfLines={5}>
+            <Text fontFamily={FontFamily.medium}>Some text</Text>
+            <Text fontSize={FontSize.small} numberOfLines={5}>
                 Some description ad laks dlka sdj askjd lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad
                 laks dlka sdj askjd lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad laks dlka sdj askjd
                 lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad laks dlka sdj askjd lasj dlasj dla
                 jsdlajs dla jsdla sjdlas dl
             </Text>
-        </Box>
+        </Touchable>
     );
 };

@@ -16,8 +16,8 @@ import {
     TypographyProps,
 } from "styled-system";
 
-import fonts from "@src/assets/fonts";
-import { fontSize, spacing } from "@src/utils/theme";
+import { FontFamily } from "@src/assets/fonts";
+import { FontSize, Spacing } from "@src/utils/theme";
 
 type Props = TextInputProps &
     ColorProps &
@@ -41,15 +41,15 @@ const StyledTextInput = styled.TextInput<Props>`
 
 export const TextInput: React.FC<PropsWithChildren<Props>> = ({
     inputRef,
-    padding = spacing.tiny,
-    fontFamily = fonts.regular,
+    padding = Spacing.tiny,
+    fontFamily = FontFamily.regular,
     ...props
 }) => {
     return (
         <StyledTextInput
             ref={inputRef}
             underlineColorAndroid="transparent"
-            fontSize={fontSize.medium}
+            fontSize={FontSize.medium}
             fontFamily={fontFamily}
             padding={padding}
             {...props}

@@ -8,14 +8,12 @@ import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "styled-components";
 
-import { HomeScreen } from "@src/screens";
-
-export enum Screens {
-    home = "home",
-}
+import { EditNoteScreen, HomeScreen } from "@src/screens";
+import { Screens } from "@src/utils/constants";
 
 export type NavigatorParamList = {
     home: undefined;
+    editNote: undefined;
 };
 
 /**
@@ -26,12 +24,13 @@ const Stack = createNativeStackNavigator<NavigatorParamList>();
 
 export const Navigation: React.FC = () => {
     const { mode } = useTheme();
+    // todo can have screen options to turn off header on all screens
     return (
         <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
             <Stack.Navigator>
                 <Stack.Screen name={Screens.home} component={HomeScreen} options={{ headerShown: false }} />
+                <Stack.Screen name={Screens.editNote} component={EditNoteScreen} options={{ headerShown: true }} />
             </Stack.Navigator>
         </NavigationContainer>
     );
 };
-export default Navigation;
