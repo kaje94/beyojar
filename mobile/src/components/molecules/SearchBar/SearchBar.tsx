@@ -52,9 +52,9 @@ export const SearchBar: React.FC = () => {
         <AnimatedBox style={searchBarStyles}>
             <FlexBox paddingX={spacing.small}>
                 {isFocused ? (
-                    <BackIcon onPress={onBackPress} />
+                    <BackIcon touchable={{ onPress: onBackPress }} />
                 ) : (
-                    <MenuIcon onPress={() => console.log("menu")} />
+                    <MenuIcon touchable={{ onPress: () => console.log("menu") }} />
                 )}
 
                 <TextInput
@@ -71,16 +71,12 @@ export const SearchBar: React.FC = () => {
                     marginLeft={spacing.small}
                     selectionColor={pallette.primary.dark}
                     accessibilityHint={t("components.searchBar.inputA11yHint")}
-                    accessibilityLabel={t(
-                        "components.searchBar.inputA11yLabel"
-                    )}
+                    accessibilityLabel={t("components.searchBar.inputA11yLabel")}
                 />
 
-                {!isFocused && <SearchIcon onPress={onSearchPress} />}
+                {!isFocused && <SearchIcon touchable={{ onPress: onSearchPress }} />}
 
-                {isFocused && searchText.length > 0 && (
-                    <CloseIcon onPress={clearText} />
-                )}
+                {isFocused && searchText.length > 0 && <CloseIcon touchable={{ onPress: clearText }} />}
             </FlexBox>
         </AnimatedBox>
     );

@@ -16,12 +16,7 @@ import {
 
 import { spacing } from "@src/utils/theme";
 
-type Props = TouchableOpacityProps &
-    ColorProps &
-    SpaceProps &
-    LayoutProps &
-    FlexboxProps &
-    BordersProps;
+type Props = TouchableOpacityProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps;
 
 const StyledTouchableOpacity = styled.TouchableOpacity<Props>`
     ${color}
@@ -31,9 +26,6 @@ const StyledTouchableOpacity = styled.TouchableOpacity<Props>`
     ${borders}
 `;
 
-export const Touchable: React.FC<PropsWithChildren<Props>> = ({
-    padding = spacing.tiny,
-    ...props
-}) => {
+export const Touchable: React.FC<PropsWithChildren<Props>> = ({ padding = spacing.tiny, ...props }) => {
     return <StyledTouchableOpacity padding={padding} {...props} />;
 };

@@ -1,6 +1,7 @@
-import { SvgProps } from "react-native-svg";
+import { NumberProp } from "react-native-svg";
 
-export interface IconProps extends SvgProps {
+export interface IconProps {
     size?: number;
     color?: string;
+    strokeWidth?: NumberProp;
 }

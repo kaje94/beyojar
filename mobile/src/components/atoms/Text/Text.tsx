@@ -19,13 +19,7 @@ import {
 import fonts from "@src/assets/fonts";
 import { fontSize, spacing } from "@src/utils/theme";
 
-type Props = TextProps &
-    ColorProps &
-    SpaceProps &
-    LayoutProps &
-    FlexboxProps &
-    BordersProps &
-    TypographyProps;
+type Props = TextProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps & TypographyProps;
 
 const StyledText = styled.Text<Props>`
     ${color}
@@ -36,17 +30,6 @@ const StyledText = styled.Text<Props>`
     ${typography}
 `;
 
-export const Text: React.FC<Props> = ({
-    padding = spacing.tiny,
-    fontFamily = fonts.regular,
-    ...props
-}) => {
-    return (
-        <StyledText
-            fontSize={fontSize.medium}
-            fontFamily={fontFamily}
-            padding={padding}
-            {...props}
-        />
-    );
+export const Text: React.FC<Props> = ({ padding = spacing.tiny, fontFamily = fonts.regular, ...props }) => {
+    return <StyledText fontSize={fontSize.medium} fontFamily={fontFamily} padding={padding} {...props} />;
 };

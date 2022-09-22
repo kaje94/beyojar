@@ -4,11 +4,7 @@
  *
  */
 import * as React from "react";
-import {
-    DarkTheme,
-    DefaultTheme,
-    NavigationContainer,
-} from "@react-navigation/native";
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "styled-components";
 
@@ -33,11 +29,7 @@ export const Navigation: React.FC = () => {
     return (
         <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
             <Stack.Navigator>
-                <Stack.Screen
-                    name={Screens.home}
-                    component={HomeScreen}
-                    options={{ headerShown: false }}
-                />
+                <Stack.Screen name={Screens.home} component={HomeScreen} options={{ headerShown: false }} />
             </Stack.Navigator>
         </NavigationContainer>
     );

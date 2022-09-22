@@ -24,12 +24,8 @@ export const useSearchBarAnimated = (isFocused: boolean) => {
 
     const margin = useRef(new Animated.Value(marginBlurred)).current;
     const padding = useRef(new Animated.Value(paddingBlurred)).current;
-    const borderRadius = useRef(
-        new Animated.Value(borderRadiusBlurred)
-    ).current;
-    const backgroundAnim = useRef(
-        new Animated.Value(colorRanges.onBlur)
-    ).current;
+    const borderRadius = useRef(new Animated.Value(borderRadiusBlurred)).current;
+    const backgroundAnim = useRef(new Animated.Value(colorRanges.onBlur)).current;
 
     const backgroundColor = backgroundAnim.interpolate({
         inputRange: [colorRanges.onBlur, colorRanges.onFocus],
@@ -65,10 +61,7 @@ export const useSearchBarAnimated = (isFocused: boolean) => {
         // sub components should be able to call a callback and update the color
         // on unmount, should reset the color
         // use https://docs.expo.dev/versions/latest/sdk/safe-area-context/ for calculating the height
-        setStatusBarBackgroundColor(
-            isFocused ? colors[colorRanges.onFocus] : pallette.background,
-            true
-        );
+        setStatusBarBackgroundColor(isFocused ? colors[colorRanges.onFocus] : pallette.background, true);
     }, [isFocused]);
 
     return { borderRadius, margin, padding, backgroundColor };

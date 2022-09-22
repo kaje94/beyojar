@@ -14,10 +14,7 @@ export const useBackPress = (props: {
                 callback();
                 return true;
             };
-            const backHandler = BackHandler.addEventListener(
-                "hardwareBackPress",
-                backAction
-            );
+            const backHandler = BackHandler.addEventListener("hardwareBackPress", backAction);
             return () => backHandler.remove();
         }
     }, [...dependencies, callback, condition]);

@@ -20,12 +20,10 @@ export const CardItem: React.FC = () => {
         >
             <Text fontFamily={fonts.medium}>Some text</Text>
             <Text fontSize={fontSize.small} numberOfLines={5}>
-                Some description ad laks dlka sdj askjd lasj dlasj dla jsdlajs
-                dla jsdla sjdlas dl Some description ad laks dlka sdj askjd lasj
-                dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad laks
-                dlka sdj askjd lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some
-                description ad laks dlka sdj askjd lasj dlasj dla jsdlajs dla
-                jsdla sjdlas dl
+                Some description ad laks dlka sdj askjd lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad
+                laks dlka sdj askjd lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad laks dlka sdj askjd
+                lasj dlasj dla jsdlajs dla jsdla sjdlas dl Some description ad laks dlka sdj askjd lasj dlasj dla
+                jsdlajs dla jsdla sjdlas dl
             </Text>
         </Box>
     );

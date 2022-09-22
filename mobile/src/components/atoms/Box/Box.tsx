@@ -14,12 +14,7 @@ import {
     SpaceProps,
 } from "styled-system";
 
-type Props = ViewProps &
-    ColorProps &
-    SpaceProps &
-    LayoutProps &
-    FlexboxProps &
-    BordersProps;
+type Props = ViewProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps;
 
 const StyledBox = styled.View<Props>`
     ${color}
@@ -39,12 +34,5 @@ export const FlexBox: React.FC<PropsWithChildren<Props>> = ({
     alignItems = "center",
     ...props
 }) => {
-    return (
-        <StyledBox
-            display={display}
-            flexDirection={flexDirection}
-            alignItems={alignItems}
-            {...props}
-        />
-    );
+    return <StyledBox display={display} flexDirection={flexDirection} alignItems={alignItems} {...props} />;
 };

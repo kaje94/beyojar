@@ -14,12 +14,7 @@ import {
     SpaceProps,
 } from "styled-system";
 
-type Props = Animated.AnimatedProps<ViewProps> &
-    ColorProps &
-    SpaceProps &
-    LayoutProps &
-    FlexboxProps &
-    BordersProps;
+type Props = Animated.AnimatedProps<ViewProps> & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps;
 
 const AnimatedStyledBox = styled(Animated.View)<Props>`
     ${color}

@@ -5,9 +5,7 @@ import { SafeAreaBox } from "@src/components/atoms";
 import { CardItem, SearchBar } from "@src/components/molecules";
 import { NavigatorParamList, Screens } from "@src/navigator";
 
-export const HomeScreen: FC<
-    NativeStackScreenProps<NavigatorParamList, Screens.home>
-> = () => {
+export const HomeScreen: FC<NativeStackScreenProps<NavigatorParamList, Screens.home>> = () => {
     return (
         <SafeAreaBox>
             <SearchBar />
