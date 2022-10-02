@@ -110,18 +110,9 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 }}
                 selectedId={persistedMode || ""}
                 options={[
-                    {
-                        id: "",
-                        label: t("screens.settings.theme.systemDefault"),
-                    },
-                    {
-                        id: "light",
-                        label: t("screens.settings.theme.light"),
-                    },
-                    {
-                        id: "dark",
-                        label: t("screens.settings.theme.dark"),
-                    },
+                    { id: "", label: t("screens.settings.theme.systemDefault") },
+                    { id: "light", label: t("screens.settings.theme.light") },
+                    { id: "dark", label: t("screens.settings.theme.dark") },
                 ]}
             />
         </SafeAreaBox>
