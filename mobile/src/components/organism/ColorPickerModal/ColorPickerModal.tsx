@@ -5,7 +5,7 @@ import { useTheme } from "styled-components";
 import { FontFamily } from "@src/assets/fonts";
 import { TickIcon } from "@src/assets/icons";
 import { chunkArray } from "@src/common/helpers";
-import { BorderRadius, FontSize, INoteColors, noteColors, Opacity, Spacing } from "@src/common/theme";
+import { BorderRadius, FontSize, IconSize, INoteColors, noteColors, Opacity, Spacing } from "@src/common/theme";
 import { Box, FlexBox, Text, Touchable } from "@src/components/atoms";
 import { BottomSheetModal } from "@src/components/molecules";
 
@@ -50,7 +50,7 @@ export const ColorPickerModal = ({
                                 justifyContent="center"
                             >
                                 {selectedColor.id === column.id && (
-                                    <TickIcon size={30} opacity={Opacity.mostlyVisible} />
+                                    <TickIcon size={IconSize.large} opacity={Opacity.mostlyVisible} />
                                 )}
                             </Touchable>
                         ))}

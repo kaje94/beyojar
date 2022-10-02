@@ -42,16 +42,10 @@ export interface INoteColors {
     dark: string;
 }
 
-export const CommonTheme = {
+const CommonTheme = {
     colors: {
         black: "#070707",
         white: "#fcfcfc",
-    },
-    icon: {
-        default: {
-            size: 24,
-            strokeWidth: 2,
-        },
     },
 };
 
@@ -65,9 +59,9 @@ export const ThemePallets: IThemePallets = {
             dark: "#618d61",
         },
         secondary: {
-            light: "#d3e2d3",
-            main: "#788378",
-            dark: "#434943",
+            light: "#d3dfd3",
+            main: "#7d857d",
+            dark: "#464946",
         },
         error: {
             light: "#ef5350",
@@ -81,19 +75,19 @@ export const ThemePallets: IThemePallets = {
     },
     dark: {
         primary: {
-            light: "#4b6d4b",
-            main: "#679668",
-            dark: "#ceffd0",
+            light: "#3e5c3e",
+            main: "#4d724e",
+            dark: "#b8e4ba",
         },
         secondary: {
-            light: "#373f37",
-            main: "#778677",
-            dark: "#ceddce",
+            light: "#4f554f",
+            main: "#919b91",
+            dark: "#e0eee0",
         },
         error: {
             light: "#ad2626",
-            main: "#e74542",
-            dark: "#f06260",
+            main: "#ec5956",
+            dark: "#fd7270",
         },
         background: "#202221",
         grey: "#d4d4d4",
@@ -192,10 +186,21 @@ export enum BorderRadius {
 
 export enum Opacity {
     invisible = 0,
-    notMuchVisible = 0.3,
+    barelyVisible = 0.25,
     partiallyVisible = 0.5,
-    mostlyVisible = 0.8,
+    mostlyVisible = 0.75,
     visible = 1,
+}
+
+export enum IconSize {
+    small = 20,
+    normal = 24,
+    large = 30,
+}
+
+export enum IconStrokeWidth {
+    default = 2,
+    large = 2.5,
 }
 
 export const noteColors: INoteColors[] = [

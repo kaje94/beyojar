@@ -2,25 +2,17 @@ import * as React from "react";
 import Svg, { Path } from "react-native-svg";
 import { useTheme } from "styled-components";
 
-import { CommonTheme } from "@src/common/theme";
+import { IconSize, IconStrokeWidth } from "@src/common/theme";
 import { Box } from "@src/components/atoms";
 import { withTouchable } from "@src/components/hoc";
 import { IconProps } from "./interface";
-
-const { icon } = CommonTheme;
 
 interface TickIconProps extends IconProps {
     circleColor?: string;
 }
 
 export const TickIcon = withTouchable(
-    ({
-        size = icon.default.size,
-        strokeWidth = icon.default.strokeWidth,
-        color,
-        circleColor,
-        opacity,
-    }: TickIconProps) => {
+    ({ size = IconSize.normal, strokeWidth = IconStrokeWidth.default, color, circleColor, opacity }: TickIconProps) => {
         const { pallette } = useTheme();
 
         return (

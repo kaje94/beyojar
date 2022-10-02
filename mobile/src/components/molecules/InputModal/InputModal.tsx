@@ -46,7 +46,7 @@ export const InputModal: FC<Props> = ({ isVisible, onClose }) => {
             animationIn="zoomIn"
             animationOut="zoomOut"
             avoidKeyboard
-            backdropOpacity={Opacity.notMuchVisible}
+            backdropOpacity={Opacity.barelyVisible}
         >
             <Box
                 p={Spacing.large}

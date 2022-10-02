@@ -8,7 +8,7 @@ import { useTheme } from "styled-components";
 import { FontFamily } from "@src/assets/fonts";
 import { StarIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
 import { IsIOS, Screens } from "@src/common/constants";
-import { FontSize, noteColors, Opacity, Spacing } from "@src/common/theme";
+import { FontSize, IconSize, noteColors, Opacity, Spacing } from "@src/common/theme";
 import { Box, FlexBox, KeyboardAvoidingBox, SafeAreaBox, ScrollView, Text, TextInput } from "@src/components/atoms";
 import { HeaderBar, LabelPills } from "@src/components/molecules";
 import { ColorPickerModal, ConfirmModal } from "@src/components/organism";
@@ -36,7 +36,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     return (
         <>
             <SafeAreaBox bg={bgColor}>
-                <HeaderBar endIcon={<StarIcon size={30} touchable={{ opacity: Opacity.notMuchVisible }} />} />
+                <HeaderBar endIcon={<StarIcon size={30} touchable={{ opacity: Opacity.barelyVisible }} />} />
                 <KeyboardAvoidingBox mb={bottomBarHight} behavior={IsIOS ? "padding" : "height"}>
                     <ScrollView px={Spacing.medium}>
                         <TextInput
@@ -84,7 +84,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
             >
                 <TagsIcon
                     color={pallette.white}
-                    size={30}
+                    size={IconSize.large}
                     touchable={{
                         mx: Spacing.tiny,
                         onPress: () => navigation.navigate(Screens.labelSelect),
@@ -92,7 +92,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 />
                 <ThemeIcon
                     color={bgColor}
-                    size={30}
+                    size={IconSize.large}
                     touchable={{ mx: Spacing.tiny, onPress: () => setColorPickerVisible(true) }}
                 />
                 <Text
@@ -106,7 +106,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 </Text>
                 <TrashIcon
                     color={pallette.error.main}
-                    size={30}
+                    size={IconSize.large}
                     touchable={{ mx: Spacing.tiny, onPress: () => setDeleteConfirmVisible(true) }}
                 />
             </FlexBox>

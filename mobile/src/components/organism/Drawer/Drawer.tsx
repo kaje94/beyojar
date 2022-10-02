@@ -8,7 +8,7 @@ import { FontFamily } from "@src/assets/fonts";
 import { EditIcon, NoteIcon, SettingsIcon, TagsIcon } from "@src/assets/icons";
 import { IconProps } from "@src/assets/icons/interface";
 import { Screens } from "@src/common/constants";
-import { AnimationDuration, BorderRadius, FontSize, Spacing } from "@src/common/theme";
+import { AnimationDuration, BorderRadius, FontSize, IconSize, Spacing } from "@src/common/theme";
 import { AnimatedBox, Box, ScrollView, Text, Touchable } from "@src/components/atoms";
 
 export const DrawerItem = ({
@@ -51,7 +51,7 @@ export const DrawerItem = ({
                 flexDirection="row"
                 alignItems="center"
             >
-                <Icon color={selected ? pallette.white : defaultColor} size={20} />
+                <Icon color={selected ? pallette.white : defaultColor} size={IconSize.small} />
                 <Text
                     fontFamily={selected ? FontFamily.medium : FontFamily.regular}
                     color={selected ? pallette.white : defaultColor}

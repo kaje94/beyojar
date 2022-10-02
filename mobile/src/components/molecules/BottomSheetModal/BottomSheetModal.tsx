@@ -22,7 +22,7 @@ export const BottomSheetModal: FC<PropsWithChildren<Props>> = ({ isVisible, onCl
             onBackdropPress={onClose}
             onBackButtonPress={onClose}
             backdropColor={pallette.black}
-            backdropOpacity={Opacity.notMuchVisible}
+            backdropOpacity={Opacity.barelyVisible}
             backdropTransitionOutTiming={0}
         >
             <Box

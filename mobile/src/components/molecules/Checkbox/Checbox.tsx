@@ -3,7 +3,7 @@ import { Transition, Transitioning, TransitioningView } from "react-native-reani
 import { useTheme } from "styled-components";
 
 import { CircleIcon, TickIcon } from "@src/assets/icons";
-import { AnimationDuration } from "@src/common/theme";
+import { AnimationDuration, IconSize } from "@src/common/theme";
 
 interface Props {
     checked?: boolean;
@@ -28,9 +28,9 @@ export const Checkbox: FC<Props> = ({ checked = false }) => {
     return (
         <Transitioning.View ref={ref} transition={slideInRightTransition}>
             {checked ? (
-                <TickIcon size={30} color={pallette.secondary.dark} circleColor={pallette.secondary.main} />
+                <TickIcon size={IconSize.large} color={pallette.secondary.dark} circleColor={pallette.secondary.main} />
             ) : (
-                <CircleIcon size={30} color={pallette.primary.main} />
+                <CircleIcon size={IconSize.large} color={pallette.primary.main} />
             )}
         </Transitioning.View>
     );

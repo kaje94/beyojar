@@ -6,7 +6,7 @@ import { useTheme } from "styled-components";
 import { FontFamily } from "@src/assets/fonts";
 import { AddIcon, CloseIcon, TagsIcon } from "@src/assets/icons";
 import { IsIOS, Screens } from "@src/common/constants";
-import { CommonTheme, Opacity, Spacing } from "@src/common/theme";
+import { IconSize, IconStrokeWidth, Opacity, Spacing } from "@src/common/theme";
 import { KeyboardAvoidingBox, SafeAreaBox, ScrollView, Text, TextInput, Touchable } from "@src/components/atoms";
 import { Checkbox, HeaderBar } from "@src/components/molecules";
 import { NavigatorParamList } from "@src/navigator";
@@ -24,7 +24,7 @@ const LabelSelectItem = ({ labelString }: { labelString: string }) => {
             px={Spacing.small}
             py={Spacing.medium}
         >
-            <TagsIcon color={pallette.grey} strokeWidth={isChecked ? 2.5 : CommonTheme.icon.default.strokeWidth} />
+            <TagsIcon color={pallette.grey} strokeWidth={isChecked ? IconStrokeWidth.large : IconStrokeWidth.default} />
             <Text
                 flex={1}
                 color={pallette.grey}
@@ -73,7 +73,11 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                 <ScrollView>
                     {searchText.length > 0 && (
                         <Touchable accessibilityRole="button" flexDirection="row" alignItems="center">
-                            <AddIcon color={pallette.primary.dark} strokeWidth={3} size={30} />
+                            <AddIcon
+                                color={pallette.primary.dark}
+                                size={IconSize.large}
+                                strokeWidth={IconStrokeWidth.large}
+                            />
                             <Text
                                 flex={1}
                                 p={Spacing.medium}

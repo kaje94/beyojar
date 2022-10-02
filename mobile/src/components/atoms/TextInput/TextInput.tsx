@@ -56,7 +56,7 @@ export const TextInput: FC<PropsWithChildren<Props>> = ({
             fontFamily={fontFamily}
             p={padding}
             color={textColor || pallette.black}
-            placeholderTextColor={placeholderTextColor || pallette.grey}
+            placeholderTextColor={placeholderTextColor || pallette.secondary.main}
             {...props}
         />
     );

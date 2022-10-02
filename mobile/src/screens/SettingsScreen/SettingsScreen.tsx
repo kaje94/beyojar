@@ -6,10 +6,10 @@ import { nativeApplicationVersion } from "expo-application";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
-import { InfoIcon, LanguageIcon, SettingsIcon, ThemeIcon, UserRemove } from "@src/assets/icons";
+import { InfoIcon, LanguageIcon, SettingsIcon, ThemeIcon, UserRemoveIcon } from "@src/assets/icons";
 import { IconProps } from "@src/assets/icons/interface";
 import { Screens } from "@src/common/constants";
-import { FontSize, Opacity, Spacing } from "@src/common/theme";
+import { FontSize, IconSize, Opacity, Spacing } from "@src/common/theme";
 import { SafeAreaBox, ScrollView, Text, Touchable } from "@src/components/atoms";
 import { HeaderBar } from "@src/components/molecules";
 import { ConfirmModal, SelectModal } from "@src/components/organism";
@@ -42,7 +42,7 @@ const SettingsItem = ({
             onPress={onPress}
             opacity={onPress ? Opacity.visible : Opacity.mostlyVisible}
         >
-            <Icon size={20} color={primaryColor} />
+            <Icon size={IconSize.small} color={primaryColor} />
             <Text flex={1} color={primaryColor} px={Spacing.medium}>
                 {title}
             </Text>
@@ -86,7 +86,7 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 />
                 <SettingsItem
                     title={t("screens.settings.deleteAccount.title")}
-                    Icon={UserRemove}
+                    Icon={UserRemoveIcon}
                     color={pallette.error.dark}
                     onPress={() => setSelectedOption(SettingsModal.RemoveAccountModal)}
                 />
@@ -99,7 +99,7 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 isVisible={selectedOption === SettingsModal.RemoveAccountModal}
                 onClose={() => setSelectedOption(null)}
                 color={pallette.error.dark}
-                Icon={UserRemove}
+                Icon={UserRemoveIcon}
             />
             <SelectModal
                 title={t("screens.settings.theme.modalTitle")}
