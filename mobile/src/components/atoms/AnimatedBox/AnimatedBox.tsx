@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import { Animated, ViewProps } from "react-native";
 import styled from "styled-components/native";
 import {
@@ -24,6 +24,6 @@ const AnimatedStyledBox = styled(Animated.View)<Props>`
     ${borders}
 `;
 
-export const AnimatedBox: React.FC<PropsWithChildren<Props>> = (props) => {
+export const AnimatedBox: FC<PropsWithChildren<Props>> = (props) => {
     return <AnimatedStyledBox {...props} />;
 };

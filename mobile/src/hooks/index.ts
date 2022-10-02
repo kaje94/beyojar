@@ -1,1 +1,2 @@
-export { useBackPress } from "./backPressHook";
+export { useBackPress } from "./useBackPress";
+export { useTimeout } from "./useTimeout";

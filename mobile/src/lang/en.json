@@ -1,10 +1,60 @@
 {
     "translation": {
+        "title": "Beyojar",
+        "common": {
+            "confirm": "Are You Sure?",
+            "continue": "Continue",
+            "cancel": "Cancel",
+            "delete": "Delete",
+            "save": "Save"
+        },
         "components": {
             "searchBar": {
                 "placeholder": "Search your notes",
                 "inputA11yLabel": "Search field input",
                 "inputA11yHint": "Notes will be filtered based on this search input"
+            },
+            "noteDeleteModal": {
+                "message": "Do you really want to delete this note? \nThis action cannot be undone."
+            },
+            "labelDeleteModal": {
+                "message": "Do you really want to delete this label? \nThis action cannot be undone."
+            },
+            "colorPicker": {
+                "title": "Pick the color of your note"
+            },
+            "drawer": {
+                "notes": "Notes",
+                "settings": "Settings",
+                "manageLabels": "Manage Labels"
+            }
+        },
+        "screens": {
+            "labelSelection": {
+                "placeholder": "Enter a label name",
+                "inputA11yLabel": "Search labels input",
+                "inputA11yHint": "Labels will be filtered based on this input",
+                "createNew": "Create {{name}}"
+            },
+            "settings": {
+                "theme": {
+                    "title": "Theme",
+                    "modalTitle": "Select App Theme",
+                    "systemDefault": "System Default",
+                    "light": "Light",
+                    "dark": "Dark"
+                },
+                "language": {
+                    "title": "Language"
+                },
+                "about": {
+                    "title": "About",
+                    "version": "Version {{version}}"
+                },
+                "deleteAccount": {
+                    "title": "Remove account",
+                    "message": "Do you really want to delete your account? \nThis will delete all your notes/labels and cannot be undone"
+                }
             }
         }
     }

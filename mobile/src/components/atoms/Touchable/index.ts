@@ -1,1 +1,1 @@
-export { Touchable } from "./Touchable";
+export { Touchable, TouchableProps } from "./Touchable";

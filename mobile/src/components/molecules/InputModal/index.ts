@@ -1,0 +1,1 @@
+export { InputModal } from "./InputModal";

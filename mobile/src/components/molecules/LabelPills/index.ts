@@ -1,0 +1,1 @@
+export { LabelPills } from "./LabelPills";

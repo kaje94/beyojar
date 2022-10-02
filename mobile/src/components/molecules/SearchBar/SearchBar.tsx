@@ -1,17 +1,20 @@
-import React, { useCallback, useRef, useState } from "react";
+import React, { FC, useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { TextInput as TextInputNative } from "react-native";
+import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
 import { BackIcon, CloseIcon, MenuIcon, SearchIcon } from "@src/assets/icons";
+import { Spacing } from "@src/common/theme";
 import { AnimatedBox, FlexBox, TextInput } from "@src/components/atoms";
 import { useBackPress } from "@src/hooks";
-import { Spacing } from "@src/utils/theme";
 import { useSearchBarAnimated } from "./animatedHook";
 
-export const SearchBar: React.FC = () => {
+// todo: move into oragnism
+export const SearchBar: FC = () => {
     const { t } = useTranslation();
     const { pallette, shadow } = useTheme();
+    const { dispatch } = useNavigation();
 
     const keyboardRef = useRef<TextInputNative>();
 
@@ -49,12 +52,12 @@ export const SearchBar: React.FC = () => {
     });
 
     return (
-        <AnimatedBox style={{ ...searchBarStyles, ...shadow.small }}>
+        <AnimatedBox style={{ ...searchBarStyles, ...shadow.medium }}>
             <FlexBox paddingX={Spacing.small}>
                 {isFocused ? (
                     <BackIcon touchable={{ onPress: onBackPress }} />
                 ) : (
-                    <MenuIcon touchable={{ onPress: () => console.log("menu") }} />
+                    <MenuIcon touchable={{ onPress: () => dispatch(DrawerActions.openDrawer) }} />
                 )}
 
                 <TextInput
@@ -68,7 +71,7 @@ export const SearchBar: React.FC = () => {
                     keyboardType="web-search"
                     spellCheck={false}
                     flex={1}
-                    marginLeft={Spacing.small}
+                    ml={Spacing.small}
                     selectionColor={pallette.primary.dark}
                     accessibilityHint={t("components.searchBar.inputA11yHint")}
                     accessibilityLabel={t("components.searchBar.inputA11yLabel")}

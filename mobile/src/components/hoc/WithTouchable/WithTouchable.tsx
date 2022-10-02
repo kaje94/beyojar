@@ -1,10 +1,9 @@
 import React, { ComponentType, FC } from "react";
-import { TouchableOpacityProps } from "react-native";
 
-import { Touchable } from "@src/components/atoms";
+import { Touchable, TouchableProps } from "@src/components/atoms";
 
 interface WithTouchableProps {
-    touchable?: TouchableOpacityProps;
+    touchable?: TouchableProps;
 }
 
 export const withTouchable =

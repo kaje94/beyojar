@@ -1,18 +1,12 @@
-import React from "react";
+import React, { FC } from "react";
 import { useTheme } from "styled-components";
 
 import { AddIcon } from "@src/assets/icons";
 import { IconProps } from "@src/assets/icons/interface";
+import { Spacing } from "@src/common/theme";
 import { Touchable } from "@src/components/atoms";
-import { Spacing } from "@src/utils/theme";
 
-export const FloatingButton = ({
-    Icon = AddIcon,
-    iconSize = 45,
-}: {
-    Icon?: React.FC<IconProps>;
-    iconSize?: number;
-}) => {
+export const FloatingButton = ({ Icon = AddIcon, iconSize = 45 }: { Icon?: FC<IconProps>; iconSize?: number }) => {
     const { pallette, shadow } = useTheme();
 
     return (
@@ -25,11 +19,11 @@ export const FloatingButton = ({
             position="absolute"
             alignSelf="center"
             bottom={Spacing.large}
-            padding={Spacing.small}
+            p={Spacing.small}
             borderRadius={iconSize}
             style={shadow.large}
         >
-            <Icon size={iconSize} color={pallette.white} />
+            <Icon size={iconSize} color={pallette.background} />
         </Touchable>
     );
 };

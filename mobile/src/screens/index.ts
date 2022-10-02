@@ -1,2 +1,5 @@
-export * from "./HomeScreen";
-export * from "./EditNoteScreen";
+export { HomeScreen } from "./HomeScreen";
+export { EditNoteScreen } from "./EditNoteScreen";
+export { LabelSelectScreen } from "./LabelSelectScreen";
+export { LabelManageScreen } from "./LabelManageScreen";
+export { SettingsScreen } from "./SettingsScreen";

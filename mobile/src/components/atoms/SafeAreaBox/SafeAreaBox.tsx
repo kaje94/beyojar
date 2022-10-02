@@ -1,9 +1,9 @@
-import React, { PropsWithChildren } from "react";
+import React, { FC, PropsWithChildren } from "react";
 import { SafeAreaView, SafeAreaViewProps } from "react-native-safe-area-context";
 import { useTheme } from "styled-components";
 import styled from "styled-components/native";
 import {
-    backgroundColor,
+    backgroundColor as bgProp,
     BackgroundColorProps,
     flexbox,
     FlexboxProps,
@@ -16,13 +16,13 @@ import {
 type Props = SafeAreaViewProps & BackgroundColorProps & FlexboxProps & LayoutProps & SpaceProps;
 
 const StyledSafeAreaBox = styled(SafeAreaView)<Props>`
-    ${backgroundColor}
+    ${bgProp}
     ${flexbox}
     ${layout}
     ${space}
 `;
 
-export const SafeAreaBox: React.FC<PropsWithChildren<Props>> = ({ backgroundColor: bg, flex = 1, ...props }) => {
+export const SafeAreaBox: FC<PropsWithChildren<Props>> = ({ backgroundColor, bg, flex = 1, ...props }) => {
     const { pallette } = useTheme();
-    return <StyledSafeAreaBox backgroundColor={bg || pallette.background} flex={flex} {...props} />;
+    return <StyledSafeAreaBox backgroundColor={backgroundColor || bg || pallette.background} flex={flex} {...props} />;
 };
