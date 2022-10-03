@@ -1,40 +1,55 @@
-import { APIGatewayProxyHandlerV2 } from "aws-lambda";
-import { DynamoDB } from "aws-sdk";
+import { createLabel, CreateLabelInput, deleteLabel, Label, listLabels, updateLabel, UpdateLabelInput } from "./labels";
+import {
+    createNote,
+    CreateNoteInput,
+    deleteNote,
+    getNoteById,
+    listNotes,
+    Note,
+    updateNote,
+    UpdateNoteInput,
+} from "./notes";
 
-const dynamoDb = new DynamoDB.DocumentClient();
-
-export const handler: APIGatewayProxyHandlerV2 = async (event) => {
-    const getParams = {
-        // Get the table name from the environment variable
-        TableName: process.env.tableName,
-        // Get the row where the counter is called "clicks"
-        Key: {
-            counter: "clicks",
-        },
+type AppSyncEvent = {
+    info: {
+        fieldName: string;
     };
-    const results = await dynamoDb.get(getParams).promise();
+    arguments: {
+        newNote: CreateNoteInput;
+        editNote: UpdateNoteInput;
+        noteId: string;
 
-    // If there is a row, then get the value of the
-    // column called "tally"
-    let count = results.Item ? results.Item.tally : 0;
-
-    const putParams = {
-        TableName: process.env.tableName,
-        Key: {
-            counter: "clicks",
-        },
-        // Update the "tally" column
-        UpdateExpression: "SET tally = :count",
-        ExpressionAttributeValues: {
-            // Increase the count
-            ":count": ++count,
-        },
+        newLabel: CreateLabelInput;
+        editLabel: UpdateLabelInput;
+        labelId: string;
     };
-    await dynamoDb.update(putParams).promise();
+};
 
-    return {
-        statusCode: 200,
-        headers: { "Content-Type": "text/plain" },
-        body: count,
-    };
+export const handler = async (
+    event: AppSyncEvent
+): Promise<Note[] | Label[] | Note | Label | string | null | undefined> => {
+    switch (event.info.fieldName) {
+        // Notes handlers
+        case "listNotes":
+            return await listNotes();
+        case "createNote":
+            return await createNote(event.arguments.newNote);
+        case "updateNote":
+            return await updateNote(event.arguments.editNote);
+        case "deleteNote":
+            return await deleteNote(event.arguments.noteId);
+        case "getNoteById":
+            return await getNoteById(event.arguments.noteId);
+        // Labels handlers
+        case "listLabels":
+            return await listLabels();
+        case "createLabel":
+            return await createLabel(event.arguments.newLabel);
+        case "updateLabel":
+            return await updateLabel(event.arguments.editLabel);
+        case "deleteLabel":
+            return await deleteLabel(event.arguments.labelId);
+        default:
+            return null;
+    }
 };

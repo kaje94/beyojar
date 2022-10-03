@@ -27,5 +27,8 @@
     "prettier": {
         "tabWidth": 4,
         "printWidth": 120
+    },
+    "dependencies": {
+        "nanoid": "^4.0.0"
     }
 }

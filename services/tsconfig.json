@@ -1,11 +1,11 @@
 {
-    "extends": "../tsconfig.json",
-    "include": ["functions"],
-    "compilerOptions": {
-        "module": "esnext",
-        "target": "es2017",
-        "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "baseUrl": "."
-    }
+  "extends": "../tsconfig.json",
+  "include": ["functions"],
+  "compilerOptions": {
+    "module": "esnext",
+    "target": "es2017",
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": "."
+  }
 }
