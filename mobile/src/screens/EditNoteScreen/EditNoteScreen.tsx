@@ -4,13 +4,13 @@ import { showMessage } from "react-native-flash-message";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import formatDistance from "date-fns/formatDistanceToNow";
-import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { nanoid } from "nanoid/non-secure";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
 import { Screens } from "@src/common/constants";
+import { setStatusBarBgColor } from "@src/common/helpers";
 import { FontSize, IconSize, INoteColors, noteColors, Spacing } from "@src/common/theme";
 import { Box, FlexBox, KeyboardAvoidingBox, SafeAreaBox, ScrollView, Text, TextInput } from "@src/components/atoms";
 import { Favorite, HeaderBar, LabelPills } from "@src/components/molecules";
@@ -93,7 +93,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
 
     const bgColor = noteState.color[mode];
 
-    useTimeout(() => setStatusBarBackgroundColor(bgColor, true), 100, [bgColor]);
+    useTimeout(() => setStatusBarBgColor(bgColor, true), 100, [bgColor]);
 
     const { addNote, updateNote } = useStore();
 

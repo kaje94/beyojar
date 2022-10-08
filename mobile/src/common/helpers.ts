@@ -1,5 +1,8 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { StateStorage } from "zustand/middleware";
+
+import { IsAndroid } from "./constants";
 
 export const persistHelper: StateStorage = {
     getItem: async (name: string): Promise<string | null> => {
@@ -17,3 +20,9 @@ export const chunkArray = <T>(arr: T[], size: number): T[][] =>
     [...Array(Math.ceil(arr.length / size))].map((_, i) => arr.slice(size * i, size + size * i));
 
 export const delay = (t: number) => new Promise((resolve) => setTimeout(resolve, t));
+
+export const setStatusBarBgColor = (backgroundColor: string, animated: boolean) => {
+    if (IsAndroid) {
+        setStatusBarBackgroundColor(backgroundColor, animated);
+    }
+};

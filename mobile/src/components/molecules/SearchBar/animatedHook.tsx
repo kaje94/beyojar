@@ -2,9 +2,9 @@ import { useEffect, useRef } from "react";
 import { Animated } from "react-native";
 import { useDrawerStatus } from "@react-navigation/drawer";
 import { useIsFocused } from "@react-navigation/native";
-import { setStatusBarBackgroundColor } from "expo-status-bar";
 import { useTheme } from "styled-components";
 
+import { setStatusBarBgColor } from "@src/common/helpers";
 import { AnimationDuration, BorderRadius, Spacing } from "@src/common/theme";
 
 const colorRanges = { onBlur: 0, onFocus: 100 };
@@ -63,11 +63,11 @@ export const useSearchBarAnimated = (isFocused: boolean) => {
         // sub components should be able to call a callback and update the color
         // on unmount, should reset the color
         // use https://docs.expo.dev/versions/latest/sdk/safe-area-context/ for calculating the height
-        setStatusBarBackgroundColor(isInFocus ? colors[colorRanges.onFocus] : pallette.background, true);
+        setStatusBarBgColor(isInFocus ? colors[colorRanges.onFocus] : pallette.background, true);
     }, [isFocused, isScreenFocused]);
 
     useEffect(() => {
-        setStatusBarBackgroundColor(isDrawerOpen ? pallette.white : pallette.background, true);
+        setStatusBarBgColor(isDrawerOpen ? pallette.white : pallette.background, true);
     }, [isDrawerOpen]);
 
     return { borderRadius, margin, padding, backgroundColor };
