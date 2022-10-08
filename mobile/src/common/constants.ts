@@ -23,5 +23,3 @@ export enum QueryKeys {
 export enum StorageKeys {
     themeMode = "themeMode",
 }
-
-// todo: rename parent folder as common instead of utils

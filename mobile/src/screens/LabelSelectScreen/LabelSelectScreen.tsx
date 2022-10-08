@@ -1,51 +1,98 @@
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import { nanoid } from "nanoid/non-secure";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { AddIcon, CloseIcon, TagsIcon } from "@src/assets/icons";
-import { IsIOS, Screens } from "@src/common/constants";
+import { Screens } from "@src/common/constants";
 import { IconSize, IconStrokeWidth, Opacity, Spacing } from "@src/common/theme";
 import { KeyboardAvoidingBox, SafeAreaBox, ScrollView, Text, TextInput, Touchable } from "@src/components/atoms";
-import { Checkbox, HeaderBar } from "@src/components/molecules";
+import { Checkbox, EmptyPlaceholder, HeaderBar } from "@src/components/molecules";
+import { useBackPress } from "@src/hooks";
 import { NavigatorParamList } from "@src/navigator";
+import { useStore } from "@src/store";
 
-const LabelSelectItem = ({ labelString }: { labelString: string }) => {
+interface Props {
+    labelString: string;
+    onPress: (isSelected: boolean) => void;
+    isSelected: boolean;
+}
+const LabelSelectItem: FC<Props> = ({ labelString, isSelected = false, onPress }) => {
     const { pallette } = useTheme();
-    const [isChecked, setChecked] = useState(false);
 
     return (
         <Touchable
-            onPress={() => setChecked(!isChecked)}
+            onPress={() => onPress(!isSelected)}
             accessibilityRole="button"
             flexDirection="row"
             alignItems="center"
             px={Spacing.small}
             py={Spacing.medium}
         >
-            <TagsIcon color={pallette.grey} strokeWidth={isChecked ? IconStrokeWidth.large : IconStrokeWidth.default} />
+            <TagsIcon
+                color={pallette.grey}
+                strokeWidth={isSelected ? IconStrokeWidth.large : IconStrokeWidth.default}
+            />
             <Text
                 flex={1}
                 color={pallette.grey}
                 px={Spacing.medium}
-                fontFamily={isChecked ? FontFamily.medium : FontFamily.regular}
+                fontFamily={isSelected ? FontFamily.medium : FontFamily.regular}
             >
                 {labelString}
             </Text>
-            <Checkbox checked={isChecked} />
+            <Checkbox checked={isSelected} />
         </Touchable>
     );
 };
 
-export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Screens.labelSelect>> = () => {
+export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Screens.labelSelect>> = ({
+    route: {
+        params: { noteItem },
+    },
+    navigation,
+}) => {
     const { pallette } = useTheme();
     const { t } = useTranslation();
     const [searchText, setSearchText] = useState("");
+    const { labels, addLabel } = useStore();
+    const [selectedIds, setSelectedIds] = useState<string[]>(noteItem.labels.map((item) => item.id));
+
+    const onBackPress = useCallback(
+        () =>
+            navigation.navigate(Screens.editNote, {
+                noteItem: { ...noteItem, labels: labels.filter((item) => selectedIds.includes(item.id)) },
+            }),
+        [labels, selectedIds]
+    );
+
+    useBackPress({ callback: onBackPress });
+
+    const filteredLabels = useMemo(
+        () => labels.filter((item) => item.name.toLowerCase().includes(searchText.toLowerCase())),
+        [searchText, labels]
+    );
+
+    const matchExist = useMemo(
+        () => labels.some((item) => item.name.toLowerCase() === searchText.toLowerCase()),
+        [searchText, filteredLabels]
+    );
+
+    const clearSearch = useCallback(() => setSearchText(""), []);
+
+    const createLabel = useCallback(() => {
+        const labelId = nanoid();
+        addLabel({ id: labelId, name: searchText });
+        setSelectedIds([...selectedIds, labelId]);
+        clearSearch();
+    }, [searchText, selectedIds]);
 
     return (
         <SafeAreaBox bg={pallette.background}>
             <HeaderBar
+                onBackPress={onBackPress}
                 title={
                     <TextInput
                         accessibilityLabel={t("screens.labelSelection.inputA11yLabel")}
@@ -61,7 +108,7 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                     searchText.length > 0 && (
                         <CloseIcon
                             touchable={{
-                                onPress: () => setSearchText(""),
+                                onPress: clearSearch,
                                 opacity: Opacity.partiallyVisible,
                                 mr: Spacing.small,
                             }}
@@ -69,10 +116,16 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                     )
                 }
             />
-            <KeyboardAvoidingBox px={Spacing.medium} behavior={IsIOS ? "padding" : "height"}>
+            <KeyboardAvoidingBox px={Spacing.medium}>
                 <ScrollView>
-                    {searchText.length > 0 && (
-                        <Touchable accessibilityRole="button" flexDirection="row" alignItems="center">
+                    {/* only if no results found */}
+                    {searchText.length > 0 && !matchExist && (
+                        <Touchable
+                            onPress={createLabel}
+                            accessibilityRole="button"
+                            flexDirection="row"
+                            alignItems="center"
+                        >
                             <AddIcon
                                 color={pallette.primary.dark}
                                 size={IconSize.large}
@@ -84,14 +137,30 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                                 fontFamily={FontFamily.medium}
                                 color={pallette.primary.dark}
                             >
-                                {t("screens.labelSelection.createNew", { name: searchText })}
+                                {t("screens.labelSelection.createNew")}
+                                <Text fontFamily={FontFamily.bold} color={pallette.primary.dark}>
+                                    {searchText}
+                                </Text>
                             </Text>
                         </Touchable>
                     )}
-
-                    <LabelSelectItem labelString="Label 1" key="label 1" />
-                    <LabelSelectItem labelString="Label 2" key="label 2" />
-                    <LabelSelectItem labelString="Label 3" key="label 3" />
+                    {labels.length === 0 && (
+                        <EmptyPlaceholder text={t("screens.labelSelection.noLabelsFound")} Icon={TagsIcon} />
+                    )}
+                    {filteredLabels.map((item) => (
+                        <LabelSelectItem
+                            key={item.id}
+                            labelString={item.name}
+                            isSelected={selectedIds.includes(item.id)}
+                            onPress={(isSelected) => {
+                                if (isSelected) {
+                                    setSelectedIds([...selectedIds, item.id]);
+                                } else {
+                                    setSelectedIds(selectedIds.filter((id) => item.id !== id));
+                                }
+                            }}
+                        />
+                    ))}
                 </ScrollView>
             </KeyboardAvoidingBox>
         </SafeAreaBox>

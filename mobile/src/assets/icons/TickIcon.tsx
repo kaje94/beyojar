@@ -7,12 +7,12 @@ import { Box } from "@src/components/atoms";
 import { withTouchable } from "@src/components/hoc";
 import { IconProps } from "./interface";
 
-interface TickIconProps extends IconProps {
+interface Props extends IconProps {
     circleColor?: string;
 }
 
 export const TickIcon = withTouchable(
-    ({ size = IconSize.normal, strokeWidth = IconStrokeWidth.default, color, circleColor, opacity }: TickIconProps) => {
+    ({ size = IconSize.normal, strokeWidth = IconStrokeWidth.default, color, circleColor, opacity }: Props) => {
         const { pallette } = useTheme();
 
         return (

@@ -4,14 +4,18 @@ import { TextInput as TextInputNative } from "react-native";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
-import { BackIcon, CloseIcon, MenuIcon, SearchIcon } from "@src/assets/icons";
+import { BackIcon, MenuIcon, SearchIcon } from "@src/assets/icons";
 import { Spacing } from "@src/common/theme";
 import { AnimatedBox, FlexBox, TextInput } from "@src/components/atoms";
 import { useBackPress } from "@src/hooks";
 import { useSearchBarAnimated } from "./animatedHook";
 
+interface Props {
+    onSearchChange: (search: string) => void;
+}
+
 // todo: move into oragnism
-export const SearchBar: FC = () => {
+export const SearchBar: FC<Props> = ({ onSearchChange }) => {
     const { t } = useTranslation();
     const { pallette, shadow } = useTheme();
     const { dispatch } = useNavigation();
@@ -20,41 +24,40 @@ export const SearchBar: FC = () => {
 
     const [isFocused, setIsFocused] = useState(false);
     const [searchText, setSearchText] = useState("");
+    const isInFocus = isFocused || searchText.length > 0;
 
-    const searchBarStyles = useSearchBarAnimated(isFocused);
+    const searchBarStyles = useSearchBarAnimated(isInFocus);
 
     const onTextInputFocus = useCallback(() => setIsFocused(true), []);
 
     const onTextInputBlur = useCallback(() => setIsFocused(false), []);
 
-    const clearText = useCallback(() => setSearchText(""), []);
-
     const onTextChange = useCallback((text: string) => {
         setSearchText(text);
+        onSearchChange(text);
         onTextInputFocus();
     }, []);
 
     const onSearchPress = useCallback(() => {
-        onTextInputFocus();
         keyboardRef?.current?.focus();
     }, []);
 
     const onBackPress = useCallback(() => {
-        onTextInputBlur();
-        clearText();
+        setSearchText("");
+        onSearchChange("");
         keyboardRef?.current?.blur();
     }, []);
 
     useBackPress({
-        dependencies: [isFocused],
+        dependencies: [isInFocus],
         callback: onBackPress,
-        condition: () => isFocused,
+        condition: () => isInFocus,
     });
 
     return (
         <AnimatedBox style={{ ...searchBarStyles, ...shadow.medium }}>
             <FlexBox paddingX={Spacing.small}>
-                {isFocused ? (
+                {isInFocus ? (
                     <BackIcon touchable={{ onPress: onBackPress }} />
                 ) : (
                     <MenuIcon touchable={{ onPress: () => dispatch(DrawerActions.openDrawer) }} />
@@ -77,9 +80,7 @@ export const SearchBar: FC = () => {
                     accessibilityLabel={t("components.searchBar.inputA11yLabel")}
                 />
 
-                {!isFocused && <SearchIcon touchable={{ onPress: onSearchPress }} />}
-
-                {isFocused && searchText.length > 0 && <CloseIcon touchable={{ onPress: clearText }} />}
+                {!isInFocus && <SearchIcon touchable={{ onPress: onSearchPress }} />}
             </FlexBox>
         </AnimatedBox>
     );

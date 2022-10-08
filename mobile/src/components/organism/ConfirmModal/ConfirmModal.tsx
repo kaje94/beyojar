@@ -5,7 +5,7 @@ import { useTheme } from "styled-components";
 import { FontFamily } from "@src/assets/fonts";
 import { TrashIcon } from "@src/assets/icons";
 import { IconProps } from "@src/assets/icons/interface";
-import { FontSize, Spacing } from "@src/common/theme";
+import { FontSize, IconSize, Spacing } from "@src/common/theme";
 import { Box, FlexBox, Text } from "@src/components/atoms";
 import { BottomSheetModal, Button } from "@src/components/molecules";
 
@@ -14,6 +14,7 @@ interface Props {
     message: string;
     isVisible: boolean;
     onClose: () => void;
+    onConfirmPress?: () => void;
     primaryBtnText?: string;
     secondaryBtnText?: string;
     color?: string;
@@ -23,6 +24,7 @@ interface Props {
 export const ConfirmModal: FC<Props> = ({
     isVisible,
     onClose,
+    onConfirmPress,
     title,
     message,
     primaryBtnText,
@@ -38,7 +40,7 @@ export const ConfirmModal: FC<Props> = ({
     return (
         <BottomSheetModal isVisible={isVisible} onClose={onClose}>
             <Box my={Spacing.medium}>
-                <Icon size={80} color={primaryColor} />
+                <Icon size={IconSize.huge} color={primaryColor} />
             </Box>
             <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large}>
                 {title}
@@ -57,7 +59,7 @@ export const ConfirmModal: FC<Props> = ({
                 />
                 <Button
                     text={primaryBtnText || t("common.continue")}
-                    onPress={onClose}
+                    onPress={onConfirmPress}
                     bg={primaryColor}
                     borderColor={primaryColor}
                 />

@@ -196,6 +196,7 @@ export enum IconSize {
     small = 20,
     normal = 24,
     large = 30,
+    huge = 80,
 }
 
 export enum IconStrokeWidth {

@@ -1,40 +1,30 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated, GestureResponderEvent } from "react-native";
-import { DrawerContentComponentProps, useDrawerStatus } from "@react-navigation/drawer";
+import { GestureResponderEvent } from "react-native";
+import { DrawerContentComponentProps } from "@react-navigation/drawer";
+import { RouteProp } from "@react-navigation/native";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { EditIcon, NoteIcon, SettingsIcon, TagsIcon } from "@src/assets/icons";
 import { IconProps } from "@src/assets/icons/interface";
 import { Screens } from "@src/common/constants";
-import { AnimationDuration, BorderRadius, FontSize, IconSize, Spacing } from "@src/common/theme";
+import { BorderRadius, FontSize, IconSize, Spacing } from "@src/common/theme";
 import { AnimatedBox, Box, ScrollView, Text, Touchable } from "@src/components/atoms";
+import { NavigatorParamList } from "@src/navigator";
+import { useStore } from "@src/store";
 
-export const DrawerItem = ({
-    name,
-    selected,
-    color,
-    Icon = NoteIcon,
-    onPress,
-}: {
+interface Props {
     name: string;
     selected?: boolean;
-    color?: string;
+    bgColor?: string;
     Icon?: FC<IconProps>;
     onPress?: (event: GestureResponderEvent) => void;
-}) => {
-    const { pallette, shadow } = useTheme();
-    const borderRadius = useRef(new Animated.Value(0)).current;
-    const defaultColor = color || pallette.grey;
+}
 
-    useEffect(() => {
-        Animated.timing(borderRadius, {
-            toValue: selected ? BorderRadius.medium : BorderRadius.none,
-            duration: AnimationDuration.medium,
-            useNativeDriver: false,
-        }).start();
-    }, [selected]);
+export const DrawerItem: FC<Props> = ({ name, selected, bgColor, Icon = NoteIcon, onPress }) => {
+    const { pallette, shadow } = useTheme();
+    const defaultColor = bgColor || pallette.grey;
 
     return (
         <AnimatedBox
@@ -42,7 +32,8 @@ export const DrawerItem = ({
             py={Spacing.small}
             bg={selected ? pallette.primary.dark : "transparent"}
             m={Spacing.tiny}
-            style={[{ borderRadius }, selected && shadow.medium]}
+            borderRadius={BorderRadius.medium}
+            style={selected && shadow.medium}
         >
             <Touchable
                 onPress={onPress}
@@ -64,13 +55,15 @@ export const DrawerItem = ({
     );
 };
 
-export const Drawer = ({ navigation }: DrawerContentComponentProps) => {
+export const Drawer = ({ navigation, state }: DrawerContentComponentProps) => {
     const { pallette } = useTheme();
-    const isDrawerOpen = useDrawerStatus() === "open";
+    const { labels } = useStore();
     const { t } = useTranslation();
 
+    const selectedLabel = (state.routes[0] as RouteProp<NavigatorParamList, Screens.home>)?.params?.label?.id;
+
     return (
-        <Box flex={1}>
+        <Box flex={1} bg={pallette.white}>
             <Text
                 fontSize={FontSize.huge}
                 color={pallette.primary.main}
@@ -83,14 +76,25 @@ export const Drawer = ({ navigation }: DrawerContentComponentProps) => {
             <Box height={1} bg={pallette.secondary.light} />
             <ScrollView flex={1} px={Spacing.small}>
                 <Box height={Spacing.small} />
-                <DrawerItem name={t("components.drawer.notes")} selected={isDrawerOpen} Icon={NoteIcon} />
-                <DrawerItem name="Label 1" selected={false} Icon={TagsIcon} />
-                <DrawerItem name="Label 1" selected={false} Icon={TagsIcon} />
-                <DrawerItem name="Label 1" selected={false} Icon={TagsIcon} />
+                <DrawerItem
+                    name={t("components.drawer.notes")}
+                    selected={!selectedLabel}
+                    Icon={NoteIcon}
+                    onPress={() => navigation.navigate(Screens.home, {})}
+                />
+                {labels.map((item) => (
+                    <DrawerItem
+                        key={item.id}
+                        name={item.name}
+                        selected={selectedLabel === item.id}
+                        Icon={TagsIcon}
+                        onPress={() => navigation.navigate(Screens.home, { label: item })}
+                    />
+                ))}
                 <DrawerItem
                     name={t("components.drawer.manageLabels")}
                     Icon={EditIcon}
-                    color={pallette.secondary.main}
+                    bgColor={pallette.secondary.main}
                     onPress={() => navigation.navigate(Screens.labelManage)}
                 />
                 <Box height={Spacing.small} />

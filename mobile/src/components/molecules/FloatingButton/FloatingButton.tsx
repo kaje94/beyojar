@@ -1,4 +1,5 @@
 import React, { FC } from "react";
+import { GestureResponderEvent } from "react-native";
 import { useTheme } from "styled-components";
 
 import { AddIcon } from "@src/assets/icons";
@@ -6,14 +7,20 @@ import { IconProps } from "@src/assets/icons/interface";
 import { Spacing } from "@src/common/theme";
 import { Touchable } from "@src/components/atoms";
 
-export const FloatingButton = ({ Icon = AddIcon, iconSize = 45 }: { Icon?: FC<IconProps>; iconSize?: number }) => {
+interface Props {
+    Icon?: FC<IconProps>;
+    iconSize?: number;
+    onPress?: (event: GestureResponderEvent) => void;
+}
+
+export const FloatingButton: FC<Props> = ({ Icon = AddIcon, iconSize = 45, onPress }) => {
     const { pallette, shadow } = useTheme();
 
     return (
         <Touchable
             backgroundColor={pallette.primary.dark}
             accessibilityRole="button"
-            onPress={() => console.log("clicked")}
+            onPress={onPress}
             alignItems="center"
             justifyContent="center"
             position="absolute"

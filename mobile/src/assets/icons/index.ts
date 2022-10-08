@@ -8,6 +8,7 @@ export { TagsIcon } from "./TagsIcon";
 export { CopyIcon } from "./CopyIcon";
 export { TrashIcon } from "./TrashIcon";
 export { StarIcon } from "./StarIcon";
+export { StarFilledIcon } from "./StarFilledIcon";
 export { TickIcon } from "./TickIcon";
 export { CircleIcon } from "./CircleIcon";
 export { SettingsIcon } from "./SettingsIcon";

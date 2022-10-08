@@ -4,19 +4,30 @@
  *
  */
 import React, { FC } from "react";
+import FlashMessage from "react-native-flash-message";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useTheme } from "styled-components";
 
 import { Screens } from "@src/common/constants";
+import { Box } from "@src/components/atoms";
+import { ToastComponent } from "@src/components/molecules";
 import { Drawer } from "@src/components/organism";
 import { EditNoteScreen, HomeScreen, LabelManageScreen, LabelSelectScreen, SettingsScreen } from "@src/screens";
+import { Label, Note } from "@src/store";
 
 export type NavigatorParamList = {
-    home: undefined;
-    editNote: undefined;
-    labelSelect: undefined;
+    home: {
+        label: Label;
+    };
+    editNote: {
+        noteItem?: Note;
+        initialLabels?: Label[];
+    };
+    labelSelect: {
+        noteItem: Note;
+    };
     labelManage: undefined;
     homeDrawer: undefined;
     settings: undefined;
@@ -53,10 +64,13 @@ const HomeStackNavigator: FC = () => {
 };
 
 export const Navigation: FC = () => {
-    const { mode } = useTheme();
+    const { mode, pallette } = useTheme();
     return (
-        <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
-            <HomeStackNavigator />
-        </NavigationContainer>
+        <Box bg={pallette.background} flex={1}>
+            <NavigationContainer theme={mode === "dark" ? DarkTheme : DefaultTheme}>
+                <HomeStackNavigator />
+                <FlashMessage MessageComponent={ToastComponent} />
+            </NavigationContainer>
+        </Box>
     );
 };

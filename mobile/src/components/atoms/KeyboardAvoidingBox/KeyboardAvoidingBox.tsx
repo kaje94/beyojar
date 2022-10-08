@@ -14,6 +14,8 @@ import {
     SpaceProps,
 } from "styled-system";
 
+import { IsIOS } from "@src/common/constants";
+
 type Props = KeyboardAvoidingViewProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps;
 
 const StyledKeyboardAvoidingBox = styled.KeyboardAvoidingView<Props>`
@@ -25,5 +27,5 @@ const StyledKeyboardAvoidingBox = styled.KeyboardAvoidingView<Props>`
 `;
 
 export const KeyboardAvoidingBox: FC<PropsWithChildren<Props>> = ({ flex = 1, ...props }) => {
-    return <StyledKeyboardAvoidingBox flex={flex} {...props} />;
+    return <StyledKeyboardAvoidingBox flex={flex} behavior={IsIOS ? "padding" : "height"} {...props} />;
 };

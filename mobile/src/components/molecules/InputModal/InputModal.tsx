@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useEffect, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import RnModal from "react-native-modal";
 import { useFormik } from "formik";
@@ -13,28 +13,47 @@ import { Button } from "@src/components/molecules/Button";
 interface Props {
     isVisible: boolean;
     onClose: () => void;
+    initialValue: string;
+    onSave: (value: string) => void;
+    existingValues?: string[];
 }
 
-const LabelNameSchema = Yup.object().shape({
-    labelName: Yup.string()
-        .transform((val) => val?.trim())
-        .min(2, "Label name is too short")
-        .max(25, "Label name is too long")
-        .required("Label name is required"),
-});
-
-export const InputModal: FC<Props> = ({ isVisible, onClose }) => {
+export const InputModal: FC<Props> = ({ isVisible, initialValue, existingValues = [], onSave, onClose }) => {
     const { pallette } = useTheme();
     const { t } = useTranslation();
 
-    const { values, errors, touched, isValid, handleChange, handleBlur, handleSubmit } = useFormik({
-        initialValues: { labelName: "" },
+    const LabelNameSchema = useMemo(
+        () =>
+            Yup.object().shape({
+                labelName: Yup.string()
+                    .transform((val) => val?.trim())
+                    .min(2, "Label name is too short")
+                    .max(25, "Label name is too long")
+                    .required("Label name is required")
+                    .test("duplicate-check", "Duplicate label name", (value) => {
+                        return !!value && !existingValues.includes(value.toLowerCase());
+                    }),
+            }),
+        [existingValues]
+    );
+
+    const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } = useFormik({
+        initialValues: { labelName: initialValue },
         validationSchema: LabelNameSchema,
         onSubmit: ({ labelName }) => {
-            console.log("submitting ", labelName?.trim());
+            onSave(labelName);
             onClose();
         },
     });
+
+    useEffect(() => {
+        if (isVisible) {
+            resetForm({ values: { labelName: initialValue }, errors: {}, touched: {} });
+            // keyboardRef?.current?.focus();
+        }
+    }, [isVisible, initialValue]);
+
+    const isInvalid = !!(errors.labelName && touched.labelName);
 
     return (
         <RnModal
@@ -45,15 +64,15 @@ export const InputModal: FC<Props> = ({ isVisible, onClose }) => {
             backdropTransitionOutTiming={0}
             animationIn="zoomIn"
             animationOut="zoomOut"
-            avoidKeyboard
+            // avoidKeyboard
             backdropOpacity={Opacity.barelyVisible}
         >
             <Box
+                accessibilityRole="button"
                 p={Spacing.large}
                 alignItems="center"
                 bg={pallette.background}
                 borderRadius={BorderRadius.small}
-                //  margin={Spacing.medium}
             >
                 <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large}>
                     Create Label
@@ -66,14 +85,15 @@ export const InputModal: FC<Props> = ({ isVisible, onClose }) => {
                     placeholder="Label name"
                     mt={Spacing.large}
                     borderWidth={BorderWidth.small}
-                    borderColor={isValid ? pallette.secondary.main : pallette.error.main}
+                    borderColor={isInvalid ? pallette.error.main : pallette.secondary.main}
                     borderRadius={BorderRadius.tiny}
                     p={Spacing.small}
                     onChangeText={handleChange("labelName")}
                     onBlur={handleBlur("labelName")}
                     value={values.labelName}
+                    autoFocus
                 />
-                {errors.labelName && touched.labelName ? (
+                {isInvalid ? (
                     <Text
                         fontSize={FontSize.small}
                         fontFamily={FontFamily.light}
@@ -93,7 +113,7 @@ export const InputModal: FC<Props> = ({ isVisible, onClose }) => {
                         bg={pallette.white}
                         textColor={pallette.grey}
                     />
-                    <Button text={t("common.save")} onPress={() => handleSubmit()} disabled={!isValid} />
+                    <Button text={t("common.save")} onPress={() => handleSubmit()} disabled={isInvalid} />
                 </FlexBox>
             </Box>
         </RnModal>

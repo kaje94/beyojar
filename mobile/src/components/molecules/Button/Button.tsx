@@ -4,11 +4,11 @@ import { useTheme } from "styled-components";
 import { BorderRadius, BorderWidth, FontSize, Opacity, Spacing } from "@src/common/theme";
 import { Text, Touchable, TouchableProps } from "@src/components/atoms";
 
-interface ButtonProps extends TouchableProps {
+interface Props extends TouchableProps {
     text?: string;
     textColor?: string;
 }
-export const Button = ({ text, textColor, disabled = false, ...rest }: ButtonProps) => {
+export const Button = ({ text, textColor, disabled = false, ...rest }: Props) => {
     const { pallette, shadow } = useTheme();
 
     return (
@@ -16,7 +16,6 @@ export const Button = ({ text, textColor, disabled = false, ...rest }: ButtonPro
             accessibilityRole="button"
             borderWidth={BorderWidth.small}
             borderColor={pallette.primary.dark}
-            // todo create seperate borderradius theme
             borderRadius={BorderRadius.huge}
             p={Spacing.small}
             flex={1}

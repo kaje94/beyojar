@@ -1,43 +1,144 @@
-import React, { FC, useState } from "react";
+import React, { FC, useCallback, useEffect, useReducer, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { showMessage } from "react-native-flash-message";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
+import formatDistance from "date-fns/formatDistanceToNow";
 import { setStatusBarBackgroundColor } from "expo-status-bar";
+import { nanoid } from "nanoid/non-secure";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
-import { StarIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
-import { IsIOS, Screens } from "@src/common/constants";
-import { FontSize, IconSize, noteColors, Opacity, Spacing } from "@src/common/theme";
+import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
+import { Screens } from "@src/common/constants";
+import { FontSize, IconSize, INoteColors, noteColors, Spacing } from "@src/common/theme";
 import { Box, FlexBox, KeyboardAvoidingBox, SafeAreaBox, ScrollView, Text, TextInput } from "@src/components/atoms";
-import { HeaderBar, LabelPills } from "@src/components/molecules";
+import { Favorite, HeaderBar, LabelPills } from "@src/components/molecules";
 import { ColorPickerModal, ConfirmModal } from "@src/components/organism";
-import { useTimeout } from "@src/hooks";
+import { useBackPress, useTimeout } from "@src/hooks";
 import { NavigatorParamList } from "@src/navigator";
+import { Label, Note, useStore } from "@src/store";
 
 const bottomBarHight = 60;
 
-export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Screens.editNote>> = ({ navigation }) => {
-    const [noteTitle, setNoteTitle] = useState("");
-    const [noteText, setNoteText] = useState("");
-    const [isDeleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
-    const [isColorPickerVisible, setColorPickerVisible] = useState(false);
-    const [selectedColor, setSelectedColor] = useState(noteColors[0]);
+enum NoteChangeKind {
+    Initialize,
+    Title,
+    Content,
+    Color,
+    isFavorite,
+    Labels,
+}
 
+interface NoteChangeAction {
+    type: NoteChangeKind;
+    payload?: string | boolean | INoteColors | Label[] | Note;
+}
+
+const initialNote: Note = {
+    color: noteColors[0],
+    title: "",
+    content: "",
+    favorite: false,
+    labels: [],
+    ts: 0,
+};
+
+const noteEditReducer = (state: Note, action: NoteChangeAction) => {
+    const { type, payload } = action;
+    switch (type) {
+        case NoteChangeKind.Initialize:
+            return (payload as Note) || initialNote;
+        case NoteChangeKind.Title:
+            return { ...state, title: payload as string, ts: Date.now() };
+        case NoteChangeKind.Content:
+            return { ...state, content: payload as string, ts: Date.now() };
+        case NoteChangeKind.Color:
+            return { ...state, color: payload as INoteColors, ts: Date.now() };
+        case NoteChangeKind.isFavorite:
+            return { ...state, favorite: !state.favorite };
+        case NoteChangeKind.Labels:
+            return { ...state, labels: payload as Label[], ts: Date.now() };
+        default:
+            return initialNote;
+    }
+};
+
+export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Screens.editNote>> = ({
+    navigation,
+    route: {
+        params: { initialLabels = [], noteItem },
+    },
+}) => {
     const insets = useSafeAreaInsets();
     const { pallette, mode } = useTheme();
     const { t } = useTranslation();
+    const { deleteNote } = useStore();
 
-    const bgColor = selectedColor[mode];
+    const [noteState, noteDispatch] = useReducer(noteEditReducer, {
+        ...initialNote,
+        labels: initialLabels,
+        ...noteItem,
+    });
+
+    useEffect(() => {
+        noteDispatch({
+            type: NoteChangeKind.Initialize,
+            payload: noteItem || { ...initialNote, labels: initialLabels },
+        });
+    }, [noteItem, initialLabels.length]);
+
+    const [isDeleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
+    const [isColorPickerVisible, setColorPickerVisible] = useState(false);
+
+    const bgColor = noteState.color[mode];
 
     useTimeout(() => setStatusBarBackgroundColor(bgColor, true), 100, [bgColor]);
 
-    // todo: extract header into new screen
+    const { addNote, updateNote } = useStore();
+
+    const saveNewNote = useCallback(() => {
+        if (noteState.id) {
+            updateNote(noteState);
+        } else if (noteState.title || noteState.content) {
+            addNote({ ...noteState, id: nanoid() });
+        } else {
+            showMessage({
+                message: t("screens.editNote.noteDiscarded"),
+                icon: <InfoIcon />,
+            });
+        }
+        navigation.goBack();
+    }, [noteState]);
+
+    useBackPress({ callback: saveNewNote });
+
+    const onDeletePress = useCallback(() => {
+        if (noteState?.id) {
+            deleteNote(noteState?.id);
+
+            showMessage({
+                message: t("screens.editNote.noteDeleted"),
+                icon: <TrashIcon />,
+                backgroundColor: pallette.error.light,
+            });
+        }
+        navigation.goBack();
+    }, [noteState]);
+
     return (
         <>
             <SafeAreaBox bg={bgColor}>
-                <HeaderBar endIcon={<StarIcon size={30} touchable={{ opacity: Opacity.barelyVisible }} />} />
-                <KeyboardAvoidingBox mb={bottomBarHight} behavior={IsIOS ? "padding" : "height"}>
+                <HeaderBar
+                    onBackPress={saveNewNote}
+                    endIcon={
+                        <Favorite
+                            isFavorite={noteState.favorite}
+                            onPress={() => noteDispatch({ type: NoteChangeKind.isFavorite })}
+                        />
+                    }
+                />
+                <KeyboardAvoidingBox mb={bottomBarHight}>
                     <ScrollView px={Spacing.medium}>
                         <TextInput
                             accessibilityLabel="Text input field"
@@ -46,11 +147,10 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                             multiline
                             fontSize={FontSize.large}
                             placeholder="Title"
-                            value={noteTitle}
-                            onChangeText={setNoteTitle}
+                            value={noteState.title}
+                            onChangeText={(value) => noteDispatch({ type: NoteChangeKind.Title, payload: value })}
                             fontFamily={FontFamily.bold}
                             color={pallette.secondary.dark}
-                            // enter to focus next input
                         />
                         <Box height={1} bg={pallette.grey} my={Spacing.small} />
                         <TextInput
@@ -60,15 +160,18 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                             multiline
                             fontSize={FontSize.medium}
                             placeholder="Start writing"
-                            value={noteText}
-                            onChangeText={setNoteText}
+                            value={noteState.content}
+                            onChangeText={(value) => noteDispatch({ type: NoteChangeKind.Content, payload: value })}
                             mb={Spacing.large}
                             color={pallette.grey}
                             minHeight={200}
                             textAlignVertical="top"
                         />
                     </ScrollView>
-                    <LabelPills />
+                    <LabelPills
+                        note={noteState}
+                        onPress={() => navigation.navigate(Screens.labelSelect, { noteItem: noteState })}
+                    />
                 </KeyboardAvoidingBox>
             </SafeAreaBox>
             <FlexBox
@@ -87,7 +190,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     size={IconSize.large}
                     touchable={{
                         mx: Spacing.tiny,
-                        onPress: () => navigation.navigate(Screens.labelSelect),
+                        onPress: () => navigation.navigate(Screens.labelSelect, { noteItem: noteState }),
                     }}
                 />
                 <ThemeIcon
@@ -102,7 +205,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     fontFamily={FontFamily.light}
                     fontSize={FontSize.small}
                 >
-                    Edited 2 days ago
+                    {!!noteState.ts && t("screens.editNote.editedTime", { time: formatDistance(noteState.ts) })}
                 </Text>
                 <TrashIcon
                     color={pallette.error.main}
@@ -117,12 +220,13 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 isVisible={isDeleteConfirmVisible}
                 onClose={() => setDeleteConfirmVisible(false)}
                 color={pallette.error.dark}
+                onConfirmPress={onDeletePress}
             />
             <ColorPickerModal
-                selectedColor={selectedColor}
+                selectedColor={noteState.color}
                 isVisible={isColorPickerVisible}
                 onClose={(selected) => {
-                    setSelectedColor(selected);
+                    noteDispatch({ type: NoteChangeKind.Color, payload: selected });
                     setColorPickerVisible(false);
                 }}
             />

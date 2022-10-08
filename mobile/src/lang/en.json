@@ -17,9 +17,6 @@
             "noteDeleteModal": {
                 "message": "Do you really want to delete this note? \nThis action cannot be undone."
             },
-            "labelDeleteModal": {
-                "message": "Do you really want to delete this label? \nThis action cannot be undone."
-            },
             "colorPicker": {
                 "title": "Pick the color of your note"
             },
@@ -27,14 +24,28 @@
                 "notes": "Notes",
                 "settings": "Settings",
                 "manageLabels": "Manage Labels"
+            },
+            "cardItem": {
+                "empty": "Empty note"
             }
         },
         "screens": {
+            "editNote": {
+                "noteDiscarded": "Empty Note Discarded",
+                "noteDeleted": "Note deleted successfully",
+                "editedTime": "Edited {{time}} ago"
+            },
             "labelSelection": {
                 "placeholder": "Enter a label name",
                 "inputA11yLabel": "Search labels input",
                 "inputA11yHint": "Labels will be filtered based on this input",
-                "createNew": "Create {{name}}"
+                "createNew": "Create ",
+                "noLabelsFound": "Start by adding a new label"
+            },
+            "labelManage": {
+                "deleteLabelMessage": "Do you really want to delete this label? \nThis action cannot be undone.",
+                "noLabelsFound": "Start by adding your first label",
+                "labelDeleted": "Label deleted successfully"
             },
             "settings": {
                 "theme": {
