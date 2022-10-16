@@ -21,8 +21,10 @@ export const decorators: Parameters<typeof addDecorator>[0][] = [
 ];
 
 export const parameters = {
+    actions: { argTypesRegex: "^on.*" },
     i18n,
     locale: "en",
+    options: { panelPosition: "right", showPanel: true },
     viewport: {
         defaultViewport: "iphonex",
         viewports: {

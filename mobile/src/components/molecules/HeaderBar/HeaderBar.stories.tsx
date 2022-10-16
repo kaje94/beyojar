@@ -2,8 +2,7 @@ import React from "react";
 
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { Default as Favorite } from "@src/components/molecules/Favorite/Favorite.stories";
-
+import { Favorite } from "../Favorite/Favorite";
 import { HeaderBar } from "./HeaderBar";
 
 export default {

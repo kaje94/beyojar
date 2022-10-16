@@ -9,7 +9,7 @@ import { IconProps } from "@src/common/interfaces";
 import { IconSize, Spacing } from "@src/common/theme";
 import { getTransition } from "@src/common/transitions";
 
-interface Props extends IconProps {
+export interface Props extends IconProps {
     /** To show checked circle or unchecked circle */
     checked?: boolean;
     /** Function to be called when checkbox is pressed */

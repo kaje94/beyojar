@@ -8,7 +8,7 @@ import { BorderRadius, BorderWidth, FontSize, Shadow, Spacing } from "@src/commo
 import { Box, Text, Touchable } from "@src/components/atoms";
 import { BottomSheetModal } from "@src/components/molecules";
 
-interface Props {
+export interface Props {
     /** Is Select modal visible */
     isVisible: boolean;
     /** Function to be called when either an option is selected or modal is closed */

@@ -11,7 +11,7 @@ import { BorderRadius, BorderWidth, FontSize, Opacity, Spacing } from "@src/comm
 import { Box, FlexBox, Text, TextInput } from "@src/components/atoms";
 import { Button } from "@src/components/molecules/Button";
 
-interface Props {
+export interface Props {
     /** Initial value to be displayed in the input field */
     initialValue: string;
     /** Placeholder to be shown in the input field */

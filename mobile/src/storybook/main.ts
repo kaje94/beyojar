@@ -8,7 +8,9 @@ const config: StorybookConfig = {
         "storybook-dark-mode",
         "@storybook/addon-react-native-web",
         "storybook-react-i18next",
+        "@storybook/addon-a11y",
     ],
+    features: { interactionsDebugger: true },
     framework: "@storybook/react",
     stories: ["../**/*.stories.@(js|jsx|ts|tsx)"],
 };

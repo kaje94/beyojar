@@ -1,29 +1,28 @@
-import React, { useState } from "react";
+import React from "react";
 
+import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { noteColors } from "@src/common/theme";
 import { Button } from "@src/components/molecules/Button";
 
-import { ColorPickerModal } from "./ColorPickerModal";
+import { ColorPickerModal, Props } from "./ColorPickerModal";
 
-export default { component: ColorPickerModal, title: "organism/ColorPickerModal" } as ComponentMeta<
-    typeof ColorPickerModal
->;
+export default {
+    args: { isVisible: false, selectedColor: noteColors[0] },
+    component: ColorPickerModal,
+    title: "organism/ColorPickerModal",
+} as ComponentMeta<typeof ColorPickerModal>;
 
-const Template: ComponentStory<typeof ColorPickerModal> = () => {
-    const [isVisible, setVisible] = useState(false);
-    const [selectedColor, setSelectedColor] = useState(noteColors[0]);
+const Template: ComponentStory<typeof ColorPickerModal> = (_) => {
+    const [args, updateArgs] = useArgs();
+
     return (
         <>
-            <Button onPress={() => setVisible(true)} text="Open Modal" />
+            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
             <ColorPickerModal
-                isVisible={isVisible}
-                onClose={(color) => {
-                    setVisible(false);
-                    setSelectedColor(color);
-                }}
-                selectedColor={selectedColor}
+                {...(args as Props)}
+                onClose={(color) => updateArgs({ isVisible: false, selectedColor: color })}
             />
         </>
     );

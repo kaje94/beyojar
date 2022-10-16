@@ -1,25 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 
+import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import * as Yup from "yup";
 
 import { Button } from "@src/components/molecules/Button";
 
-import { InputModal } from "./InputModal";
+import { InputModal, Props } from "./InputModal";
 
-export default { component: InputModal, title: "organism/InputModal" } as ComponentMeta<typeof InputModal>;
+export default { args: { isVisible: false }, component: InputModal, title: "organism/InputModal" } as ComponentMeta<
+    typeof InputModal
+>;
 
-const Template: ComponentStory<typeof InputModal> = (args) => {
-    const [isVisible, setVisible] = useState(false);
+const Template: ComponentStory<typeof InputModal> = (_) => {
+    const [args, updateArgs] = useArgs();
     return (
         <>
-            <Button onPress={() => setVisible(true)} text="Open Modal" />
-            <InputModal
-                {...args}
-                isVisible={isVisible}
-                onClose={() => setVisible(false)}
-                onSave={() => setVisible(false)}
-            />
+            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <InputModal {...(args as Props)} onClose={() => updateArgs({ isVisible: false })} />
         </>
     );
 };

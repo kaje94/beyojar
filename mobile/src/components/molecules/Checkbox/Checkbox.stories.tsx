@@ -1,14 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 
+import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { Checkbox } from "./Checkbox";
+import { Checkbox, Props } from "./Checkbox";
 
-export default { component: Checkbox, title: "molecules/Checkbox" } as ComponentMeta<typeof Checkbox>;
+export default {
+    argTypes: { onPress: { action: "Checkbox pressed" } },
+    args: { checked: false },
+    component: Checkbox,
+    title: "molecules/Checkbox",
+} as ComponentMeta<typeof Checkbox>;
 
-const Template: ComponentStory<typeof Checkbox> = () => {
-    const [checked, setChecked] = useState(false);
-    return <Checkbox checked={checked} onPress={() => setChecked(!checked)} />;
+const Template: ComponentStory<typeof Checkbox> = (_) => {
+    const [args, updateArgs] = useArgs();
+    return <Checkbox {...(args as Props)} onPress={() => updateArgs({ checked: !args.checked })} />;
 };
 
 export const Default = Template.bind({});

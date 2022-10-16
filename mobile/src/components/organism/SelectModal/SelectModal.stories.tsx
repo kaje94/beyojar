@@ -1,37 +1,35 @@
-import React, { useState } from "react";
+import React from "react";
 
+import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { Button } from "@src/components/molecules/Button";
 
-import { SelectModal } from "./SelectModal";
+import { Props, SelectModal } from "./SelectModal";
 
-export default { component: SelectModal, title: "organism/SelectModal" } as ComponentMeta<typeof SelectModal>;
+export default {
+    args: {
+        isVisible: false,
+        options: [
+            { id: "1", label: "item 1" },
+            { id: "2", label: "item 2" },
+        ],
+        selectedId: "1",
+        title: "Modal title",
+    },
+    component: SelectModal,
+    title: "organism/SelectModal",
+} as ComponentMeta<typeof SelectModal>;
 
-const Template: ComponentStory<typeof SelectModal> = (args) => {
-    const [isVisible, setVisible] = useState(false);
-    const [selected, setSelected] = useState("1");
+const Template: ComponentStory<typeof SelectModal> = (_) => {
+    const [args, updateArgs] = useArgs();
+
     return (
         <>
-            <Button onPress={() => setVisible(true)} text="Open Modal" />
-            <SelectModal
-                {...args}
-                isVisible={isVisible}
-                onClose={(id) => {
-                    setSelected(id);
-                    setVisible(false);
-                }}
-                selectedId={selected}
-            />
+            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <SelectModal {...(args as Props)} onClose={(id) => updateArgs({ isVisible: false, selectedId: id })} />
         </>
     );
 };
 
 export const Default = Template.bind({});
-Default.args = {
-    options: [
-        { id: "1", label: "item 1" },
-        { id: "2", label: "item 2" },
-    ],
-    title: "Modal title",
-};

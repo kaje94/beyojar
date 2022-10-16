@@ -1,20 +1,25 @@
-import React, { useState } from "react";
+import React from "react";
 
+import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { TrashIcon } from "@src/assets/icons";
 import { Button } from "@src/components/molecules/Button";
 
-import { ConfirmModal } from "./ConfirmModal";
+import { ConfirmModal, Props } from "./ConfirmModal";
 
-export default { component: ConfirmModal, title: "organism/ConfirmModal" } as ComponentMeta<typeof ConfirmModal>;
+export default {
+    args: { isVisible: false },
+    component: ConfirmModal,
+    title: "organism/ConfirmModal",
+} as ComponentMeta<typeof ConfirmModal>;
 
-const Template: ComponentStory<typeof ConfirmModal> = (args) => {
-    const [isVisible, setVisible] = useState(false);
+const Template: ComponentStory<typeof ConfirmModal> = (_) => {
+    const [args, updateArgs] = useArgs();
     return (
         <>
-            <Button onPress={() => setVisible(true)} text="Open Modal" />
-            <ConfirmModal {...args} isVisible={isVisible} onClose={() => setVisible(false)} />
+            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <ConfirmModal {...(args as Props)} onClose={() => updateArgs({ isVisible: false })} />
         </>
     );
 };

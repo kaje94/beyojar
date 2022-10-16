@@ -11,7 +11,7 @@ import { Box, FlexBox, Text } from "@src/components/atoms";
 import { Button } from "@src/components/molecules";
 import { BottomSheetModal, Props as BottomSheetModalProps } from "@src/components/molecules/BottomSheetModal";
 
-interface Props extends BottomSheetModalProps {
+export interface Props extends BottomSheetModalProps {
     /** Icon to be shown in the modal */
     Icon?: FC<IconProps>;
     /** Primary color of the confirm modal */

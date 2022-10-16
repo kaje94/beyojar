@@ -21,9 +21,8 @@ const defaultNoteItem: Note = {
 };
 
 export default {
-    args: {
-        noteItem: defaultNoteItem,
-    },
+    argTypes: { onPress: { action: "Card pressed" } },
+    args: { noteItem: defaultNoteItem },
     component: CardItem,
     title: "molecules/CardItem",
 } as ComponentMeta<typeof CardItem>;

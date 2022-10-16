@@ -9,7 +9,7 @@ import { IconSize, Opacity } from "@src/common/theme";
 import { getTransition } from "@src/common/transitions";
 import { Touchable, TouchableProps } from "@src/components/atoms";
 
-interface Props extends TouchableProps {
+export interface Props extends TouchableProps {
     /** To show filled star icon or unfilled one */
     isFavorite?: boolean;
     /** Size of the icon */

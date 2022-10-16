@@ -5,7 +5,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Button } from "./Button";
 
 export default {
-    argTypes: { onPress: { action: "Pressed" } },
+    argTypes: { onPress: { action: "Button pressed" } },
     component: Button,
     title: "molecules/Button",
 } as ComponentMeta<typeof Button>;

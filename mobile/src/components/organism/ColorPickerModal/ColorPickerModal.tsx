@@ -14,7 +14,7 @@ import { BottomSheetModal } from "@src/components/molecules";
 const columnCount = 4;
 const colorSize = 60;
 
-interface Props {
+export interface Props {
     /** Is color picker modal visible */
     isVisible: boolean;
     /** Function to be called when either a color is selected or modal is closed */
