@@ -182,27 +182,27 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 <KeyboardAvoidingBox mb={bottomBarHight}>
                     <ScrollBox px={Spacing.medium}>
                         <TextInput
-                            accessibilityHint={t("components.noteDeleteModal.titleA11yHint")}
-                            accessibilityLabel={t("components.noteDeleteModal.titleA11yLabel")}
+                            accessibilityHint={t("screens.editNote.titleA11yHint")}
+                            accessibilityLabel={t("screens.editNote.titleA11yLabel")}
                             color={pallette.secondary.dark}
                             fontFamily={FontFamily.bold}
                             fontSize={FontSize.large}
                             multiline
                             onChangeText={(value) => noteDispatch({ payload: value, type: NoteChangeKind.Title })}
-                            placeholder={t("components.noteDeleteModal.titlePlaceholder")}
+                            placeholder={t("screens.editNote.titlePlaceholder")}
                             value={noteState.title}
                         />
                         <Box bg={pallette.grey} height={1} my={Spacing.small} />
                         <TextInput
-                            accessibilityHint={t("components.noteDeleteModal.contentA11yHint")}
-                            accessibilityLabel={t("components.noteDeleteModal.contentA11yLabel")}
+                            accessibilityHint={t("screens.editNote.contentA11yHint")}
+                            accessibilityLabel={t("screens.editNote.contentA11yLabel")}
                             color={pallette.grey}
                             fontSize={FontSize.medium}
                             mb={Spacing.large}
                             minHeight={200}
                             multiline
                             onChangeText={(value) => noteDispatch({ payload: value, type: NoteChangeKind.Content })}
-                            placeholder={t("components.noteDeleteModal.contentPlaceholder")}
+                            placeholder={t("screens.editNote.contentPlaceholder")}
                             textAlignVertical="top"
                             value={noteState.content}
                         />
@@ -225,8 +225,8 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     color={pallette.white}
                     size={IconSize.medium}
                     touchable={{
-                        accessibilityHint: t("components.noteDeleteModal.openLabelsA11yHint"),
-                        accessibilityLabel: t("components.noteDeleteModal.openLabelsA11yLabel"),
+                        accessibilityHint: t("screens.editNote.openLabelsA11yHint"),
+                        accessibilityLabel: t("screens.editNote.openLabelsA11yLabel"),
                         mx: Spacing.tiny,
                         onPress: openLabelSelectScreen,
                     }}
@@ -235,8 +235,8 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     color={bgColor}
                     size={IconSize.medium}
                     touchable={{
-                        accessibilityHint: t("components.noteDeleteModal.openColorModalA11yHint"),
-                        accessibilityLabel: t("components.noteDeleteModal.openColorModalA11yLabel"),
+                        accessibilityHint: t("screens.editNote.openColorModalA11yHint"),
+                        accessibilityLabel: t("screens.editNote.openColorModalA11yLabel"),
                         mx: Spacing.tiny,
                         onPress: openColoPickerModal,
                     }}
@@ -254,8 +254,8 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     color={pallette.error.main}
                     size={IconSize.medium}
                     touchable={{
-                        accessibilityHint: t("components.noteDeleteModal.openDeleteA11yHint"),
-                        accessibilityLabel: t("components.noteDeleteModal.openDeletesA11yLabel"),
+                        accessibilityHint: t("screens.editNote.openDeleteA11yHint"),
+                        accessibilityLabel: t("screens.editNote.openDeletesA11yLabel"),
                         mx: Spacing.tiny,
                         onPress: openDeleteConfirmModal,
                     }}
