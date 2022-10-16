@@ -182,29 +182,27 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 <KeyboardAvoidingBox mb={bottomBarHight}>
                     <ScrollBox px={Spacing.medium}>
                         <TextInput
-                            // todo update
-                            accessibilityHint="ss"
-                            accessibilityLabel="Text input field"
+                            accessibilityHint={t("components.noteDeleteModal.titleA11yHint")}
+                            accessibilityLabel={t("components.noteDeleteModal.titleA11yLabel")}
                             color={pallette.secondary.dark}
                             fontFamily={FontFamily.bold}
                             fontSize={FontSize.large}
                             multiline
                             onChangeText={(value) => noteDispatch({ payload: value, type: NoteChangeKind.Title })}
-                            placeholder="Title"
+                            placeholder={t("components.noteDeleteModal.titlePlaceholder")}
                             value={noteState.title}
                         />
                         <Box bg={pallette.grey} height={1} my={Spacing.small} />
                         <TextInput
-                            // todo update
-                            accessibilityHint="ss"
-                            accessibilityLabel="Text input field"
+                            accessibilityHint={t("components.noteDeleteModal.contentA11yHint")}
+                            accessibilityLabel={t("components.noteDeleteModal.contentA11yLabel")}
                             color={pallette.grey}
                             fontSize={FontSize.medium}
                             mb={Spacing.large}
                             minHeight={200}
                             multiline
                             onChangeText={(value) => noteDispatch({ payload: value, type: NoteChangeKind.Content })}
-                            placeholder="Start writing"
+                            placeholder={t("components.noteDeleteModal.contentPlaceholder")}
                             textAlignVertical="top"
                             value={noteState.content}
                         />
@@ -226,12 +224,22 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 <TagsIcon
                     color={pallette.white}
                     size={IconSize.medium}
-                    touchable={{ mx: Spacing.tiny, onPress: openLabelSelectScreen }}
+                    touchable={{
+                        accessibilityHint: t("components.noteDeleteModal.openLabelsA11yHint"),
+                        accessibilityLabel: t("components.noteDeleteModal.openLabelsA11yLabel"),
+                        mx: Spacing.tiny,
+                        onPress: openLabelSelectScreen,
+                    }}
                 />
                 <ThemeIcon
                     color={bgColor}
                     size={IconSize.medium}
-                    touchable={{ mx: Spacing.tiny, onPress: openColoPickerModal }}
+                    touchable={{
+                        accessibilityHint: t("components.noteDeleteModal.openColorModalA11yHint"),
+                        accessibilityLabel: t("components.noteDeleteModal.openColorModalA11yLabel"),
+                        mx: Spacing.tiny,
+                        onPress: openColoPickerModal,
+                    }}
                 />
                 <Text
                     color={pallette.white}
@@ -245,7 +253,12 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 <TrashIcon
                     color={pallette.error.main}
                     size={IconSize.medium}
-                    touchable={{ mx: Spacing.tiny, onPress: openDeleteConfirmModal }}
+                    touchable={{
+                        accessibilityHint: t("components.noteDeleteModal.openDeleteA11yHint"),
+                        accessibilityLabel: t("components.noteDeleteModal.openDeletesA11yLabel"),
+                        mx: Spacing.tiny,
+                        onPress: openDeleteConfirmModal,
+                    }}
                 />
             </FlexBox>
             <ConfirmModal

@@ -82,7 +82,13 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                 endIcon={
                     searchText.length > 0 && (
                         <CloseIcon
-                            touchable={{ mr: Spacing.small, onPress: clearSearch, opacity: Opacity.partiallyVisible }}
+                            touchable={{
+                                accessibilityHint: t("screens.labelSelection.clearSearchA11yHint"),
+                                accessibilityLabel: t("screens.labelSelection.clearSearchA11yLabel"),
+                                mr: Spacing.small,
+                                onPress: clearSearch,
+                                opacity: Opacity.partiallyVisible,
+                            }}
                         />
                     )
                 }
@@ -91,6 +97,7 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                     <TextInput
                         accessibilityHint={t("screens.labelSelection.inputA11yHint")}
                         accessibilityLabel={t("screens.labelSelection.inputA11yLabel")}
+                        accessibilityRole="search"
                         flex={1}
                         ml={Spacing.medium}
                         onChangeText={setSearchText}
@@ -103,6 +110,10 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                 <ScrollBox>
                     {searchText.length > 0 && !matchExist && (
                         <Touchable
+                            accessibilityHint={t("screens.labelSelection.createNewLabelA11yHint", {
+                                label: searchText,
+                            })}
+                            accessibilityLabel={t("screens.labelSelection.createNewLabelA11yLabel")}
                             accessibilityRole="button"
                             alignItems="center"
                             flexDirection="row"
@@ -136,6 +147,14 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                                 key={item.id}
                                 Prefix={<TagsIcon color={pallette.grey} />}
                                 Suffix={<Checkbox checked={isSelected} onPress={() => onLabelSelect(item.id)} />}
+                                accessibilityHint={t("screens.labelSelection.labelItemA11yHint", {
+                                    label: item.name,
+                                    selected: isSelected,
+                                })}
+                                accessibilityLabel={t("screens.labelSelection.labelItemA11yLabel", {
+                                    label: item.name,
+                                })}
+                                accessibilityRole="checkbox"
                                 onPress={() => onLabelSelect(item.id)}
                                 text={item.name}
                             />

@@ -133,10 +133,18 @@ export const LabelManageScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                             <TrashIcon
                                 color={pallette.error.dark}
                                 touchable={{
+                                    accessibilityHint: t("screens.labelManage.deleteLabelA11yHint", {
+                                        label: item.name,
+                                    }),
+                                    accessibilityLabel: t("screens.labelManage.deleteLabelA11yLabel", {
+                                        label: item.name,
+                                    }),
                                     onPress: () => stateDispatch({ payload: item, type: ModalKind.ShowDeleteModal }),
                                 }}
                             />
                         }
+                        accessibilityHint={t("screens.labelManage.labelItemA11yHint", { label: item.name })}
+                        accessibilityLabel={t("screens.labelManage.labelItemA11yLabel", { label: item.name })}
                         mx={Spacing.medium}
                         onPress={() => stateDispatch({ payload: item, type: ModalKind.ShowLabelModal })}
                         text={item.name}

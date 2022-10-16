@@ -67,14 +67,34 @@
             "editNote": {
                 "noteDiscarded": "Empty Note Discarded",
                 "noteDeleted": "Note deleted successfully",
-                "editedTime": "Edited {{time}} ago"
+                "editedTime": "Edited {{time}} ago",
+                "titlePlaceholder": "Title",
+                "titleA11yLabel": "Edit Title",
+                "titleA11yHint": "Edit title of the note",
+                "contentPlaceholder": "Start writing",
+                "contentA11yLabel": "Edit content",
+                "contentA11yHint": "Edit content of the note",
+                "openLabelsA11yLabel": "Open Labels screen",
+                "openLabelsA11yHint": "Open Labels screen and select the labels of the note",
+                "openColorModalA11yLabel": "Open color picker",
+                "openColorModalA11yHint": "Open color picker modal for the note",
+                "openDeletesA11yLabel": "Delete note",
+                "openDeleteA11yHint": "Open delete confirm screen for the note"
             },
             "labelSelection": {
                 "placeholder": "Enter a label name",
                 "inputA11yLabel": "Search labels input",
                 "inputA11yHint": "Labels will be filtered based on this input",
                 "createNew": "Create ",
-                "noLabelsFound": "Start by adding a new label"
+                "noLabelsFound": "Start by adding a new label",
+                "clearSearchA11yLabel": "Clear search",
+                "clearSearchA11yHint": "Clear search input",
+                "createNewLabelA11yLabel": "Create new label",
+                "createNewLabelA11yHint": "Create new label as {{label}} and automatically select it",
+                "labelItemA11yLabel": "Edit label {{label}}",
+                "labelItemA11yHint": "Mark {{label}} selected {{selected}} for the note",
+                "deleteLabelA11yLabel": "Delete label {{label}}",
+                "deleteLabelA11yHint": "Open delete label confirm modal for {{label}}"
             },
             "labelManage": {
                 "deleteLabelMessage": "Do you really want to delete this label? \nThis action cannot be undone.",
@@ -94,7 +114,9 @@
                     "inputPlaceholder": "Label Name"
                 },
                 "addButtonA11yLabel": "Add new Label",
-                "addButtonA11yHint": "Open a new modal to input new label name"
+                "addButtonA11yHint": "Open a new modal to input new label name",
+                "labelItemA11yLabel": "Edit Label {{label}}",
+                "labelItemA11yHint": "Open edit label modal to edit label {{label}}"
             },
             "settings": {
                 "theme": {
