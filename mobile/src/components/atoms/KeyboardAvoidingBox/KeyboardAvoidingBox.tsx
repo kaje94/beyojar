@@ -29,5 +29,5 @@ const StyledKeyboardAvoidingBox = styled.KeyboardAvoidingView<Props>`
 
 /** Styled Keyboard avoiding View, built on top of React-Native KeyboardAvoidingView component */
 export const KeyboardAvoidingBox: FC<PropsWithChildren<Props>> = memo(({ flex = 1, ...props }) => {
-    return <StyledKeyboardAvoidingBox flex={flex} behavior={IsIOS ? "padding" : "height"} {...props} />;
+    return <StyledKeyboardAvoidingBox behavior={IsIOS ? "padding" : "height"} flex={flex} {...props} />;
 });

@@ -43,7 +43,7 @@ export const ThemeProvider = ({ defaultMode, children }: Props) => {
     return (
         <StyledThemeProvider theme={{ mode: selectedMode, pallette: selectedTheme }}>
             {!fontsLoading && children}
-            <StatusBar animated translucent style={selectedMode === "light" ? "dark" : "light"} />
+            <StatusBar animated style={selectedMode === "light" ? "dark" : "light"} translucent />
         </StyledThemeProvider>
     );
 };

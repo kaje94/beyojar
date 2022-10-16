@@ -26,20 +26,20 @@ export const Favorite: FC<Props> = ({ isFavorite = false, size, ...rest }) => {
 
     return (
         <Touchable
-            accessibilityRole="checkbox"
-            accessibilityLabel={t(`components.favorite.${isFavorite ? "isFavorite" : "isNotFavorite"}`)}
             accessibilityHint={t("components.favorite.allyHint")}
+            accessibilityLabel={t(`components.favorite.${isFavorite ? "isFavorite" : "isNotFavorite"}`)}
+            accessibilityRole="checkbox"
             {...rest}
         >
             <Transitioning.View ref={ref} transition={getTransition("scale")}>
                 {isFavorite ? (
                     <StarFilledIcon
-                        size={size || IconSize.medium}
                         color={pallette.grey}
                         secondaryColor={pallette.black}
+                        size={size || IconSize.medium}
                     />
                 ) : (
-                    <StarIcon size={size || IconSize.medium} color={pallette.grey} opacity={Opacity.barelyVisible} />
+                    <StarIcon color={pallette.grey} opacity={Opacity.barelyVisible} size={size || IconSize.medium} />
                 )}
             </Transitioning.View>
         </Touchable>

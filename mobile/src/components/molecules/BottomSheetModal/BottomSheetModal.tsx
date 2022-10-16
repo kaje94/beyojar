@@ -18,23 +18,23 @@ export const BottomSheetModal: FC<PropsWithChildren<Props>> = ({ isVisible, onCl
     const { pallette } = useTheme();
     return (
         <RnModal
-            isVisible={isVisible}
-            swipeDirection="down"
-            // eslint-disable-next-line react-native/no-inline-styles
-            style={{ justifyContent: "flex-end", margin: Spacing.none }}
             backdropColor={pallette.black}
             backdropOpacity={Opacity.barelyVisible}
             backdropTransitionOutTiming={0}
-            onSwipeComplete={onClose}
-            onBackdropPress={onClose}
+            isVisible={isVisible}
             onBackButtonPress={onClose}
+            onBackdropPress={onClose}
+            onSwipeComplete={onClose}
+            // eslint-disable-next-line react-native/no-inline-styles
+            style={{ justifyContent: "flex-end", margin: Spacing.none }}
+            swipeDirection="down"
         >
             <Box
-                p={Spacing.large}
                 alignItems="center"
                 bg={pallette.background}
                 borderTopLeftRadius={Spacing.huge}
                 borderTopRightRadius={Spacing.huge}
+                p={Spacing.large}
             >
                 {children}
             </Box>

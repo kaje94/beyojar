@@ -24,12 +24,12 @@ export const parameters = {
     i18n,
     locale: "en",
     viewport: {
+        defaultViewport: "iphonex",
         viewports: {
-            pixel: INITIAL_VIEWPORTS.pixel,
-            pixelxl: INITIAL_VIEWPORTS.pixelxl,
             iphonex: INITIAL_VIEWPORTS.iphonex,
             iphonexsmax: INITIAL_VIEWPORTS.iphonexsmax,
+            pixel: INITIAL_VIEWPORTS.pixel,
+            pixelxl: INITIAL_VIEWPORTS.pixelxl,
         },
-        defaultViewport: "iphonex",
     },
 };

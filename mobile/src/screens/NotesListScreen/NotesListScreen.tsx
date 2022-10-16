@@ -56,20 +56,20 @@ export const NotesListScreen: FC<DrawerScreenProps<NavigatorParamList, Screens.n
 
     return (
         <SafeAreaBox>
-            <NotesSearchBar onSearchChange={setSearchText} onFocusChange={setSearchInFocus} />
+            <NotesSearchBar onFocusChange={setSearchInFocus} onSearchChange={setSearchText} />
             <FlatList
+                ListEmptyComponent={<EmptyPlaceholder text={emptyNoteText} />}
                 data={searchedNotes}
+                keyExtractor={(item, index) => item.id || `${index}`}
                 renderItem={({ item }) => (
                     <CardItem noteItem={item} onPress={() => navigate(Screens.editNote, { noteItem: item })} />
                 )}
-                keyExtractor={(item, index) => item.id || `${index}`}
-                ListEmptyComponent={<EmptyPlaceholder text={emptyNoteText} />}
             />
             <FloatingButton
+                accessibilityHint={t("screens.notesList.addButtonA11yHint")}
+                accessibilityLabel={t("screens.notesList.addButtonA11yLabel")}
                 onPress={() => navigate(Screens.editNote, { initialLabels: label ? [label] : [] })}
                 visible={!isSearchInFocus}
-                accessibilityLabel={t("screens.notesList.addButtonA11yLabel")}
-                accessibilityHint={t("screens.notesList.addButtonA11yHint")}
             />
         </SafeAreaBox>
     );

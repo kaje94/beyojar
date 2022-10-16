@@ -9,12 +9,12 @@ import { IconSize, Spacing } from "@src/common/theme";
 import { Box, BoxProps, Text, TextProps } from "@src/components/atoms";
 
 interface Props extends BoxProps {
-    /** Text to be displayed within the empty placeholder */
-    text?: string;
     /** Icon to be displayed within the empty placeholder */
     Icon?: FC<IconProps>;
     /** Color of the icon and text */
     color?: string;
+    /** Text to be displayed within the empty placeholder */
+    text?: string;
     /** Properties of text element */
     textProps?: TextProps;
 }
@@ -28,19 +28,19 @@ export const EmptyPlaceholder: FC<Props> = ({ text, color, Icon = SearchIcon, te
         <Box
             accessibilityLabel={text}
             accessibilityRole="alert"
+            alignItems="center"
+            display="flex"
+            justifyContent="center"
             px={Spacing.large}
             py={Spacing.huge}
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
             {...rest}
         >
-            <Icon size={IconSize.huge} color={color || pallette.secondary.main} />
+            <Icon color={color || pallette.secondary.main} size={IconSize.huge} />
             <Text
-                mt={Spacing.medium}
                 color={color || pallette.secondary.main}
-                textAlign="center"
                 fontFamily={FontFamily.light}
+                mt={Spacing.medium}
+                textAlign="center"
                 {...textProps}
             >
                 {text}

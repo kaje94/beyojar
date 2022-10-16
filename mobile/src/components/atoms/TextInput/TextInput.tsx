@@ -54,13 +54,13 @@ export const TextInput: FC<PropsWithChildren<Props>> = memo(
         const { pallette } = useTheme();
         return (
             <StyledTextInput
+                color={textColor || pallette.black}
+                fontFamily={fontFamily}
+                fontSize={FontSize.medium}
+                p={padding}
+                placeholderTextColor={placeholderTextColor || pallette.secondary.main}
                 ref={inputRef}
                 underlineColorAndroid="transparent"
-                fontSize={FontSize.medium}
-                fontFamily={fontFamily}
-                p={padding}
-                color={textColor || pallette.black}
-                placeholderTextColor={placeholderTextColor || pallette.secondary.main}
                 {...props}
             />
         );

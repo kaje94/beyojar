@@ -7,8 +7,8 @@ import { Default as Text } from "@src/components/atoms/Text/Text.stories";
 import { Box } from "./Box";
 
 export default {
-    title: "atoms/Box",
     component: Box,
+    title: "atoms/Box",
 } as ComponentMeta<typeof Box>;
 
 const Template: ComponentStory<typeof Box> = ({ children, ...rest }) => (

@@ -9,14 +9,14 @@ import { BorderRadius, IconSize, Shadow, Spacing } from "@src/common/theme";
 import { Text, Touchable, TouchableProps } from "@src/components/atoms";
 
 interface Props extends TouchableProps {
+    /** Icon to be shown along with the item/option */
+    Icon?: FC<IconProps>;
+    /** Background color of the item/option */
+    bgColor?: string;
     /** Name of the item/option */
     name: string;
     /** Is item/option selected */
     selected?: boolean;
-    /** Background color of the item/option */
-    bgColor?: string;
-    /** Icon to be shown along with the item/option */
-    Icon?: FC<IconProps>;
 }
 
 /** Navigation drawer selection item */
@@ -26,22 +26,22 @@ export const DrawerItem: FC<Props> = memo(({ name, selected, bgColor, Icon = Not
 
     return (
         <Touchable
+            accessibilityRole="menuitem"
+            alignItems="center"
+            bg={selected ? pallette.primary.dark : "transparent"}
+            borderRadius={BorderRadius.medium}
             display="flex"
             flexDirection="row"
-            alignItems="center"
+            m={Spacing.tiny}
             px={Spacing.medium}
             py={Spacing.small}
-            bg={selected ? pallette.primary.dark : "transparent"}
-            m={Spacing.tiny}
-            borderRadius={BorderRadius.medium}
             shadow={selected && Shadow.medium}
-            accessibilityRole="menuitem"
             {...rest}
         >
             <Icon color={selected ? pallette.white : defaultColor} size={IconSize.small} />
             <Text
-                fontFamily={selected ? FontFamily.medium : FontFamily.regular}
                 color={selected ? pallette.white : defaultColor}
+                fontFamily={selected ? FontFamily.medium : FontFamily.regular}
                 ml={Spacing.small}
                 my={Spacing.tiny}
             >

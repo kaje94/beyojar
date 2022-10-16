@@ -7,7 +7,7 @@ import { Button } from "@src/components/molecules/Button";
 
 import { ColorPickerModal } from "./ColorPickerModal";
 
-export default { title: "organism/ColorPickerModal", component: ColorPickerModal } as ComponentMeta<
+export default { component: ColorPickerModal, title: "organism/ColorPickerModal" } as ComponentMeta<
     typeof ColorPickerModal
 >;
 
@@ -16,14 +16,14 @@ const Template: ComponentStory<typeof ColorPickerModal> = () => {
     const [selectedColor, setSelectedColor] = useState(noteColors[0]);
     return (
         <>
-            <Button text="Open Modal" onPress={() => setVisible(true)} />
+            <Button onPress={() => setVisible(true)} text="Open Modal" />
             <ColorPickerModal
-                selectedColor={selectedColor}
                 isVisible={isVisible}
                 onClose={(color) => {
                     setVisible(false);
                     setSelectedColor(color);
                 }}
+                selectedColor={selectedColor}
             />
         </>
     );

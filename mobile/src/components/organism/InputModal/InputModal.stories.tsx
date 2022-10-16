@@ -7,13 +7,13 @@ import { Button } from "@src/components/molecules/Button";
 
 import { InputModal } from "./InputModal";
 
-export default { title: "organism/InputModal", component: InputModal } as ComponentMeta<typeof InputModal>;
+export default { component: InputModal, title: "organism/InputModal" } as ComponentMeta<typeof InputModal>;
 
 const Template: ComponentStory<typeof InputModal> = (args) => {
     const [isVisible, setVisible] = useState(false);
     return (
         <>
-            <Button text="Open Modal" onPress={() => setVisible(true)} />
+            <Button onPress={() => setVisible(true)} text="Open Modal" />
             <InputModal
                 {...args}
                 isVisible={isVisible}
@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof InputModal> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = {
-    title: "Modal title",
     inputPlaceholder: "Input placeholder",
     schema: Yup.object().shape({ field: Yup.string().required("Value is required") }),
+    title: "Modal title",
 };

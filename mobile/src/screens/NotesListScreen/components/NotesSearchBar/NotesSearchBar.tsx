@@ -13,10 +13,10 @@ import { useBackPress } from "@src/hooks";
 import { useSearchAnimation } from "./useSearchAnimation";
 
 interface Props {
-    /** Callback to be fired when search text input changes */
-    onSearchChange: (search: string) => void;
     /** Callback to be fired when focus of the text input changes */
     onFocusChange: (isFocused: boolean) => void;
+    /** Callback to be fired when search text input changes */
+    onSearchChange: (search: string) => void;
 }
 
 /** Notes search component that animates when on focus */
@@ -52,7 +52,7 @@ export const NotesSearchBar: FC<Props> = ({ onSearchChange, onFocusChange }) => 
     }, []);
 
     /** Remove focus from the search input when back button is pressed */
-    useBackPress({ dependencies: [isInFocus], callback: onBackPress, condition: () => isInFocus });
+    useBackPress({ callback: onBackPress, condition: () => isInFocus, dependencies: [isInFocus] });
 
     /** Notify the parent component when local focused state is changed */
     useEffect(() => onFocusChange(isInFocus), [isInFocus]);
@@ -64,51 +64,51 @@ export const NotesSearchBar: FC<Props> = ({ onSearchChange, onFocusChange }) => 
     const onOpenDrawer = useCallback(() => dispatch(DrawerActions.openDrawer), []);
 
     return (
-        <AnimatedBox style={animatedStyles} shadow={Shadow.medium}>
+        <AnimatedBox shadow={Shadow.medium} style={animatedStyles}>
             <FlexBox paddingX={Spacing.small}>
                 {isInFocus ? (
                     <BackIcon
                         touchable={{
-                            onPress: onBackPress,
                             accessibilityHint: t("components.searchBar.backA11yLabel"),
                             accessibilityLabel: t("components.searchBar.backA11yHint"),
+                            onPress: onBackPress,
                         }}
                     />
                 ) : (
                     <MenuIcon
                         touchable={{
-                            onPress: onOpenDrawer,
                             accessibilityHint: t("components.searchBar.menuA11yLabel"),
                             accessibilityLabel: t("components.searchBar.menuA11yHint"),
                             accessibilityRole: "menu",
+                            onPress: onOpenDrawer,
                         }}
                     />
                 )}
 
                 <TextInput
-                    inputRef={keyboardRef}
-                    onFocus={onTextInputFocus}
-                    onBlur={onTextInputBlur}
-                    onChangeText={onTextChange}
-                    value={searchText}
-                    placeholder={t("components.searchBar.placeholder")}
-                    returnKeyType="search"
-                    keyboardType="web-search"
-                    spellCheck={false}
-                    flex={1}
-                    ml={Spacing.small}
-                    selectionColor={pallette.primary.dark}
-                    accessibilityRole="search"
                     accessibilityHint={t("components.searchBar.inputA11yHint")}
                     accessibilityLabel={t("components.searchBar.inputA11yLabel")}
+                    accessibilityRole="search"
+                    flex={1}
+                    inputRef={keyboardRef}
+                    keyboardType="web-search"
+                    ml={Spacing.small}
+                    onBlur={onTextInputBlur}
+                    onChangeText={onTextChange}
+                    onFocus={onTextInputFocus}
+                    placeholder={t("components.searchBar.placeholder")}
+                    returnKeyType="search"
+                    selectionColor={pallette.primary.dark}
+                    spellCheck={false}
+                    value={searchText}
                 />
 
                 {!isInFocus && (
                     <SearchIcon
                         touchable={{
-                            onPress: onSearchPress,
                             accessibilityHint: t("components.searchBar.searchA11yLabel"),
                             accessibilityLabel: t("components.searchBar.searchA11yHint"),
+                            onPress: onSearchPress,
                         }}
                     />
                 )}

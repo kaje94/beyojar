@@ -46,8 +46,8 @@ export const Text: FC<TextProps> = memo(
         return (
             <StyledText
                 color={textColor || pallette.black}
-                fontSize={FontSize.medium}
                 fontFamily={fontFamily}
+                fontSize={FontSize.medium}
                 padding={padding}
                 {...props}
             />

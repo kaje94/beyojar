@@ -7,8 +7,8 @@ import { Default as Text } from "@src/components/atoms/Text/Text.stories";
 import { FlexBox } from "./FlexBox";
 
 export default {
-    title: "atoms/FlexBox",
     component: FlexBox,
+    title: "atoms/FlexBox",
 } as ComponentMeta<typeof FlexBox>;
 
 const Template: ComponentStory<typeof FlexBox> = ({ children, ...rest }) => (

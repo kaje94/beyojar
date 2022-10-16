@@ -9,9 +9,9 @@ import en from "./en.json";
 
 i18n.use(initReactI18next).init({
     compatibilityJSON: "v3",
+    debug: true,
     fallbackLng: "en",
     resources: { en },
-    debug: true,
 });
 
 export { i18n };

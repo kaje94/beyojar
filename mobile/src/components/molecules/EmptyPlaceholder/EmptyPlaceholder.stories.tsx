@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { EmptyPlaceholder } from "./EmptyPlaceholder";
 
-export default { title: "molecules/EmptyPlaceholder", component: EmptyPlaceholder } as ComponentMeta<
+export default { component: EmptyPlaceholder, title: "molecules/EmptyPlaceholder" } as ComponentMeta<
     typeof EmptyPlaceholder
 >;
 

@@ -7,9 +7,9 @@ import { Default as Favorite } from "@src/components/molecules/Favorite/Favorite
 import { HeaderBar } from "./HeaderBar";
 
 export default {
-    title: "molecules/HeaderBar",
     component: HeaderBar,
     parameters: { layout: "fullscreen" },
+    title: "molecules/HeaderBar",
 } as ComponentMeta<typeof HeaderBar>;
 
 const Template: ComponentStory<typeof HeaderBar> = (args) => <HeaderBar {...args} />;

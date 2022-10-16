@@ -25,22 +25,22 @@ enum VisibleModal {
 }
 
 interface SettingsOption {
-    /** Unique key for each settings option */
-    key: string;
-    /** Title of the settings option */
-    title: string;
     /** Icon displayed along the settings option */
     Icon: FC<IconProps>;
-    /** Secondary Text displayed on the right side of the settings option */
-    value?: string;
-    /** Color of the settings list item */
-    color?: string;
-    /** Callback to be fired when setting option is selected */
-    onPress?: () => void;
-    /** Overrides the text that's read by the screen reader */
-    accessibilityLabel?: string;
     /** helps users understand what will happen when they perform an action  */
     accessibilityHint?: string;
+    /** Overrides the text that's read by the screen reader */
+    accessibilityLabel?: string;
+    /** Color of the settings list item */
+    color?: string;
+    /** Unique key for each settings option */
+    key: string;
+    /** Callback to be fired when setting option is selected */
+    onPress?: () => void;
+    /** Title of the settings option */
+    title: string;
+    /** Secondary Text displayed on the right side of the settings option */
+    value?: string;
 }
 
 /** Settings screen to allow users to update their theme/language or reset their account */
@@ -54,33 +54,33 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     const settingsOptions: SettingsOption[] = useMemo(
         () => [
             {
+                Icon: InfoIcon,
                 key: "about",
                 title: t("screens.settings.about.title"),
                 value: t("screens.settings.about.version", { version: nativeApplicationVersion }),
-                Icon: InfoIcon,
             },
             {
+                Icon: LanguageIcon,
                 key: "language",
                 title: t("screens.settings.language.title"),
                 value: "English",
-                Icon: LanguageIcon,
             },
             {
+                Icon: ThemeIcon,
+                accessibilityHint: t("screens.settings.theme.a11yHint"),
+                accessibilityLabel: t("screens.settings.theme.a11yLabel", { theme: persistedTheme || "Default" }),
                 key: "theme",
+                onPress: () => setSelectedModal(VisibleModal.ThemeModal),
                 title: t("screens.settings.theme.title"),
                 value: persistedTheme || "Default",
-                Icon: ThemeIcon,
-                onPress: () => setSelectedModal(VisibleModal.ThemeModal),
-                accessibilityLabel: t("screens.settings.theme.a11yLabel", { theme: persistedTheme || "Default" }),
-                accessibilityHint: t("screens.settings.theme.a11yHint"),
             },
             {
-                key: "account",
-                title: t("screens.settings.deleteAccount.title"),
                 Icon: UserRemoveIcon,
-                onPress: () => setSelectedModal(VisibleModal.RemoveAccountModal),
-                color: pallette.error.dark,
                 accessibilityHint: t("screens.settings.theme.a11yHint"),
+                color: pallette.error.dark,
+                key: "account",
+                onPress: () => setSelectedModal(VisibleModal.RemoveAccountModal),
+                title: t("screens.settings.deleteAccount.title"),
             },
         ],
         [pallette.error.dark, persistedTheme]
@@ -102,45 +102,45 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 {settingsOptions.map((item) => (
                     <ListItem
                         key={item.key}
-                        text={item.title}
-                        textProps={{ color: item.color || pallette.grey }}
                         Prefix={<item.Icon color={item.color || pallette.grey} />}
                         Suffix={
                             <Text
-                                fontFamily={FontFamily.light}
                                 color={item.color || pallette.grey}
-                                opacity={Opacity.partiallyVisible}
+                                fontFamily={FontFamily.light}
                                 fontSize={FontSize.small}
+                                opacity={Opacity.partiallyVisible}
                             >
                                 {item.value}
                             </Text>
                         }
-                        onPress={item.onPress}
-                        accessibilityLabel={item.accessibilityLabel}
                         accessibilityHint={item.accessibilityHint}
+                        accessibilityLabel={item.accessibilityLabel}
+                        onPress={item.onPress}
+                        text={item.title}
+                        textProps={{ color: item.color || pallette.grey }}
                     />
                 ))}
             </ScrollBox>
 
             <ConfirmModal
-                title={t("common.confirm")}
-                message={t("screens.settings.deleteAccount.message")}
-                primaryBtnText={t("common.delete")}
-                isVisible={selectedModal === VisibleModal.RemoveAccountModal}
-                onClose={onCloseModal}
-                color={pallette.error.dark}
                 Icon={UserRemoveIcon}
+                color={pallette.error.dark}
+                isVisible={selectedModal === VisibleModal.RemoveAccountModal}
+                message={t("screens.settings.deleteAccount.message")}
+                onClose={onCloseModal}
+                primaryBtnText={t("common.delete")}
+                title={t("common.confirm")}
             />
             <SelectModal
-                title={t("screens.settings.theme.modalTitle")}
                 isVisible={selectedModal === VisibleModal.ThemeModal}
                 onClose={onCloseThemeModal}
-                selectedId={persistedTheme || ""}
                 options={[
                     { id: "", label: t("screens.settings.theme.systemDefault") },
                     { id: "light", label: t("screens.settings.theme.light") },
                     { id: "dark", label: t("screens.settings.theme.dark") },
                 ]}
+                selectedId={persistedTheme || ""}
+                title={t("screens.settings.theme.modalTitle")}
             />
         </SafeAreaBox>
     );

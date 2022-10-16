@@ -2,14 +2,14 @@ import { ColorSchemeName } from "react-native";
 import { NumberProp } from "react-native-svg";
 
 export interface IconProps {
-    /** Size of the icon */
-    size?: number;
     /** Color of the icon */
     color?: string;
-    /** Stroke width or thickness of the icon */
-    strokeWidth?: NumberProp;
     /** Opacity of the icon */
     opacity?: number;
+    /** Size of the icon */
+    size?: number;
+    /** Stroke width or thickness of the icon */
+    strokeWidth?: NumberProp;
 }
 
 export interface Label {
@@ -20,65 +20,67 @@ export interface Label {
 }
 
 export interface Note {
-    /** Unique ID of the note */
-    id?: string;
-    /** Title of the note */
-    title: string;
-    /** Content/Body of the note */
-    content: string;
     /** Background color of the note */
     color: INoteColors;
+    /** Content/Body of the note */
+    content: string;
     /** Is note marked as a favorite */
     favorite: boolean;
+    /** Unique ID of the note */
+    id?: string;
     /** List of labels attached to the note */
     labels: Label[];
+    /** Title of the note */
+    title: string;
     /** Last updated timestamp of the note */
     ts: number;
 }
 
 interface IThemeColorGroup {
-    /** Main color variant */
-    main: string;
-    /** Light color variant */
-    light: string;
     /** Dark color variant */
     dark: string;
+    /** Light color variant */
+    light: string;
+    /** Main color variant */
+    main: string;
 }
 
 export interface IThemePallet {
-    /** Primary color group of the theme */
-    primary: IThemeColorGroup;
-    /** Secondary color group of the theme */
-    secondary: IThemeColorGroup;
-    /** Color group to be used for depicting errors */
-    error: IThemeColorGroup;
     /** Color of the background */
     background: string;
     /** Black color for light theme and white color for dark theme */
     black: string;
+    /** Color group to be used for depicting errors */
+    error: IThemeColorGroup;
     /** Dark grey color for light theme and light grey color for dark theme */
     grey: string;
+    /** Primary color group of the theme */
+    primary: IThemeColorGroup;
+    /** Secondary color group of the theme */
+    secondary: IThemeColorGroup;
     /** White color for light theme and black color for dark theme */
     white: string;
 }
 
 export interface IThemePallets {
-    /** Light theme mode */
-    light: IThemePallet;
     /** Dark theme mode */
     dark: IThemePallet;
+    /** Light theme mode */
+    light: IThemePallet;
 }
 
 export interface INoteColors {
+    /** Dark variant of the the note color */
+    dark: string;
     /** Unique ID of the note color */
     id: string;
     /** Light variant of the note color */
     light: string;
-    /** Dark variant of the the note color */
-    dark: string;
 }
 
 export interface IShadowItem {
+    /** Sets the elevation of a view, using Android's underlying elevation API. (Android-only) */
+    elevation: number;
     /**
      * Drop shadow color \
      * Works with IOS and Android API 28 and above
@@ -86,15 +88,13 @@ export interface IShadowItem {
     shadowColor: string;
     /** Offset of the drop shadow (IOS Only) */
     shadowOffset: {
-        width: number;
         height: number;
+        width: number;
     };
     /** Drop shadow opacity (multiplied by the color's alpha component) (IOS Only) */
     shadowOpacity: number;
     /** Drop shadow blur radius (IOS Only) */
     shadowRadius: number;
-    /** Sets the elevation of a view, using Android's underlying elevation API. (Android-only) */
-    elevation: number;
 }
 
 export interface ITheme {

@@ -7,7 +7,7 @@ import { Button } from "@src/components/molecules/Button";
 
 import { BottomSheetModal } from "./BottomSheetModal";
 
-export default { title: "molecules/BottomSheetModal", component: BottomSheetModal } as ComponentMeta<
+export default { component: BottomSheetModal, title: "molecules/BottomSheetModal" } as ComponentMeta<
     typeof BottomSheetModal
 >;
 
@@ -15,7 +15,7 @@ const Template: ComponentStory<typeof BottomSheetModal> = (args) => {
     const [isOpen, setIsOpen] = useState(false);
     return (
         <>
-            <Button text="Open Bottom Sheet" onPress={() => setIsOpen(!isOpen)} />
+            <Button onPress={() => setIsOpen(!isOpen)} text="Open Bottom Sheet" />
             <BottomSheetModal {...args} isVisible={isOpen} onClose={() => setIsOpen(false)}>
                 <Box height={200} />
             </BottomSheetModal>

@@ -79,34 +79,34 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
     return (
         <SafeAreaBox bg={pallette.background}>
             <HeaderBar
-                onBackPress={onBackPress}
-                title={
-                    <TextInput
-                        accessibilityLabel={t("screens.labelSelection.inputA11yLabel")}
-                        accessibilityHint={t("screens.labelSelection.inputA11yHint")}
-                        value={searchText}
-                        onChangeText={setSearchText}
-                        placeholder={t("screens.labelSelection.placeholder")}
-                        flex={1}
-                        ml={Spacing.medium}
-                    />
-                }
                 endIcon={
                     searchText.length > 0 && (
                         <CloseIcon
-                            touchable={{ onPress: clearSearch, opacity: Opacity.partiallyVisible, mr: Spacing.small }}
+                            touchable={{ mr: Spacing.small, onPress: clearSearch, opacity: Opacity.partiallyVisible }}
                         />
                     )
+                }
+                onBackPress={onBackPress}
+                title={
+                    <TextInput
+                        accessibilityHint={t("screens.labelSelection.inputA11yHint")}
+                        accessibilityLabel={t("screens.labelSelection.inputA11yLabel")}
+                        flex={1}
+                        ml={Spacing.medium}
+                        onChangeText={setSearchText}
+                        placeholder={t("screens.labelSelection.placeholder")}
+                        value={searchText}
+                    />
                 }
             />
             <KeyboardAvoidingBox px={Spacing.medium}>
                 <ScrollBox>
                     {searchText.length > 0 && !matchExist && (
                         <Touchable
-                            onPress={createLabel}
                             accessibilityRole="button"
-                            flexDirection="row"
                             alignItems="center"
+                            flexDirection="row"
+                            onPress={createLabel}
                         >
                             <AddIcon
                                 color={pallette.primary.dark}
@@ -114,30 +114,30 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
                                 strokeWidth={IconStrokeWidth.large}
                             />
                             <Text
-                                flex={1}
-                                p={Spacing.medium}
-                                fontFamily={FontFamily.medium}
                                 color={pallette.primary.dark}
+                                flex={1}
+                                fontFamily={FontFamily.medium}
+                                p={Spacing.medium}
                             >
                                 {t("screens.labelSelection.createNew")}
-                                <Text fontFamily={FontFamily.bold} color={pallette.primary.dark}>
+                                <Text color={pallette.primary.dark} fontFamily={FontFamily.bold}>
                                     {searchText}
                                 </Text>
                             </Text>
                         </Touchable>
                     )}
                     {labels.length === 0 && (
-                        <EmptyPlaceholder text={t("screens.labelSelection.noLabelsFound")} Icon={TagsIcon} />
+                        <EmptyPlaceholder Icon={TagsIcon} text={t("screens.labelSelection.noLabelsFound")} />
                     )}
                     {filteredLabels.map((item) => {
                         const isSelected = selectedIds.includes(item.id);
                         return (
                             <ListItem
                                 key={item.id}
-                                onPress={() => onLabelSelect(item.id)}
-                                text={item.name}
                                 Prefix={<TagsIcon color={pallette.grey} />}
                                 Suffix={<Checkbox checked={isSelected} onPress={() => onLabelSelect(item.id)} />}
+                                onPress={() => onLabelSelect(item.id)}
+                                text={item.name}
                             />
                         );
                     })}

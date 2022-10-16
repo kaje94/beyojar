@@ -12,20 +12,20 @@ import { Box, FlexBox, Text, TextInput } from "@src/components/atoms";
 import { Button } from "@src/components/molecules/Button";
 
 interface Props {
+    /** Initial value to be displayed in the input field */
+    initialValue: string;
+    /** Placeholder to be shown in the input field */
+    inputPlaceholder?: string;
     /** Is input modal visible */
     isVisible: boolean;
     /** Called when modal is closed */
     onClose: () => void;
-    /** Initial value to be displayed in the input field */
-    initialValue: string;
     /** Function to be called when the value is submitted */
     onSave: (value: string) => void;
-    /** Title of the input modal */
-    title: string;
-    /** Placeholder to be shown in the input field */
-    inputPlaceholder?: string;
     /** Yup schema to validate the input field */
     schema?: Yup.SchemaOf<{ field: string }>;
+    /** Title of the input modal */
+    title: string;
 }
 
 /** Input modal component to capture, validate and submit a single input field */
@@ -43,16 +43,16 @@ export const InputModal: FC<Props> = ({
 
     const { values, errors, touched, handleChange, handleBlur, handleSubmit, resetForm } = useFormik({
         initialValues: { field: initialValue },
-        validationSchema: schema,
         onSubmit: ({ field }) => {
             onSave(field);
             onClose();
         },
+        validationSchema: schema,
     });
 
     useEffect(() => {
         if (isVisible) {
-            resetForm({ values: { field: initialValue }, errors: {}, touched: {} });
+            resetForm({ errors: {}, touched: {}, values: { field: initialValue } });
         }
     }, [isVisible, initialValue]);
 
@@ -60,70 +60,70 @@ export const InputModal: FC<Props> = ({
 
     return (
         <RnModal
-            isVisible={isVisible}
-            onBackdropPress={onClose}
-            onBackButtonPress={onClose}
-            backdropColor={pallette.black}
-            backdropTransitionOutTiming={0}
             animationIn="zoomIn"
             animationOut="zoomOut"
+            backdropColor={pallette.black}
             backdropOpacity={Opacity.barelyVisible}
+            backdropTransitionOutTiming={0}
+            isVisible={isVisible}
+            onBackButtonPress={onClose}
+            onBackdropPress={onClose}
         >
             <Box
                 accessibilityRole="button"
-                p={Spacing.large}
                 alignItems="center"
                 bg={pallette.background}
                 borderRadius={BorderRadius.small}
+                p={Spacing.large}
             >
-                <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large}>
+                <Text fontFamily={FontFamily.medium} fontSize={FontSize.large} textAlign="center">
                     {title}
                 </Text>
                 <TextInput
-                    width="100%"
-                    placeholder={inputPlaceholder}
-                    mt={Spacing.large}
-                    borderWidth={BorderWidth.small}
+                    accessibilityHint={`${t("common.enter")} ${title}`}
+                    accessibilityLabel={`${t("common.enter")} ${title}`}
+                    autoFocus
                     borderColor={isInvalid ? pallette.error.main : pallette.secondary.main}
                     borderRadius={BorderRadius.tiny}
-                    p={Spacing.small}
-                    onChangeText={handleChange("field")}
+                    borderWidth={BorderWidth.small}
+                    mt={Spacing.large}
                     onBlur={handleBlur("field")}
+                    onChangeText={handleChange("field")}
+                    p={Spacing.small}
+                    placeholder={inputPlaceholder}
                     value={values.field}
-                    autoFocus
-                    accessibilityLabel={`${t("common.enter")} ${title}`}
-                    accessibilityHint={`${t("common.enter")} ${title}`}
+                    width="100%"
                 />
                 {isInvalid ? (
                     <Text
-                        fontSize={FontSize.small}
+                        color={pallette.error.main}
                         fontFamily={FontFamily.light}
+                        fontSize={FontSize.small}
+                        mt={Spacing.tiny}
                         textAlign="left"
                         width="100%"
-                        mt={Spacing.tiny}
-                        color={pallette.error.main}
                     >
                         {errors.field}
                     </Text>
                 ) : null}
                 <FlexBox mt={Spacing.large} width="100%">
                     <Button
-                        text={t("common.cancel")}
-                        onPress={onClose}
-                        borderColor={pallette.grey}
-                        bg={pallette.white}
-                        textColor={pallette.grey}
-                        accessibilityRole="button"
-                        accessibilityLabel={`${t("common.cancel")} ${values.field}`}
                         accessibilityHint={`${t("common.cancel")} ${title} ${values.field}`}
+                        accessibilityLabel={`${t("common.cancel")} ${values.field}`}
+                        accessibilityRole="button"
+                        bg={pallette.white}
+                        borderColor={pallette.grey}
+                        onPress={onClose}
+                        text={t("common.cancel")}
+                        textColor={pallette.grey}
                     />
                     <Button
-                        text={t("common.save")}
-                        onPress={() => handleSubmit()}
-                        disabled={isInvalid}
-                        accessibilityRole="button"
-                        accessibilityLabel={`${t("common.save")} ${values.field}`}
                         accessibilityHint={`${t("common.save")} ${title} ${values.field}`}
+                        accessibilityLabel={`${t("common.save")} ${values.field}`}
+                        accessibilityRole="button"
+                        disabled={isInvalid}
+                        onPress={() => handleSubmit()}
+                        text={t("common.save")}
                     />
                 </FlexBox>
             </Box>

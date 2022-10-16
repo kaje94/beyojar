@@ -19,19 +19,19 @@ export const Button: FC<Props> = ({ text = "Button", textColor, disabled = false
     return (
         <Touchable
             accessibilityRole="button"
-            borderWidth={BorderWidth.small}
+            bg={pallette.primary.dark}
             borderColor={pallette.primary.dark}
             borderRadius={BorderRadius.huge}
-            p={Spacing.small}
+            borderWidth={BorderWidth.small}
+            disabled={disabled}
             flex={1}
             mx={Spacing.small}
-            bg={pallette.primary.dark}
-            shadow={!disabled && Shadow.small}
             opacity={disabled ? Opacity.partiallyVisible : Opacity.visible}
-            disabled={disabled}
+            p={Spacing.small}
+            shadow={!disabled && Shadow.small}
             {...rest}
         >
-            <Text textAlign="center" color={textColor || pallette.white} fontSize={FontSize.medium}>
+            <Text color={textColor || pallette.white} fontSize={FontSize.medium} textAlign="center">
                 {text}
             </Text>
         </Touchable>

@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { Checkbox } from "./Checkbox";
 
-export default { title: "molecules/Checkbox", component: Checkbox } as ComponentMeta<typeof Checkbox>;
+export default { component: Checkbox, title: "molecules/Checkbox" } as ComponentMeta<typeof Checkbox>;
 
 const Template: ComponentStory<typeof Checkbox> = () => {
     const [checked, setChecked] = useState(false);

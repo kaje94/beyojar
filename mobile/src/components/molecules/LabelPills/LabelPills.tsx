@@ -28,18 +28,18 @@ export const LabelPills: FC<Props> = ({ note, variant = "normal", onPress }) => 
             {note.labels.map((label) => (
                 <Touchable
                     key={label.id}
-                    accessibilityRole="button"
-                    accessibilityLabel={t("components.labelPills.labelA11yLabel", { label: label.name })}
                     accessibilityHint={t("components.labelPills.labelA11yHint")}
-                    px={variant === "small" ? Spacing.tiny : Spacing.small}
-                    py={variant === "small" ? Spacing.none : Spacing.tiny}
+                    accessibilityLabel={t("components.labelPills.labelA11yLabel", { label: label.name })}
+                    accessibilityRole="button"
+                    borderColor={pallette.grey}
                     borderRadius={BorderRadius.large}
                     borderWidth={BorderWidth.small}
-                    borderColor={pallette.grey}
                     m={Spacing.tiny}
-                    shadow={Shadow.small}
                     onPress={onPress}
                     opacity={variant === "small" ? Opacity.partiallyVisible : Opacity.mostlyVisible}
+                    px={variant === "small" ? Spacing.tiny : Spacing.small}
+                    py={variant === "small" ? Spacing.none : Spacing.tiny}
+                    shadow={Shadow.small}
                 >
                     <Text
                         fontFamily={FontFamily.medium}

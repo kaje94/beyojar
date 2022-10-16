@@ -46,16 +46,16 @@ enum NoteChangeKind {
 }
 
 interface NoteChangeAction {
-    type: NoteChangeKind;
     payload?: string | boolean | INoteColors | Label[] | Note;
+    type: NoteChangeKind;
 }
 
 const initialNote: Note = {
     color: noteColors[0],
-    title: "",
     content: "",
     favorite: false,
     labels: [],
+    title: "",
     ts: 0,
 };
 
@@ -103,8 +103,8 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     /** Update the local note state whenever navigation props changes */
     useEffect(() => {
         noteDispatch({
-            type: NoteChangeKind.Initialize,
             payload: noteItem || { ...initialNote, labels: initialLabels },
+            type: NoteChangeKind.Initialize,
         });
     }, [noteItem, initialLabels.length]);
 
@@ -124,7 +124,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
             addNote({ ...noteState, id: nanoid() });
         } else {
             /** Show a note discarded message, If its a new note without a title or content */
-            showMessage({ message: t("screens.editNote.noteDiscarded"), icon: <InfoIcon /> });
+            showMessage({ icon: <InfoIcon />, message: t("screens.editNote.noteDiscarded") });
         }
         goBack();
     }, [noteState]);
@@ -138,9 +138,9 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
             deleteNote(noteState?.id);
 
             showMessage({
-                message: t("screens.editNote.noteDeleted"),
-                icon: <TrashIcon />,
                 backgroundColor: pallette.error.light,
+                icon: <TrashIcon />,
+                message: t("screens.editNote.noteDeleted"),
             });
         }
         goBack();
@@ -163,7 +163,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
 
     /** Update selected color when color picker modal closes */
     const onCloseColorPickerModal = useCallback((selected: INoteColors) => {
-        noteDispatch({ type: NoteChangeKind.Color, payload: selected });
+        noteDispatch({ payload: selected, type: NoteChangeKind.Color });
         closeModal();
     }, []);
 
@@ -171,57 +171,57 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
         <>
             <SafeAreaBox bg={bgColor}>
                 <HeaderBar
-                    onBackPress={saveNewNote}
                     endIcon={
                         <Favorite
                             isFavorite={noteState.favorite}
                             onPress={() => noteDispatch({ type: NoteChangeKind.isFavorite })}
                         />
                     }
+                    onBackPress={saveNewNote}
                 />
                 <KeyboardAvoidingBox mb={bottomBarHight}>
                     <ScrollBox px={Spacing.medium}>
                         <TextInput
-                            accessibilityLabel="Text input field"
                             // todo update
                             accessibilityHint="ss"
-                            multiline
+                            accessibilityLabel="Text input field"
+                            color={pallette.secondary.dark}
+                            fontFamily={FontFamily.bold}
                             fontSize={FontSize.large}
+                            multiline
+                            onChangeText={(value) => noteDispatch({ payload: value, type: NoteChangeKind.Title })}
                             placeholder="Title"
                             value={noteState.title}
-                            onChangeText={(value) => noteDispatch({ type: NoteChangeKind.Title, payload: value })}
-                            fontFamily={FontFamily.bold}
-                            color={pallette.secondary.dark}
                         />
-                        <Box height={1} bg={pallette.grey} my={Spacing.small} />
+                        <Box bg={pallette.grey} height={1} my={Spacing.small} />
                         <TextInput
-                            accessibilityLabel="Text input field"
                             // todo update
                             accessibilityHint="ss"
-                            multiline
-                            fontSize={FontSize.medium}
-                            placeholder="Start writing"
-                            value={noteState.content}
-                            onChangeText={(value) => noteDispatch({ type: NoteChangeKind.Content, payload: value })}
-                            mb={Spacing.large}
+                            accessibilityLabel="Text input field"
                             color={pallette.grey}
+                            fontSize={FontSize.medium}
+                            mb={Spacing.large}
                             minHeight={200}
+                            multiline
+                            onChangeText={(value) => noteDispatch({ payload: value, type: NoteChangeKind.Content })}
+                            placeholder="Start writing"
                             textAlignVertical="top"
+                            value={noteState.content}
                         />
                     </ScrollBox>
                     <LabelPills note={noteState} onPress={openLabelSelectScreen} />
                 </KeyboardAvoidingBox>
             </SafeAreaBox>
             <FlexBox
-                position="absolute"
-                bottom={0}
-                pb={insets.bottom}
                 bg={pallette.grey}
-                height={bottomBarHight}
-                width="100%"
                 borderTopLeftRadius={Spacing.large}
                 borderTopRightRadius={Spacing.large}
+                bottom={0}
+                height={bottomBarHight}
+                pb={insets.bottom}
+                position="absolute"
                 px={Spacing.medium}
+                width="100%"
             >
                 <TagsIcon
                     color={pallette.white}
@@ -235,10 +235,10 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 />
                 <Text
                     color={pallette.white}
-                    textAlign="center"
                     flex={1}
                     fontFamily={FontFamily.light}
                     fontSize={FontSize.small}
+                    textAlign="center"
                 >
                     {!!noteState.ts && t("screens.editNote.editedTime", { time: formatDistance(noteState.ts) })}
                 </Text>
@@ -249,19 +249,19 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 />
             </FlexBox>
             <ConfirmModal
-                title={t("common.confirm")}
-                message={t("components.noteDeleteModal.message")}
-                primaryBtnText={t("common.delete")}
-                isVisible={openedModal === VisibleModal.DeleteConfirm}
-                onClose={closeModal}
-                color={pallette.error.dark}
-                onConfirmPress={onDeletePress}
                 Icon={TrashIcon}
+                color={pallette.error.dark}
+                isVisible={openedModal === VisibleModal.DeleteConfirm}
+                message={t("components.noteDeleteModal.message")}
+                onClose={closeModal}
+                onConfirmPress={onDeletePress}
+                primaryBtnText={t("common.delete")}
+                title={t("common.confirm")}
             />
             <ColorPickerModal
-                selectedColor={noteState.color}
                 isVisible={openedModal === VisibleModal.ColorPicker}
                 onClose={(selectedColor) => onCloseColorPickerModal(selectedColor)}
+                selectedColor={noteState.color}
             />
         </>
     );

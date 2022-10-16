@@ -5,9 +5,9 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { Button } from "./Button";
 
 export default {
-    title: "molecules/Button",
-    component: Button,
     argTypes: { onPress: { action: "Pressed" } },
+    component: Button,
+    title: "molecules/Button",
 } as ComponentMeta<typeof Button>;
 
 const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;

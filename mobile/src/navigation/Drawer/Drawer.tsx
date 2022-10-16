@@ -24,64 +24,64 @@ export const Drawer: FC<DrawerContentComponentProps> = ({ navigation: { navigate
     const selectedLabel = (state.routes[0] as RouteProp<NavigatorParamList, Screens.notesList>)?.params?.label?.id;
 
     return (
-        <Box flex={1} bg={pallette.white}>
+        <Box bg={pallette.white} flex={1}>
             <Text
-                fontSize={FontSize.huge}
                 color={pallette.primary.main}
                 fontFamily={FontFamily.bold}
+                fontSize={FontSize.huge}
                 m={Spacing.medium}
                 mt={Spacing.large}
             >
                 {t("title")}
             </Text>
-            <Box height={1} bg={pallette.secondary.light} />
+            <Box bg={pallette.secondary.light} height={1} />
             <ScrollBox flex={1} px={Spacing.small}>
                 <Box height={Spacing.small} />
                 <DrawerItem
-                    name={t("components.drawer.notes")}
-                    selected={!selectedLabel}
                     Icon={NoteIcon}
-                    onPress={() => navigate(Screens.notesList, {})}
-                    accessibilityLabel={t("components.drawer.notes")}
                     accessibilityHint={t("components.drawer.itemAllyHint", {
                         item: t("components.drawer.notes"),
                     })}
+                    accessibilityLabel={t("components.drawer.notes")}
+                    name={t("components.drawer.notes")}
+                    onPress={() => navigate(Screens.notesList, {})}
+                    selected={!selectedLabel}
                 />
                 {labels.map((item) => (
                     <DrawerItem
                         key={item.id}
-                        name={item.name}
-                        selected={selectedLabel === item.id}
                         Icon={TagsIcon}
-                        onPress={() => navigate(Screens.notesList, { label: item })}
-                        accessibilityLabel={item.name}
                         accessibilityHint={t("components.drawer.itemAllyHint", { item: item.name })}
+                        accessibilityLabel={item.name}
+                        name={item.name}
+                        onPress={() => navigate(Screens.notesList, { label: item })}
+                        selected={selectedLabel === item.id}
                     />
                 ))}
                 <DrawerItem
-                    name={t("components.drawer.manageLabels")}
                     Icon={EditIcon}
-                    bgColor={pallette.secondary.main}
-                    onPress={() => navigate(Screens.labelManage)}
-                    accessibilityLabel={t("components.drawer.manageLabels")}
                     accessibilityHint={t("components.drawer.itemAllyHint", {
                         item: t("components.drawer.manageLabels"),
                     })}
+                    accessibilityLabel={t("components.drawer.manageLabels")}
+                    bgColor={pallette.secondary.main}
+                    name={t("components.drawer.manageLabels")}
+                    onPress={() => navigate(Screens.labelManage)}
                 />
                 <Box height={Spacing.small} />
             </ScrollBox>
 
-            <Box height={1} bg={pallette.secondary.light} />
+            <Box bg={pallette.secondary.light} height={1} />
 
-            <Box px={Spacing.small} bg={pallette.background}>
+            <Box bg={pallette.background} px={Spacing.small}>
                 <DrawerItem
-                    name={t("components.drawer.settings")}
                     Icon={SettingsIcon}
-                    onPress={() => navigate(Screens.settings)}
-                    accessibilityLabel={t("components.drawer.settings")}
                     accessibilityHint={t("components.drawer.itemAllyHint", {
                         item: t("components.drawer.settings"),
                     })}
+                    accessibilityLabel={t("components.drawer.settings")}
+                    name={t("components.drawer.settings")}
+                    onPress={() => navigate(Screens.settings)}
                 />
             </Box>
         </Box>

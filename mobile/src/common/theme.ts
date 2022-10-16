@@ -82,28 +82,25 @@ const CommonTheme = { colors: { black: "#070707", white: "#fcfcfc" } };
  */
 export const DefaultShadow: { [key in Shadow]: IShadowItem } = {
     [Shadow.small]: {
+        elevation: 2,
         shadowColor: CommonTheme.colors.black,
-        shadowOffset: { width: 0, height: 1 },
+        shadowOffset: { height: 1, width: 0 },
         shadowOpacity: 0.2,
         shadowRadius: 1.41,
-
-        elevation: 2,
     },
     [Shadow.medium]: {
+        elevation: 6,
         shadowColor: CommonTheme.colors.black,
-        shadowOffset: { width: 0, height: 3 },
+        shadowOffset: { height: 3, width: 0 },
         shadowOpacity: 0.27,
         shadowRadius: 4.65,
-
-        elevation: 6,
     },
     [Shadow.large]: {
+        elevation: 12,
         shadowColor: CommonTheme.colors.black,
-        shadowOffset: { width: 0, height: 6 },
+        shadowOffset: { height: 6, width: 0 },
         shadowOpacity: 0.37,
         shadowRadius: 7.49,
-
-        elevation: 12,
     },
 };
 
@@ -113,38 +110,38 @@ export const DefaultShadow: { [key in Shadow]: IShadowItem } = {
  * should be used instead of directly referencing this
  */
 export const ThemePallets: IThemePallets = {
-    light: {
-        primary: { light: "#b8f3ba", main: "#7ab17c", dark: "#618d61" },
-        secondary: { light: "#d3dfd3", main: "#7d857d", dark: "#464946" },
-        error: { light: "#ef5350", main: "#e53935", dark: "#b71c1c" },
-        background: "#eceeed",
-        grey: "#3f3f3f",
-        black: CommonTheme.colors.black,
-        white: CommonTheme.colors.white,
-    },
     dark: {
-        primary: { light: "#3e5c3e", main: "#4d724e", dark: "#b8e4ba" },
-        secondary: { light: "#4f554f", main: "#919b91", dark: "#e0eee0" },
-        error: { light: "#ad2626", main: "#ec5956", dark: "#fd7270" },
         background: "#202221",
-        grey: "#d4d4d4",
         black: CommonTheme.colors.white,
+        error: { dark: "#fd7270", light: "#ad2626", main: "#ec5956" },
+        grey: "#d4d4d4",
+        primary: { dark: "#b8e4ba", light: "#3e5c3e", main: "#4d724e" },
+        secondary: { dark: "#e0eee0", light: "#4f554f", main: "#919b91" },
         white: CommonTheme.colors.black,
+    },
+    light: {
+        background: "#eceeed",
+        black: CommonTheme.colors.black,
+        error: { dark: "#b71c1c", light: "#ef5350", main: "#e53935" },
+        grey: "#3f3f3f",
+        primary: { dark: "#618d61", light: "#b8f3ba", main: "#7ab17c" },
+        secondary: { dark: "#464946", light: "#d3dfd3", main: "#7d857d" },
+        white: CommonTheme.colors.white,
     },
 };
 
 /** Color options for note background */
 export const noteColors: INoteColors[] = [
-    { id: "color_white", light: "#ffffff", dark: "#000000" },
-    { id: "color_red", light: "#F28B82", dark: "#5C2B29" },
-    { id: "color_orange", light: "#FBBC04", dark: "#614A19" },
-    { id: "color_yellow", light: "#FFF475", dark: "#635D19" },
-    { id: "color_green", light: "#CCFF90", dark: "#345920" },
-    { id: "color_teal", light: "#A7FFEB", dark: "#16504B" },
-    { id: "color_blue", light: "#CBF0F8", dark: "#2D555E" },
-    { id: "color_darkBlue", light: "#AECBFA", dark: "#1E3A5F" },
-    { id: "color_purple", light: "#D7AEFB", dark: "#42275E" },
-    { id: "color_pink", light: "#FDCFE8", dark: "#5B2245" },
-    { id: "color_beige", light: "#E6C9A8", dark: "#442F19" },
-    { id: "color_grey", light: "#E8EAED", dark: "#3C3F43" },
+    { dark: "#000000", id: "color_white", light: "#ffffff" },
+    { dark: "#5C2B29", id: "color_red", light: "#F28B82" },
+    { dark: "#614A19", id: "color_orange", light: "#FBBC04" },
+    { dark: "#635D19", id: "color_yellow", light: "#FFF475" },
+    { dark: "#345920", id: "color_green", light: "#CCFF90" },
+    { dark: "#16504B", id: "color_teal", light: "#A7FFEB" },
+    { dark: "#2D555E", id: "color_blue", light: "#CBF0F8" },
+    { dark: "#1E3A5F", id: "color_darkBlue", light: "#AECBFA" },
+    { dark: "#42275E", id: "color_purple", light: "#D7AEFB" },
+    { dark: "#5B2245", id: "color_pink", light: "#FDCFE8" },
+    { dark: "#442F19", id: "color_beige", light: "#E6C9A8" },
+    { dark: "#3C3F43", id: "color_grey", light: "#E8EAED" },
 ];

@@ -8,7 +8,7 @@ import { noteColors } from "@src/common/theme";
 import { CardItem } from "./CardItem";
 
 const defaultNoteItem: Note = {
-    title: "Title of the card",
+    color: noteColors[0],
     content:
         "amet consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae",
     favorite: false,
@@ -16,16 +16,16 @@ const defaultNoteItem: Note = {
         { id: "1", name: "Grocery" },
         { id: "2", name: "work" },
     ],
-    color: noteColors[0],
+    title: "Title of the card",
     ts: 0,
 };
 
 export default {
-    title: "molecules/CardItem",
-    component: CardItem,
     args: {
         noteItem: defaultNoteItem,
     },
+    component: CardItem,
+    title: "molecules/CardItem",
 } as ComponentMeta<typeof CardItem>;
 
 const Template: ComponentStory<typeof CardItem> = (args) => <CardItem {...args} />;
@@ -60,7 +60,7 @@ export const Empty = Template.bind({});
 Empty.args = {
     noteItem: {
         ...defaultNoteItem,
-        title: "",
         content: "",
+        title: "",
     },
 };

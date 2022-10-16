@@ -19,7 +19,7 @@ export const useSettingsStore = create<SettingsState>()(
                 persistedTheme: null,
                 setPersistedTheme: (theme) => set(() => ({ persistedTheme: theme })),
             }),
-            { name: "settings-storage", getStorage: () => persistHelper }
+            { getStorage: () => persistHelper, name: "settings-storage" }
         )
     )
 );

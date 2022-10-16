@@ -28,31 +28,31 @@ enum ModalKind {
 }
 
 interface ModalChangeAction {
-    type: ModalKind;
     payload?: Label;
+    type: ModalKind;
 }
 
 interface ModalState {
-    /** The type of modal that is visible */
-    visibleModal: ModalKind | null;
     /** Label object will be needed when modifying an existing label */
     label: Label | null;
+    /** The type of modal that is visible */
+    visibleModal: ModalKind | null;
 }
 
 const initialModalState: ModalState = {
-    visibleModal: null,
     label: null,
+    visibleModal: null,
 };
 
 const labelManageReducer = (state: ModalState, action: ModalChangeAction) => {
     const { type, payload } = action;
     switch (type) {
         case ModalKind.ShowLabelModal:
-            return { visibleModal: type, label: payload || null };
+            return { label: payload || null, visibleModal: type };
         case ModalKind.ShowDeleteModal:
-            return { visibleModal: type, label: payload || null };
+            return { label: payload || null, visibleModal: type };
         case ModalKind.HideModal:
-            return { visibleModal: null, label: null };
+            return { label: null, visibleModal: null };
         default:
             return state;
     }
@@ -106,9 +106,9 @@ export const LabelManageScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
         deleteLabel(modalState?.label?.id as string);
         stateDispatch({ type: ModalKind.HideModal });
         showMessage({
-            message: t("screens.labelManage.labelDeleted"),
-            icon: <TrashIcon />,
             backgroundColor: pallette.error.light,
+            icon: <TrashIcon />,
+            message: t("screens.labelManage.labelDeleted"),
         });
     }, [modalState?.label?.id, pallette.error.light]);
 
@@ -122,51 +122,51 @@ export const LabelManageScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
         <SafeAreaBox bg={pallette.background}>
             <HeaderBar title={t("components.drawer.manageLabels")} />
             <FlatList
+                ListEmptyComponent={<EmptyPlaceholder Icon={TagsIcon} text={t("screens.labelManage.noLabelsFound")} />}
                 data={labels}
+                keyExtractor={(item, index) => item.id || `${index}`}
                 renderItem={({ item }) => (
                     <ListItem
                         key={item.id}
-                        onPress={() => stateDispatch({ type: ModalKind.ShowLabelModal, payload: item })}
-                        text={item.name}
                         Prefix={<TagsIcon color={pallette.grey} />}
-                        mx={Spacing.medium}
                         Suffix={
                             <TrashIcon
                                 color={pallette.error.dark}
                                 touchable={{
-                                    onPress: () => stateDispatch({ type: ModalKind.ShowDeleteModal, payload: item }),
+                                    onPress: () => stateDispatch({ payload: item, type: ModalKind.ShowDeleteModal }),
                                 }}
                             />
                         }
+                        mx={Spacing.medium}
+                        onPress={() => stateDispatch({ payload: item, type: ModalKind.ShowLabelModal })}
+                        text={item.name}
                     />
                 )}
-                keyExtractor={(item, index) => item.id || `${index}`}
-                ListEmptyComponent={<EmptyPlaceholder text={t("screens.labelManage.noLabelsFound")} Icon={TagsIcon} />}
             />
             <FloatingButton
+                accessibilityHint={t("screens.labelManage.addButtonA11yHint")}
+                accessibilityLabel={t("screens.labelManage.addButtonA11yLabel")}
                 onPress={onShowCreateLabelModal}
                 visible={modalState.visibleModal === null}
-                accessibilityLabel={t("screens.labelManage.addButtonA11yLabel")}
-                accessibilityHint={t("screens.labelManage.addButtonA11yHint")}
             />
             <InputModal
                 initialValue={modalState?.label?.name || ""}
-                onSave={onSaveLabel}
+                inputPlaceholder={t("screens.labelManage.inputModal.inputPlaceholder")}
                 isVisible={modalState.visibleModal === ModalKind.ShowLabelModal}
                 onClose={onModalHide}
-                title={t(`screens.labelManage.inputModal.title.${modalState?.label?.id ? "edit" : "create"}`)}
-                inputPlaceholder={t("screens.labelManage.inputModal.inputPlaceholder")}
+                onSave={onSaveLabel}
                 schema={labelNameSchema}
+                title={t(`screens.labelManage.inputModal.title.${modalState?.label?.id ? "edit" : "create"}`)}
             />
             <ConfirmModal
-                title={t("common.confirm")}
-                message={t("screens.labelManage.deleteLabelMessage")}
-                primaryBtnText={t("common.delete")}
-                isVisible={modalState.visibleModal === ModalKind.ShowDeleteModal}
-                onClose={onModalHide}
-                color={pallette.error.dark}
                 Icon={TrashIcon}
+                color={pallette.error.dark}
+                isVisible={modalState.visibleModal === ModalKind.ShowDeleteModal}
+                message={t("screens.labelManage.deleteLabelMessage")}
+                onClose={onModalHide}
                 onConfirmPress={onDeleteConfirm}
+                primaryBtnText={t("common.delete")}
+                title={t("common.confirm")}
             />
         </SafeAreaBox>
     );

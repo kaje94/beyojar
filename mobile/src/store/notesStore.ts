@@ -1,3 +1,5 @@
+/* eslint-disable typescript-sort-keys/interface */
+/* eslint-disable sort-keys-fix/sort-keys-fix */
 import create from "zustand";
 import { devtools, persist } from "zustand/middleware";
 

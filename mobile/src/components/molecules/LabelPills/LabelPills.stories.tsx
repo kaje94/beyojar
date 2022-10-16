@@ -8,7 +8,7 @@ import { noteColors } from "@src/common/theme";
 import { LabelPills } from "./LabelPills";
 
 const defaultNoteItem: Note = {
-    title: "",
+    color: noteColors[0],
     content: "",
     favorite: false,
     labels: [
@@ -18,16 +18,16 @@ const defaultNoteItem: Note = {
         { id: "4", name: "Home" },
         { id: "5", name: "Passion" },
     ],
-    color: noteColors[0],
+    title: "",
     ts: 0,
 };
 
 export default {
-    title: "molecules/LabelPills",
-    component: LabelPills,
     args: {
         note: defaultNoteItem,
     },
+    component: LabelPills,
+    title: "molecules/LabelPills",
 } as ComponentMeta<typeof LabelPills>;
 
 const Template: ComponentStory<typeof LabelPills> = (args) => <LabelPills {...args} />;

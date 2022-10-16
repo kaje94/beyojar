@@ -22,47 +22,47 @@ export const CardItem: FC<Props> = ({ noteItem, onPress, ...props }) => {
 
     return (
         <Touchable
-            accessibilityRole="button"
-            accessibilityLabel={t("components.cardItem.a11yLabel", { title: noteItem.title })}
             accessibilityHint={t("components.cardItem.allyHint")}
+            accessibilityLabel={t("components.cardItem.a11yLabel", { title: noteItem.title })}
+            accessibilityRole="button"
             bg={noteItem.color[mode] || pallette.white}
+            borderRadius={BorderRadius.small}
             mx={Spacing.medium}
             my={Spacing.small}
-            p={Spacing.medium}
-            borderRadius={BorderRadius.small}
-            shadow={Shadow.small}
             onPress={onPress}
+            p={Spacing.medium}
+            shadow={Shadow.small}
             {...props}
         >
             {!noteItem.title && !noteItem.content ? (
-                <Text fontFamily={FontFamily.medium} color={pallette.secondary.dark}>
+                <Text color={pallette.secondary.dark} fontFamily={FontFamily.medium}>
                     {t("components.cardItem.empty")}
                 </Text>
             ) : (
                 <>
                     {noteItem.title && (
-                        <Text fontFamily={FontFamily.medium} color={pallette.secondary.dark}>
+                        <Text color={pallette.secondary.dark} fontFamily={FontFamily.medium}>
                             {noteItem.title}
                         </Text>
                     )}
 
                     {noteItem.title && noteItem.content && (
                         <Box
-                            height={0.5}
                             backgroundColor={pallette.grey}
-                            opacity={Opacity.partiallyVisible}
+                            height={0.5}
                             my={Spacing.tiny}
+                            opacity={Opacity.partiallyVisible}
                         />
                     )}
 
                     {noteItem.content && (
-                        <Text fontSize={FontSize.small} color={pallette.grey} numberOfLines={5}>
+                        <Text color={pallette.grey} fontSize={FontSize.small} numberOfLines={5}>
                             {noteItem.content}
                         </Text>
                     )}
                 </>
             )}
-            <LabelPills note={noteItem} variant="small" onPress={onPress} />
+            <LabelPills note={noteItem} onPress={onPress} variant="small" />
         </Touchable>
     );
 };

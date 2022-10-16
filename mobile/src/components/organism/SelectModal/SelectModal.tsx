@@ -13,12 +13,12 @@ interface Props {
     isVisible: boolean;
     /** Function to be called when either an option is selected or modal is closed */
     onClose: (selectedOption: string) => void;
-    /** Title to be shown in the modal */
-    title: string;
-    /** Id of the selected item */
-    selectedId: string;
     /** List of options to be listed in the select modal */
     options: { id: string; label: string }[];
+    /** Id of the selected item */
+    selectedId: string;
+    /** Title to be shown in the modal */
+    title: string;
 }
 
 /** Select modal that behaves similar to radio buttons */
@@ -28,28 +28,28 @@ export const SelectModal: FC<Props> = ({ isVisible, onClose, title, selectedId, 
 
     return (
         <BottomSheetModal isVisible={isVisible} onClose={() => onClose(selectedId)}>
-            <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large} color={pallette.grey}>
+            <Text color={pallette.grey} fontFamily={FontFamily.medium} fontSize={FontSize.large} textAlign="center">
                 {title}
             </Text>
 
-            <Box width="100%" mt={Spacing.medium} accessibilityRole="radiogroup">
+            <Box accessibilityRole="radiogroup" mt={Spacing.medium} width="100%">
                 {options.map((item) => {
                     const isSelected = item.id === selectedId;
                     return (
                         <Touchable
                             key={item.id}
-                            borderWidth={BorderWidth.small}
+                            accessibilityHint={`${t("common.select")} ${title} ${item.label}`}
+                            accessibilityLabel={item.label}
+                            accessibilityRole="radio"
+                            bg={isSelected ? pallette.secondary.light : pallette.white}
                             borderColor={pallette.secondary.light}
                             borderRadius={BorderRadius.medium}
-                            bg={isSelected ? pallette.secondary.light : pallette.white}
-                            py={Spacing.medium}
-                            px={Spacing.small}
+                            borderWidth={BorderWidth.small}
                             my={Spacing.tiny}
-                            shadow={Shadow.small}
                             onPress={() => onClose(item.id)}
-                            accessibilityRole="radio"
-                            accessibilityLabel={item.label}
-                            accessibilityHint={`${t("common.select")} ${title} ${item.label}`}
+                            px={Spacing.small}
+                            py={Spacing.medium}
+                            shadow={Shadow.small}
                         >
                             <Text
                                 color={isSelected ? pallette.black : pallette.grey}

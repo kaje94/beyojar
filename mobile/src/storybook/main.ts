@@ -2,7 +2,6 @@
 import { StorybookConfig } from "@storybook/react/types";
 
 const config: StorybookConfig = {
-    stories: ["../**/*.stories.@(js|jsx|ts|tsx)"],
     addons: [
         "@storybook/addon-links",
         "@storybook/addon-essentials",
@@ -11,6 +10,7 @@ const config: StorybookConfig = {
         "storybook-react-i18next",
     ],
     framework: "@storybook/react",
+    stories: ["../**/*.stories.@(js|jsx|ts|tsx)"],
 };
 
 module.exports = config;

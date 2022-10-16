@@ -5,9 +5,9 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { FloatingButton } from "./FloatingButton";
 
 export default {
-    title: "molecules/FloatingButton",
-    component: FloatingButton,
     argTypes: { onPress: { action: "Pressed" } },
+    component: FloatingButton,
+    title: "molecules/FloatingButton",
 } as ComponentMeta<typeof FloatingButton>;
 
 const Template: ComponentStory<typeof FloatingButton> = (args) => <FloatingButton {...args} />;

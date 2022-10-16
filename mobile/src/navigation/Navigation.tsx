@@ -21,11 +21,11 @@ import { EditNoteScreen, LabelManageScreen, LabelSelectScreen, NotesListScreen, 
 import { Drawer as DrawerComponent } from "./Drawer";
 
 export type NavigatorParamList = {
-    notesList: { label: Label };
-    editNote: { noteItem?: Note; initialLabels?: Label[] };
-    labelSelect: { noteItem: Note };
-    labelManage: undefined;
     drawer: undefined;
+    editNote: { initialLabels?: Label[]; noteItem?: Note };
+    labelManage: undefined;
+    labelSelect: { noteItem: Note };
+    notesList: { label: Label };
     settings: undefined;
 };
 
@@ -34,8 +34,8 @@ const Drawer = createDrawerNavigator();
 
 const DrawerNavigator: FC = () => {
     return (
-        <Drawer.Navigator screenOptions={{ headerShown: false }} drawerContent={DrawerComponent}>
-            <HomeStack.Screen name={Screens.notesList} component={NotesListScreen} />
+        <Drawer.Navigator drawerContent={DrawerComponent} screenOptions={{ headerShown: false }}>
+            <HomeStack.Screen component={NotesListScreen} name={Screens.notesList} />
         </Drawer.Navigator>
     );
 };
@@ -44,13 +44,13 @@ const NotesStackNavigator: FC = () => {
     const { pallette } = useTheme();
     return (
         <HomeStack.Navigator screenOptions={{ headerShown: false, statusBarColor: pallette.background }}>
-            <HomeStack.Screen name={Screens.drawer} component={DrawerNavigator} />
-            <HomeStack.Screen name={Screens.labelManage} component={LabelManageScreen} />
-            <HomeStack.Screen name={Screens.editNote} component={EditNoteScreen} />
-            <HomeStack.Screen name={Screens.settings} component={SettingsScreen} />
+            <HomeStack.Screen component={DrawerNavigator} name={Screens.drawer} />
+            <HomeStack.Screen component={LabelManageScreen} name={Screens.labelManage} />
+            <HomeStack.Screen component={EditNoteScreen} name={Screens.editNote} />
+            <HomeStack.Screen component={SettingsScreen} name={Screens.settings} />
             <HomeStack.Screen
-                name={Screens.labelSelect}
                 component={LabelSelectScreen}
+                name={Screens.labelSelect}
                 options={{ animation: "slide_from_bottom" }}
             />
         </HomeStack.Navigator>

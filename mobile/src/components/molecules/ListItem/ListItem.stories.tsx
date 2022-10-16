@@ -7,12 +7,12 @@ import { TagsIcon, TrashIcon } from "@src/assets/icons";
 import { ListItem } from "./ListItem";
 
 export default {
-    title: "molecules/ListItem",
-    component: ListItem,
     args: {
         text: "Text",
     },
+    component: ListItem,
     parameters: { layout: "fullscreen" },
+    title: "molecules/ListItem",
 } as ComponentMeta<typeof ListItem>;
 
 const Template: ComponentStory<typeof ListItem> = (args) => <ListItem {...args} />;

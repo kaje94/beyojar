@@ -27,16 +27,16 @@ export const Checkbox: FC<Props> = ({ checked = false, onPress, ...rest }) => {
         <Transitioning.View ref={ref} transition={getTransition("slide-right")}>
             {checked ? (
                 <TickIcon
-                    size={IconSize.medium}
-                    color={pallette.secondary.dark}
                     circleColor={pallette.secondary.main}
+                    color={pallette.secondary.dark}
+                    size={IconSize.medium}
                     touchable={{ onPress, padding: Spacing.none }}
                     {...rest}
                 />
             ) : (
                 <CircleIcon
-                    size={IconSize.medium}
                     color={pallette.primary.main}
+                    size={IconSize.medium}
                     touchable={{ onPress, padding: Spacing.none }}
                     {...rest}
                 />

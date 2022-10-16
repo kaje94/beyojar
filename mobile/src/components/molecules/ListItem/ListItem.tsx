@@ -8,10 +8,10 @@ import { Text, TextProps, Touchable, TouchableProps } from "@src/components/atom
 interface Props extends TouchableProps {
     /** Text prefix component */
     Prefix?: ReactElement;
-    /** Text to be displayed in the item */
-    text: string;
     /** Text suffix component */
     Suffix?: ReactElement;
+    /** Text to be displayed in the item */
+    text: string;
     /** Props for the text wrapping element */
     textProps?: TextProps;
 }
@@ -23,17 +23,17 @@ export const ListItem: FC<Props> = ({ text, Suffix, Prefix, onPress, textProps, 
     return (
         <Touchable
             accessibilityRole="button"
-            flexDirection="row"
             alignItems="center"
-            px={Spacing.small}
-            py={Spacing.medium}
             disabled={!onPress}
+            flexDirection="row"
             onPress={onPress}
             opacity={onPress ? Opacity.visible : Opacity.mostlyVisible}
+            px={Spacing.small}
+            py={Spacing.medium}
             {...rest}
         >
             {Prefix}
-            <Text flex={1} color={pallette.grey} px={Spacing.medium} {...textProps}>
+            <Text color={pallette.grey} flex={1} px={Spacing.medium} {...textProps}>
                 {text}
             </Text>
             {Suffix}

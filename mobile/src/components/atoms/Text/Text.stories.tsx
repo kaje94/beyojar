@@ -7,10 +7,10 @@ import { FontFamily } from "@src/assets/fonts";
 import { Text } from "./Text";
 
 export default {
-    title: "atoms/Text",
-    component: Text,
     args: { children: "Text value" },
+    component: Text,
     excludeStories: ["Template"],
+    title: "atoms/Text",
 } as ComponentMeta<typeof Text>;
 
 export const Template: ComponentStory<typeof Text> = (args) => <Text {...args} />;

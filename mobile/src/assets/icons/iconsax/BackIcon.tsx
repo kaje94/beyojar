@@ -14,14 +14,14 @@ export const BackIcon = withTouchable(
 
         return (
             <Box height={size} width={size}>
-                <Svg height="100%" width="100%" viewBox="0 0 24 24" fill="none">
+                <Svg fill="none" height="100%" viewBox="0 0 24 24" width="100%">
                     <Path
                         d="M9.57 5.93 3.5 12l6.07 6.07M12.82 12H3.5M20.33 12h-3.48"
                         stroke={color || pallette.black}
-                        strokeWidth={strokeWidth}
-                        strokeMiterlimit={10}
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        strokeMiterlimit={10}
+                        strokeWidth={strokeWidth}
                     />
                 </Svg>
             </Box>

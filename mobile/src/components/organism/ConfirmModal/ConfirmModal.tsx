@@ -12,8 +12,10 @@ import { Button } from "@src/components/molecules";
 import { BottomSheetModal, Props as BottomSheetModalProps } from "@src/components/molecules/BottomSheetModal";
 
 interface Props extends BottomSheetModalProps {
-    /** Title shown in the modal */
-    title: string;
+    /** Icon to be shown in the modal */
+    Icon?: FC<IconProps>;
+    /** Primary color of the confirm modal */
+    color?: string;
     /** Message shown in the modal */
     message: string;
     /** Function to be called when confirm is pressed */
@@ -22,10 +24,8 @@ interface Props extends BottomSheetModalProps {
     primaryBtnText?: string;
     /** Optional label to be shown on the secondary/cancel button */
     secondaryBtnText?: string;
-    /** Primary color of the confirm modal */
-    color?: string;
-    /** Icon to be shown in the modal */
-    Icon?: FC<IconProps>;
+    /** Title shown in the modal */
+    title: string;
 }
 
 /** Modal to get user's confirmation before performing critical actions */
@@ -47,34 +47,34 @@ export const ConfirmModal: FC<Props> = ({
     return (
         <BottomSheetModal isVisible={isVisible} onClose={onClose}>
             <Box my={Spacing.medium}>
-                <Icon size={IconSize.huge} color={primaryColor} />
+                <Icon color={primaryColor} size={IconSize.huge} />
             </Box>
-            <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large}>
+            <Text fontFamily={FontFamily.medium} fontSize={FontSize.large} textAlign="center">
                 {title}
             </Text>
-            <Text textAlign="center" color={pallette.grey} fontSize={FontSize.small}>
+            <Text color={pallette.grey} fontSize={FontSize.small} textAlign="center">
                 {message}
             </Text>
 
             <FlexBox mt={Spacing.medium} width="100%">
                 <Button
-                    text={secondaryBtnText || t("common.cancel")}
-                    onPress={onClose}
-                    borderColor={pallette.grey}
-                    bg={pallette.white}
-                    textColor={pallette.grey}
-                    accessibilityRole="button"
-                    accessibilityLabel={`${secondaryBtnText || t("common.continue")} ${title}`}
                     accessibilityHint={`${secondaryBtnText || t("common.continue")} ${message}`}
+                    accessibilityLabel={`${secondaryBtnText || t("common.continue")} ${title}`}
+                    accessibilityRole="button"
+                    bg={pallette.white}
+                    borderColor={pallette.grey}
+                    onPress={onClose}
+                    text={secondaryBtnText || t("common.cancel")}
+                    textColor={pallette.grey}
                 />
                 <Button
-                    text={primaryBtnText || t("common.continue")}
-                    onPress={onConfirmPress}
+                    accessibilityHint={`${primaryBtnText || t("common.continue")} ${message}`}
+                    accessibilityLabel={`${primaryBtnText || t("common.continue")} ${title}`}
+                    accessibilityRole="button"
                     bg={primaryColor}
                     borderColor={primaryColor}
-                    accessibilityRole="button"
-                    accessibilityLabel={`${primaryBtnText || t("common.continue")} ${title}`}
-                    accessibilityHint={`${primaryBtnText || t("common.continue")} ${message}`}
+                    onPress={onConfirmPress}
+                    text={primaryBtnText || t("common.continue")}
                 />
             </FlexBox>
         </BottomSheetModal>

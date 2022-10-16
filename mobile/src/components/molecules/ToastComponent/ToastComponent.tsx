@@ -13,12 +13,12 @@ export const ToastComponent: FC<MessageComponentProps> = ({ message, icon }) => 
     return (
         // eslint-disable-next-line react-native-a11y/has-accessibility-hint
         <FlexBox
+            accessibilityLabel="message"
+            accessibilityRole="alert"
             bg={message.backgroundColor || pallette.primary.main}
-            p={Spacing.medium}
             borderBottomLeftRadius={BorderRadius.medium}
             borderBottomRightRadius={BorderRadius.medium}
-            accessibilityRole="alert"
-            accessibilityLabel="message"
+            p={Spacing.medium}
         >
             <>
                 {icon}

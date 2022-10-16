@@ -39,23 +39,23 @@ export const useSearchAnimation = (isFocused: boolean) => {
         const isInFocus = isFocused && isScreenFocused;
         Animated.parallel([
             Animated.timing(borderRadius, {
-                toValue: isInFocus ? BorderRadius.none : BorderRadius.large,
                 duration: AnimationDuration.fast,
+                toValue: isInFocus ? BorderRadius.none : BorderRadius.large,
                 useNativeDriver: false,
             }),
             Animated.timing(margin, {
-                toValue: isInFocus ? Spacing.none : marginBlurred,
                 duration: AnimationDuration.fast,
+                toValue: isInFocus ? Spacing.none : marginBlurred,
                 useNativeDriver: false,
             }),
             Animated.timing(padding, {
-                toValue: isInFocus ? paddingFocussed : paddingBlurred,
                 duration: AnimationDuration.fast,
+                toValue: isInFocus ? paddingFocussed : paddingBlurred,
                 useNativeDriver: false,
             }),
             Animated.timing(backgroundAnim, {
-                toValue: isInFocus ? colorRanges.onFocus : colorRanges.onBlur,
                 duration: AnimationDuration.fast,
+                toValue: isInFocus ? colorRanges.onFocus : colorRanges.onBlur,
                 useNativeDriver: false,
             }),
         ]).start();
@@ -69,5 +69,5 @@ export const useSearchAnimation = (isFocused: boolean) => {
         }
     }, [isFocused, isScreenFocused, isDrawerOpen]);
 
-    return { borderRadius, margin, padding, backgroundColor };
+    return { backgroundColor, borderRadius, margin, padding };
 };

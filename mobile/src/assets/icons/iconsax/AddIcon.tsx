@@ -14,13 +14,13 @@ export const AddIcon = withTouchable(
 
         return (
             <Box height={size} width={size}>
-                <Svg height="100%" width="100%" viewBox="0 0 24 24" fill="none">
+                <Svg fill="none" height="100%" viewBox="0 0 24 24" width="100%">
                     <Path
                         d="M12 18V6M16 12h2M6 12h5.66M12 18V6"
                         stroke={color || pallette.black}
-                        strokeWidth={strokeWidth}
                         strokeLinecap="round"
                         strokeLinejoin="round"
+                        strokeWidth={strokeWidth}
                     />
                 </Svg>
             </Box>

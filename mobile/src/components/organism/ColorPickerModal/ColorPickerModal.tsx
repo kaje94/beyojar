@@ -17,10 +17,10 @@ const colorSize = 60;
 interface Props {
     /** Is color picker modal visible */
     isVisible: boolean;
-    /** Selected color of the note */
-    selectedColor: INoteColors;
     /** Function to be called when either a color is selected or modal is closed */
     onClose: (selectedColor: INoteColors) => void;
+    /** Selected color of the note */
+    selectedColor: INoteColors;
 }
 
 /** Modal to allow users to select their preferred color for a selected note */
@@ -32,32 +32,32 @@ export const ColorPickerModal: FC<Props> = ({ isVisible, selectedColor, onClose 
 
     return (
         <BottomSheetModal isVisible={isVisible} onClose={() => onClose(selectedColor)}>
-            <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large} color={pallette.grey}>
+            <Text color={pallette.grey} fontFamily={FontFamily.medium} fontSize={FontSize.large} textAlign="center">
                 {t("components.colorPicker.title")}
             </Text>
 
-            <Box width="100%" mt={Spacing.medium}>
+            <Box mt={Spacing.medium} width="100%">
                 {colors?.map((row) => (
-                    <FlexBox my={Spacing.medium} justifyContent="space-between" key={row.map(({ id }) => id).join("-")}>
+                    <FlexBox key={row.map(({ id }) => id).join("-")} justifyContent="space-between" my={Spacing.medium}>
                         {row.map((column) => (
                             <Touchable
                                 key={column.id}
-                                bg={column[mode]}
-                                height={colorSize}
-                                width={colorSize}
-                                borderRadius={BorderRadius.small}
-                                shadow={Shadow.small}
-                                onPress={() => onClose(column)}
-                                alignItems="center"
-                                justifyContent="center"
-                                accessibilityRole="button"
+                                accessibilityHint={t("components.colorPicker.colorItemA11yHint", { color: column.id })}
                                 accessibilityLabel={t("components.colorPicker.colorItemA11yLabel", {
                                     color: column.id,
                                 })}
-                                accessibilityHint={t("components.colorPicker.colorItemA11yHint", { color: column.id })}
+                                accessibilityRole="button"
+                                alignItems="center"
+                                bg={column[mode]}
+                                borderRadius={BorderRadius.small}
+                                height={colorSize}
+                                justifyContent="center"
+                                onPress={() => onClose(column)}
+                                shadow={Shadow.small}
+                                width={colorSize}
                             >
                                 {selectedColor.id === column.id && (
-                                    <TickIcon size={IconSize.medium} opacity={Opacity.mostlyVisible} />
+                                    <TickIcon opacity={Opacity.mostlyVisible} size={IconSize.medium} />
                                 )}
                             </Touchable>
                         ))}
