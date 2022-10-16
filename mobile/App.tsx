@@ -1,10 +1,10 @@
 import React from "react";
-import { SafeAreaProvider } from "react-native-safe-area-context";
-import * as SplashScreen from "expo-splash-screen";
 
-import { Navigation } from "@src/navigator";
-import { ReactQueryProvider } from "@src/providers/reactQueryProvider";
-import { ThemeProvider } from "@src/providers/themeProvider";
+import * as SplashScreen from "expo-splash-screen";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import { Navigation } from "@src/navigation";
+import { ThemeProvider } from "@src/providers";
 
 import "@src/lang/i18n";
 
@@ -12,15 +12,12 @@ SplashScreen.preventAutoHideAsync();
 
 const App = () => {
     return (
-        <ReactQueryProvider>
-            <ThemeProvider>
-                <SafeAreaProvider>
-                    <Navigation />
-                </SafeAreaProvider>
-            </ThemeProvider>
-        </ReactQueryProvider>
+        <ThemeProvider>
+            <SafeAreaProvider>
+                <Navigation />
+            </SafeAreaProvider>
+        </ThemeProvider>
     );
 };
 
-// eslint-disable-next-line import/no-default-export
 export default App;

@@ -1,4 +1,4 @@
-export * from "./ConfirmModal";
-export * from "./ColorPickerModal";
-export * from "./Drawer";
-export * from "./SelectModal";
+export { ConfirmModal } from "./ConfirmModal";
+export { ColorPickerModal } from "./ColorPickerModal";
+export { SelectModal } from "./SelectModal";
+export { InputModal } from "./InputModal";

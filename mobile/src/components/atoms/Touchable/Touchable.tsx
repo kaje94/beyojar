@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, memo, PropsWithChildren } from "react";
+
 import { TouchableOpacityProps } from "react-native";
 import styled from "styled-components/native";
 import {
@@ -17,6 +18,7 @@ import {
 } from "styled-system";
 
 import { Opacity, Spacing } from "@src/common/theme";
+import { WithShadow, WithShadowProps } from "@src/components/hoc/WithShadow";
 
 export type TouchableProps = TouchableOpacityProps &
     ColorProps &
@@ -35,10 +37,9 @@ const StyledTouchableOpacity = styled.TouchableOpacity<TouchableProps>`
     ${position}
 `;
 
-export const Touchable: FC<PropsWithChildren<TouchableProps>> = ({
-    activeOpacity = Opacity.partiallyVisible,
-    padding = Spacing.tiny,
-    ...props
-}) => {
-    return <StyledTouchableOpacity activeOpacity={activeOpacity} padding={padding} {...props} />;
-};
+/** Styled Touchable/Pressable, built on top of React-Native TouchableOpacity component */
+export const Touchable: FC<PropsWithChildren<TouchableProps & WithShadowProps>> = memo(
+    WithShadow(({ activeOpacity = Opacity.partiallyVisible, padding = Spacing.tiny, ...props }) => {
+        return <StyledTouchableOpacity activeOpacity={activeOpacity} padding={padding} {...props} />;
+    })
+);

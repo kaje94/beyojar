@@ -1,36 +1,45 @@
 import React, { FC, useEffect, useRef } from "react";
-import { Transition, Transitioning, TransitioningView } from "react-native-reanimated";
+
+import { GestureResponderEvent } from "react-native";
+import { Transitioning, TransitioningView } from "react-native-reanimated";
 import { useTheme } from "styled-components";
 
 import { CircleIcon, TickIcon } from "@src/assets/icons";
-import { AnimationDuration, IconSize } from "@src/common/theme";
+import { IconProps } from "@src/common/interfaces";
+import { IconSize, Spacing } from "@src/common/theme";
+import { getTransition } from "@src/common/transitions";
 
-interface Props {
+interface Props extends IconProps {
+    /** To show checked circle or unchecked circle */
     checked?: boolean;
+    /** Function to be called when checkbox is pressed */
+    onPress?: (event: GestureResponderEvent) => void;
 }
 
-const slideInRightTransition = (
-    <Transition.Together>
-        <Transition.Out type="slide-right" durationMs={AnimationDuration.fast} />
-        <Transition.Change interpolation="easeInOut" />
-        <Transition.In type="slide-right" durationMs={AnimationDuration.fast} />
-    </Transition.Together>
-);
-
-export const Checkbox: FC<Props> = ({ checked = false }) => {
+/** Controlled Checkbox component to show checked and unchecked state */
+export const Checkbox: FC<Props> = ({ checked = false, onPress, ...rest }) => {
     const ref = useRef<TransitioningView | null>(null);
     const { pallette } = useTheme();
 
-    useEffect(() => {
-        ref.current?.animateNextTransition();
-    }, [checked]);
+    useEffect(() => ref.current?.animateNextTransition(), [checked]);
 
     return (
-        <Transitioning.View ref={ref} transition={slideInRightTransition}>
+        <Transitioning.View ref={ref} transition={getTransition("slide-right")}>
             {checked ? (
-                <TickIcon size={IconSize.large} color={pallette.secondary.dark} circleColor={pallette.secondary.main} />
+                <TickIcon
+                    size={IconSize.medium}
+                    color={pallette.secondary.dark}
+                    circleColor={pallette.secondary.main}
+                    touchable={{ onPress, padding: Spacing.none }}
+                    {...rest}
+                />
             ) : (
-                <CircleIcon size={IconSize.large} color={pallette.primary.main} />
+                <CircleIcon
+                    size={IconSize.medium}
+                    color={pallette.primary.main}
+                    touchable={{ onPress, padding: Spacing.none }}
+                    {...rest}
+                />
             )}
         </Transitioning.View>
     );

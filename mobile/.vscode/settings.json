@@ -2,5 +2,18 @@
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true
     },
-    "cSpell.words": ["Formik", "immer", "relativetime", "zustand"]
+    "cSpell.words": [
+        "Formik",
+        "iconsax",
+        "immer",
+        "iphonex",
+        "iphonexsmax",
+        "pixelxl",
+        "relativetime",
+        "viewports",
+        "zustand"
+    ],
+    "search.exclude": {
+        "**/.expo": true
+    }
 }

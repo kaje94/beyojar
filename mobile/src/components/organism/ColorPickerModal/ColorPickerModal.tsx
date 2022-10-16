@@ -1,32 +1,35 @@
-import React, { useMemo } from "react";
+import React, { FC, useMemo } from "react";
+
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { TickIcon } from "@src/assets/icons";
 import { chunkArray } from "@src/common/helpers";
-import { BorderRadius, FontSize, IconSize, INoteColors, noteColors, Opacity, Spacing } from "@src/common/theme";
+import { INoteColors } from "@src/common/interfaces";
+import { BorderRadius, FontSize, IconSize, noteColors, Opacity, Shadow, Spacing } from "@src/common/theme";
 import { Box, FlexBox, Text, Touchable } from "@src/components/atoms";
 import { BottomSheetModal } from "@src/components/molecules";
 
 const columnCount = 4;
 const colorSize = 60;
 
-export const ColorPickerModal = ({
-    isVisible,
-    selectedColor,
-    onClose,
-}: {
+interface Props {
+    /** Is color picker modal visible */
     isVisible: boolean;
+    /** Selected color of the note */
     selectedColor: INoteColors;
+    /** Function to be called when either a color is selected or modal is closed */
     onClose: (selectedColor: INoteColors) => void;
-}) => {
+}
+
+/** Modal to allow users to select their preferred color for a selected note */
+export const ColorPickerModal: FC<Props> = ({ isVisible, selectedColor, onClose }) => {
     const { t } = useTranslation();
-    const { pallette, shadow, mode } = useTheme();
+    const { pallette, mode } = useTheme();
 
     const colors = useMemo(() => chunkArray(noteColors, columnCount), []);
 
-    // todo: update a11y for touchable
     return (
         <BottomSheetModal isVisible={isVisible} onClose={() => onClose(selectedColor)}>
             <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large} color={pallette.grey}>
@@ -38,19 +41,23 @@ export const ColorPickerModal = ({
                     <FlexBox my={Spacing.medium} justifyContent="space-between" key={row.map(({ id }) => id).join("-")}>
                         {row.map((column) => (
                             <Touchable
-                                accessibilityRole="button"
                                 key={column.id}
                                 bg={column[mode]}
                                 height={colorSize}
                                 width={colorSize}
                                 borderRadius={BorderRadius.small}
-                                style={shadow.small}
+                                shadow={Shadow.small}
                                 onPress={() => onClose(column)}
                                 alignItems="center"
                                 justifyContent="center"
+                                accessibilityRole="button"
+                                accessibilityLabel={t("components.colorPicker.colorItemA11yLabel", {
+                                    color: column.id,
+                                })}
+                                accessibilityHint={t("components.colorPicker.colorItemA11yHint", { color: column.id })}
                             >
                                 {selectedColor.id === column.id && (
-                                    <TickIcon size={IconSize.large} opacity={Opacity.mostlyVisible} />
+                                    <TickIcon size={IconSize.medium} opacity={Opacity.mostlyVisible} />
                                 )}
                             </Touchable>
                         ))}

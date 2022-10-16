@@ -1,6 +1,8 @@
-import React, { FC, MutableRefObject, PropsWithChildren } from "react";
+import React, { FC, memo, MutableRefObject, PropsWithChildren } from "react";
+
 import { TextInput as TextInputNative, TextInputProps } from "react-native";
-import styled, { useTheme } from "styled-components/native";
+import { useTheme } from "styled-components";
+import styled from "styled-components/native";
 import {
     borders,
     BordersProps,
@@ -39,25 +41,28 @@ const StyledTextInput = styled.TextInput<Props>`
     ${typography}
 `;
 
-export const TextInput: FC<PropsWithChildren<Props>> = ({
-    inputRef,
-    padding = Spacing.tiny,
-    fontFamily = FontFamily.regular,
-    color: textColor,
-    placeholderTextColor,
-    ...props
-}) => {
-    const { pallette } = useTheme();
-    return (
-        <StyledTextInput
-            ref={inputRef}
-            underlineColorAndroid="transparent"
-            fontSize={FontSize.medium}
-            fontFamily={fontFamily}
-            p={padding}
-            color={textColor || pallette.black}
-            placeholderTextColor={placeholderTextColor || pallette.secondary.main}
-            {...props}
-        />
-    );
-};
+/** Styled TextInput, built on top of React-Native TextInput component */
+export const TextInput: FC<PropsWithChildren<Props>> = memo(
+    ({
+        inputRef,
+        padding = Spacing.tiny,
+        fontFamily = FontFamily.regular,
+        color: textColor,
+        placeholderTextColor,
+        ...props
+    }) => {
+        const { pallette } = useTheme();
+        return (
+            <StyledTextInput
+                ref={inputRef}
+                underlineColorAndroid="transparent"
+                fontSize={FontSize.medium}
+                fontFamily={fontFamily}
+                p={padding}
+                color={textColor || pallette.black}
+                placeholderTextColor={placeholderTextColor || pallette.secondary.main}
+                {...props}
+            />
+        );
+    }
+);

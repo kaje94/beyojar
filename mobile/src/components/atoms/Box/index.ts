@@ -1,1 +1,1 @@
-export { Box, FlexBox } from "./Box";
+export { Box, BoxProps } from "./Box";

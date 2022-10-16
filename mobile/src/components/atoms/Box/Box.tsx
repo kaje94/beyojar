@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, memo, PropsWithChildren } from "react";
+
 import { ViewProps } from "react-native";
 import styled from "styled-components/native";
 import {
@@ -16,9 +17,9 @@ import {
     SpaceProps,
 } from "styled-system";
 
-type Props = ViewProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps & PositionProps;
+export type BoxProps = ViewProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps & PositionProps;
 
-const StyledBox = styled.View<Props>`
+const StyledBox = styled.View<BoxProps>`
     ${color}
     ${space}
     ${layout}
@@ -27,15 +28,7 @@ const StyledBox = styled.View<Props>`
     ${position}
 `;
 
-export const Box: FC<PropsWithChildren<Props>> = (props) => {
+/** Styled  View, built on top of React-Native View component */
+export const Box: FC<PropsWithChildren<BoxProps>> = memo((props) => {
     return <StyledBox {...props} />;
-};
-
-export const FlexBox: FC<PropsWithChildren<Props>> = ({
-    display = "flex",
-    flexDirection = "row",
-    alignItems = "center",
-    ...props
-}) => {
-    return <StyledBox display={display} flexDirection={flexDirection} alignItems={alignItems} {...props} />;
-};
+});

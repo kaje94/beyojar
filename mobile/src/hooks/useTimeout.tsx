@@ -1,6 +1,13 @@
 import { DependencyList, useEffect, useRef } from "react";
+
 import { useIsFocused } from "@react-navigation/native";
 
+/**
+ * Hook that will call a provided function after a given time
+ * @param callback Function to be called
+ * @param delay Delay in milliseconds
+ * @param dependencies dependencies that will re-trigger the function
+ */
 export const useTimeout = (callback: () => void, delay: number, dependencies: DependencyList) => {
     const timeoutRef = useRef<number>();
     const savedCallback = useRef(callback);

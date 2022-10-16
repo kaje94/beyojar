@@ -1,32 +1,47 @@
 import React, { FC, useCallback, useEffect, useReducer, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { showMessage } from "react-native-flash-message";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
+
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import formatDistance from "date-fns/formatDistanceToNow";
 import { nanoid } from "nanoid/non-secure";
+import { useTranslation } from "react-i18next";
+import { showMessage } from "react-native-flash-message";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
 import { Screens } from "@src/common/constants";
 import { setStatusBarBgColor } from "@src/common/helpers";
-import { FontSize, IconSize, INoteColors, noteColors, Spacing } from "@src/common/theme";
-import { Box, FlexBox, KeyboardAvoidingBox, SafeAreaBox, ScrollView, Text, TextInput } from "@src/components/atoms";
+import { INoteColors, Label, Note } from "@src/common/interfaces";
+import { FontSize, IconSize, noteColors, Spacing } from "@src/common/theme";
+import { Box, FlexBox, KeyboardAvoidingBox, SafeAreaBox, ScrollBox, Text, TextInput } from "@src/components/atoms";
 import { Favorite, HeaderBar, LabelPills } from "@src/components/molecules";
 import { ColorPickerModal, ConfirmModal } from "@src/components/organism";
 import { useBackPress, useTimeout } from "@src/hooks";
-import { NavigatorParamList } from "@src/navigator";
-import { Label, Note, useStore } from "@src/store";
+import { NavigatorParamList } from "@src/navigation";
+import { useNotesStore } from "@src/store";
 
 const bottomBarHight = 60;
 
+enum VisibleModal {
+    /** Show the delete confirm modal for the selected note */
+    DeleteConfirm,
+    /** Show the color picker modal for the note */
+    ColorPicker,
+}
+
 enum NoteChangeKind {
+    /** Initialize the local state with incoming note object from react-navigation */
     Initialize,
+    /** Update the title field of the local state */
     Title,
+    /** Update the content field of the local state */
     Content,
+    /** Update the color field of the local state */
     Color,
+    /** Update the isFavorite field of the local state */
     isFavorite,
+    /** Update the labels field of the local state */
     Labels,
 }
 
@@ -64,8 +79,9 @@ const noteEditReducer = (state: Note, action: NoteChangeAction) => {
     }
 };
 
+/** Screen that allows users to either create new note or update an existing note */
 export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Screens.editNote>> = ({
-    navigation,
+    navigation: { navigate, goBack },
     route: {
         params: { initialLabels = [], noteItem },
     },
@@ -73,14 +89,18 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     const insets = useSafeAreaInsets();
     const { pallette, mode } = useTheme();
     const { t } = useTranslation();
-    const { deleteNote } = useStore();
+    const { deleteNote } = useNotesStore();
+    const { addNote, updateNote } = useNotesStore();
+    const [openedModal, setOpenedModal] = useState<VisibleModal | null>(null);
 
+    /** Local note state reducer */
     const [noteState, noteDispatch] = useReducer(noteEditReducer, {
         ...initialNote,
         labels: initialLabels,
         ...noteItem,
     });
 
+    /** Update the local note state whenever navigation props changes */
     useEffect(() => {
         noteDispatch({
             type: NoteChangeKind.Initialize,
@@ -88,31 +108,31 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
         });
     }, [noteItem, initialLabels.length]);
 
-    const [isDeleteConfirmVisible, setDeleteConfirmVisible] = useState(false);
-    const [isColorPickerVisible, setColorPickerVisible] = useState(false);
-
+    /** Background color based on the the theme (light/dark) */
     const bgColor = noteState.color[mode];
 
-    useTimeout(() => setStatusBarBgColor(bgColor, true), 100, [bgColor]);
+    /** Update the statusbar color in Android with a slight delay */
+    useTimeout(() => setStatusBarBgColor(bgColor), 100, [bgColor]);
 
-    const { addNote, updateNote } = useStore();
-
+    /** Persist the note details in the store and navigate back to previous screen */
     const saveNewNote = useCallback(() => {
         if (noteState.id) {
+            /** Update the note if its an existing note */
             updateNote(noteState);
         } else if (noteState.title || noteState.content) {
+            /** Create a new note if title or content exists */
             addNote({ ...noteState, id: nanoid() });
         } else {
-            showMessage({
-                message: t("screens.editNote.noteDiscarded"),
-                icon: <InfoIcon />,
-            });
+            /** Show a note discarded message, If its a new note without a title or content */
+            showMessage({ message: t("screens.editNote.noteDiscarded"), icon: <InfoIcon /> });
         }
-        navigation.goBack();
+        goBack();
     }, [noteState]);
 
+    /** Back press listener to save the note when navigating back */
     useBackPress({ callback: saveNewNote });
 
+    /** Delete the note from the persisted store and show a toast message */
     const onDeletePress = useCallback(() => {
         if (noteState?.id) {
             deleteNote(noteState?.id);
@@ -123,8 +143,29 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 backgroundColor: pallette.error.light,
             });
         }
-        navigation.goBack();
+        goBack();
     }, [noteState]);
+
+    /** Navigate to the label select screen */
+    const openLabelSelectScreen = useCallback(
+        () => navigate(Screens.labelSelect, { noteItem: noteState }),
+        [noteState]
+    );
+
+    /** Open color picker modal */
+    const openColoPickerModal = useCallback(() => setOpenedModal(VisibleModal.ColorPicker), []);
+
+    /** Open delete confirm modal */
+    const openDeleteConfirmModal = useCallback(() => setOpenedModal(VisibleModal.DeleteConfirm), []);
+
+    /** Close any of the open modals */
+    const closeModal = useCallback(() => setOpenedModal(null), []);
+
+    /** Update selected color when color picker modal closes */
+    const onCloseColorPickerModal = useCallback((selected: INoteColors) => {
+        noteDispatch({ type: NoteChangeKind.Color, payload: selected });
+        closeModal();
+    }, []);
 
     return (
         <>
@@ -139,7 +180,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     }
                 />
                 <KeyboardAvoidingBox mb={bottomBarHight}>
-                    <ScrollView px={Spacing.medium}>
+                    <ScrollBox px={Spacing.medium}>
                         <TextInput
                             accessibilityLabel="Text input field"
                             // todo update
@@ -167,11 +208,8 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                             minHeight={200}
                             textAlignVertical="top"
                         />
-                    </ScrollView>
-                    <LabelPills
-                        note={noteState}
-                        onPress={() => navigation.navigate(Screens.labelSelect, { noteItem: noteState })}
-                    />
+                    </ScrollBox>
+                    <LabelPills note={noteState} onPress={openLabelSelectScreen} />
                 </KeyboardAvoidingBox>
             </SafeAreaBox>
             <FlexBox
@@ -187,16 +225,13 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
             >
                 <TagsIcon
                     color={pallette.white}
-                    size={IconSize.large}
-                    touchable={{
-                        mx: Spacing.tiny,
-                        onPress: () => navigation.navigate(Screens.labelSelect, { noteItem: noteState }),
-                    }}
+                    size={IconSize.medium}
+                    touchable={{ mx: Spacing.tiny, onPress: openLabelSelectScreen }}
                 />
                 <ThemeIcon
                     color={bgColor}
-                    size={IconSize.large}
-                    touchable={{ mx: Spacing.tiny, onPress: () => setColorPickerVisible(true) }}
+                    size={IconSize.medium}
+                    touchable={{ mx: Spacing.tiny, onPress: openColoPickerModal }}
                 />
                 <Text
                     color={pallette.white}
@@ -209,26 +244,24 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 </Text>
                 <TrashIcon
                     color={pallette.error.main}
-                    size={IconSize.large}
-                    touchable={{ mx: Spacing.tiny, onPress: () => setDeleteConfirmVisible(true) }}
+                    size={IconSize.medium}
+                    touchable={{ mx: Spacing.tiny, onPress: openDeleteConfirmModal }}
                 />
             </FlexBox>
             <ConfirmModal
                 title={t("common.confirm")}
                 message={t("components.noteDeleteModal.message")}
                 primaryBtnText={t("common.delete")}
-                isVisible={isDeleteConfirmVisible}
-                onClose={() => setDeleteConfirmVisible(false)}
+                isVisible={openedModal === VisibleModal.DeleteConfirm}
+                onClose={closeModal}
                 color={pallette.error.dark}
                 onConfirmPress={onDeletePress}
+                Icon={TrashIcon}
             />
             <ColorPickerModal
                 selectedColor={noteState.color}
-                isVisible={isColorPickerVisible}
-                onClose={(selected) => {
-                    noteDispatch({ type: NoteChangeKind.Color, payload: selected });
-                    setColorPickerVisible(false);
-                }}
+                isVisible={openedModal === VisibleModal.ColorPicker}
+                onClose={(selectedColor) => onCloseColorPickerModal(selectedColor)}
             />
         </>
     );

@@ -7,9 +7,11 @@
         "prettier",
         "plugin:prettier/recommended",
         "plugin:react-native/all",
-        "plugin:react-native-a11y/all"
+        "plugin:react-native-a11y/all",
+        "plugin:storybook/recommended",
+        "plugin:import/recommended"
     ],
-    "plugins": ["@typescript-eslint", "react", "react-native", "prettier", "simple-import-sort"],
+    "plugins": ["@typescript-eslint", "react", "react-native", "prettier"],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": { "jsx": true },
@@ -24,32 +26,31 @@
         "react/jsx-props-no-spreading": "off",
         "react/require-default-props": "off",
         "no-promise-executor-return": "off",
-        "import/no-default-export": ["error"],
         "@typescript-eslint/no-unused-vars": ["error"],
         "@typescript-eslint/no-shadow": ["error"],
-        "import/extensions": ["error", "never"],
         "prettier/prettier": ["error", { "tabWidth": 4, "printWidth": 120 }],
         "react/jsx-filename-extension": ["error", { "extensions": [".ts", ".tsx"] }],
         "max-lines": ["error", 300],
+        "import/extensions": ["error", "ignorePackages", { "tsx": "never", "ts": "never" }],
+        "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "react/function-component-definition": [
             "error",
-            {
-                "namedComponents": "arrow-function",
-                "unnamedComponents": "arrow-function"
-            }
+            { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }
         ],
-        "simple-import-sort/imports": [
+        "sort-imports": ["error", { "ignoreCase": true, "ignoreDeclarationSort": true }],
+        "import/order": [
             "error",
             {
-                "groups": [
-                    // React and other packages come first
-                    ["^react", "^@react?\\w", "^"],
-                    // Internal packages, and relative paths
-                    ["^(@src)(/.*|$)", "^\\."],
-                    // Side effect imports.
-                    ["^\\u0000"]
-                ]
+                "groups": [["external", "builtin", "object", "type"], "internal", ["parent", "sibling", "index"]],
+                "pathGroups": [
+                    { "pattern": "react", "group": "external", "position": "before" },
+                    { "pattern": "@src/**", "group": "internal" }
+                ],
+                "pathGroupsExcludedImportTypes": ["internal", "react"],
+                "newlines-between": "always",
+                "alphabetize": { "order": "asc", "caseInsensitive": true }
             }
         ]
-    }
+    },
+    "settings": { "import/resolver": { "typescript": true } }
 }

@@ -1,64 +1,48 @@
-import React, { PropsWithChildren, useEffect } from "react";
-import { ColorSchemeName, useColorScheme } from "react-native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import React, { PropsWithChildren, useEffect, useState } from "react";
+
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import { ColorSchemeName, useColorScheme } from "react-native";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 import { loadFonts } from "@src/assets/fonts";
-import { QueryKeys, StorageKeys } from "@src/common/constants";
-import { getShadow, IShadow, IThemePallet, ThemePallets } from "@src/common/theme";
+import { ThemePallets } from "@src/common/theme";
+import { useSettingsStore } from "@src/store";
 
-// Default theme interface has been overwritten
-// by ITheme mobile/src/utils/styled.d.ts
-export interface ITheme {
-    mode: NonNullable<ColorSchemeName>;
-    persistedMode: ColorSchemeName;
-    setPersistedMode: (newMode: ColorSchemeName) => void;
-    pallette: IThemePallet;
-    shadow: IShadow;
+/**
+ * The default styled components theme interface
+ * has been overwritten by ITheme in src/common/styled.d.ts
+ */
+
+interface Props extends PropsWithChildren {
+    /** Overwrite system color theme and persisted color theme with provided mode */
+    defaultMode?: ColorSchemeName;
 }
 
-export const ThemeProvider = ({ children }: PropsWithChildren) => {
+/** Loads fonts, selects the theme based on the mode (light/dark) and passes it down to all the the child components */
+export const ThemeProvider = ({ defaultMode, children }: Props) => {
     const systemThemeMode = useColorScheme() as NonNullable<ColorSchemeName>;
-
-    const { isLoading: fontsLoading } = useQuery([QueryKeys.fonts], loadFonts);
-
-    const {
-        data: persistedMode,
-        isLoading: themeLoading,
-        refetch,
-    } = useQuery([QueryKeys.theme], () => AsyncStorage.getItem(StorageKeys.themeMode));
-
-    const { mutate } = useMutation((mode: ColorSchemeName) => AsyncStorage.setItem(StorageKeys.themeMode, mode || ""), {
-        onSettled: () => refetch(),
-    });
-
-    const isLoading = fontsLoading || themeLoading;
+    const [fontsLoading, setFontsLoading] = useState(true);
+    const { persistedTheme } = useSettingsStore();
 
     useEffect(() => {
-        if (!isLoading) {
-            setTimeout(() => {
-                SplashScreen.hideAsync();
-            }, 2000);
-        }
-    }, [isLoading]);
+        // Load fonts when the app is loaded
+        loadFonts().finally(() => setFontsLoading(false));
+    }, []);
 
-    const selectedMode = (persistedMode as ColorSchemeName) || systemThemeMode || "light";
+    useEffect(() => {
+        if (!fontsLoading) {
+            // Hide splash screen once the fonts are loaded
+            setTimeout(() => SplashScreen.hideAsync(), 1000);
+        }
+    }, [fontsLoading]);
+
+    const selectedMode = defaultMode || persistedTheme || systemThemeMode || "light";
     const selectedTheme = ThemePallets[selectedMode];
 
     return (
-        <StyledThemeProvider
-            theme={{
-                mode: selectedMode,
-                persistedMode: persistedMode as ColorSchemeName,
-                pallette: selectedTheme,
-                shadow: getShadow(selectedTheme.black),
-                setPersistedMode: mutate,
-            }}
-        >
-            {!isLoading && children}
+        <StyledThemeProvider theme={{ mode: selectedMode, pallette: selectedTheme }}>
+            {!fontsLoading && children}
             <StatusBar animated translucent style={selectedMode === "light" ? "dark" : "light"} />
         </StyledThemeProvider>
     );

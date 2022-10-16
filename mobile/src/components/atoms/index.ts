@@ -1,10 +1,9 @@
-export * from "./Box";
-export * from "./SafeAreaBox";
-export * from "./AnimatedBox";
-export * from "./TextInput";
-export * from "./Text";
-export * from "./Touchable";
-export * from "./KeyboardAvoidingBox";
-export * from "./ScrollView";
-
-// todo: add memo throughout!
+export { Box, BoxProps } from "./Box";
+export { FlexBox } from "./FlexBox";
+export { SafeAreaBox } from "./SafeAreaBox";
+export { AnimatedBox } from "./AnimatedBox";
+export { TextInput } from "./TextInput";
+export { Text, TextProps } from "./Text";
+export { Touchable, TouchableProps } from "./Touchable";
+export { KeyboardAvoidingBox } from "./KeyboardAvoidingBox";
+export { ScrollBox } from "./ScrollBox";

@@ -6,30 +6,64 @@
             "continue": "Continue",
             "cancel": "Cancel",
             "delete": "Delete",
-            "save": "Save"
+            "save": "Save",
+            "select": "Select",
+            "enter": "Enter"
         },
         "components": {
             "searchBar": {
                 "placeholder": "Search your notes",
                 "inputA11yLabel": "Search field input",
-                "inputA11yHint": "Notes will be filtered based on this search input"
+                "inputA11yHint": "Notes will be filtered based on this search input",
+                "backA11yLabel": "Exit search screen",
+                "backA11yHint": "Exit the notes filtering/search view",
+                "searchA11yLabel": "Search notes",
+                "searchA11yHint": "Open search view to filter out your notes",
+                "menuA11yLabel": "Open navigation drawer",
+                "menuA11yHint": "Open navigation drawer and navigate to any of your labels, manage labels screen or settings screen"
             },
             "noteDeleteModal": {
                 "message": "Do you really want to delete this note? \nThis action cannot be undone."
             },
             "colorPicker": {
-                "title": "Pick the color of your note"
+                "title": "Pick the color of your note",
+                "colorItemA11yLabel": "Change color to {{color}}",
+                "colorItemA11yHint": "Change color of the note to {{color}}"
             },
             "drawer": {
                 "notes": "Notes",
                 "settings": "Settings",
-                "manageLabels": "Manage Labels"
+                "manageLabels": "Manage Labels",
+                "itemAllyHint": "Navigate to {{item}}"
             },
             "cardItem": {
-                "empty": "Empty note"
+                "empty": "Empty note",
+                "a11yLabel": "Open Note {{title}}",
+                "allyHint": "Edit note view will be open, when pressed"
+            },
+            "favorite": {
+                "isFavorite": "Is favorite",
+                "isNotFavorite": "Is not favorite",
+                "allyHint": "Favorite selection will be reversed"
+            },
+            "header": {
+                "backButtonA11yLabel": "Back button",
+                "backButtonA11yHint": "Navigate back to the previous screen"
+            },
+            "labelPills": {
+                "labelA11yLabel": "Note label {{label}}",
+                "labelA11yHint": "Manage labels of the note"
             }
         },
         "screens": {
+            "notesList": {
+                "initialNotePrompt": "Get started by adding your first note",
+                "noNotesForSearch": "No matching notes found for the searched keyword",
+                "noNotesFoundForLabel": "No notes found with {{labelName}} label",
+                "noNotesFound": "No notes found",
+                "addButtonA11yLabel": "Add new Note",
+                "addButtonA11yHint": "Open a new screen to add new note details"
+            },
             "editNote": {
                 "noteDiscarded": "Empty Note Discarded",
                 "noteDeleted": "Note deleted successfully",
@@ -45,7 +79,22 @@
             "labelManage": {
                 "deleteLabelMessage": "Do you really want to delete this label? \nThis action cannot be undone.",
                 "noLabelsFound": "Start by adding your first label",
-                "labelDeleted": "Label deleted successfully"
+                "labelDeleted": "Label deleted successfully",
+                "inputModal": {
+                    "title": {
+                        "create": "Create Label",
+                        "edit": "Edit Label"
+                    },
+                    "validation": {
+                        "tooShort": "Label name is too short",
+                        "tooLong": "Label name is too long",
+                        "required": "Label name is required",
+                        "duplicateExist": "Duplicate label name"
+                    },
+                    "inputPlaceholder": "Label Name"
+                },
+                "addButtonA11yLabel": "Add new Label",
+                "addButtonA11yHint": "Open a new modal to input new label name"
             },
             "settings": {
                 "theme": {
@@ -53,7 +102,9 @@
                     "modalTitle": "Select App Theme",
                     "systemDefault": "System Default",
                     "light": "Light",
-                    "dark": "Dark"
+                    "dark": "Dark",
+                    "a11yLabel": "Current theme {{theme}}",
+                    "a11yHint": "Open change theme modal"
                 },
                 "language": {
                     "title": "Language"
@@ -63,8 +114,9 @@
                     "version": "Version {{version}}"
                 },
                 "deleteAccount": {
-                    "title": "Remove account",
-                    "message": "Do you really want to delete your account? \nThis will delete all your notes/labels and cannot be undone"
+                    "title": "Reset account",
+                    "message": "Do you really want to reset your account? \nThis will delete all your notes/labels and cannot be undone",
+                    "a11yHint": "Open reset account modal"
                 }
             }
         }

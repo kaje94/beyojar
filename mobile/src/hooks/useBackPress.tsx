@@ -1,9 +1,14 @@
 import { DependencyList, useEffect } from "react";
+
 import { BackHandler } from "react-native";
 
+/** Hook that fires a given callback function when back button is pressed */
 export const useBackPress = (props: {
+    /** Dependencies that will reset the hook */
     dependencies?: DependencyList;
+    /** Callback function to be fired */
     callback: () => void;
+    /** Optional condition to check whether or not to call the function */
     condition?: () => boolean;
 }) => {
     const { dependencies = [], callback, condition = () => true } = props;

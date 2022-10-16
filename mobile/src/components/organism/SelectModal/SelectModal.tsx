@@ -1,43 +1,42 @@
-import React from "react";
+import React, { FC } from "react";
+
+import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
-import { BorderRadius, BorderWidth, FontSize, Spacing } from "@src/common/theme";
+import { BorderRadius, BorderWidth, FontSize, Shadow, Spacing } from "@src/common/theme";
 import { Box, Text, Touchable } from "@src/components/atoms";
 import { BottomSheetModal } from "@src/components/molecules";
 
-export const SelectModal = ({
-    isVisible,
-    onClose,
-    title,
-    selectedId,
-    options,
-}: {
+interface Props {
+    /** Is Select modal visible */
     isVisible: boolean;
+    /** Function to be called when either an option is selected or modal is closed */
     onClose: (selectedOption: string) => void;
+    /** Title to be shown in the modal */
     title: string;
+    /** Id of the selected item */
     selectedId: string;
-    options: {
-        id: string;
-        label: string;
-    }[];
-}) => {
-    const { pallette, shadow } = useTheme();
+    /** List of options to be listed in the select modal */
+    options: { id: string; label: string }[];
+}
 
-    // todo: update a11y for touchable
+/** Select modal that behaves similar to radio buttons */
+export const SelectModal: FC<Props> = ({ isVisible, onClose, title, selectedId, options }) => {
+    const { pallette } = useTheme();
+    const { t } = useTranslation();
+
     return (
         <BottomSheetModal isVisible={isVisible} onClose={() => onClose(selectedId)}>
             <Text textAlign="center" fontFamily={FontFamily.medium} fontSize={FontSize.large} color={pallette.grey}>
                 {title}
             </Text>
 
-            <Box width="100%" mt={Spacing.medium}>
+            <Box width="100%" mt={Spacing.medium} accessibilityRole="radiogroup">
                 {options.map((item) => {
                     const isSelected = item.id === selectedId;
                     return (
                         <Touchable
-                            // todo update a11y
-                            accessibilityRole="button"
                             key={item.id}
                             borderWidth={BorderWidth.small}
                             borderColor={pallette.secondary.light}
@@ -46,8 +45,11 @@ export const SelectModal = ({
                             py={Spacing.medium}
                             px={Spacing.small}
                             my={Spacing.tiny}
-                            style={shadow.small}
+                            shadow={Shadow.small}
                             onPress={() => onClose(item.id)}
+                            accessibilityRole="radio"
+                            accessibilityLabel={item.label}
+                            accessibilityHint={`${t("common.select")} ${title} ${item.label}`}
                         >
                             <Text
                                 color={isSelected ? pallette.black : pallette.grey}

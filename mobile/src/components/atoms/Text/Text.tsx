@@ -1,6 +1,8 @@
-import React, { FC } from "react";
-import { TextProps } from "react-native";
-import styled, { useTheme } from "styled-components/native";
+import React, { FC, memo } from "react";
+
+import { TextProps as NativeTextProps } from "react-native";
+import { useTheme } from "styled-components";
+import styled from "styled-components/native";
 import {
     borders,
     BordersProps,
@@ -19,9 +21,15 @@ import {
 import { FontFamily } from "@src/assets/fonts";
 import { FontSize, Spacing } from "@src/common/theme";
 
-type Props = TextProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps & TypographyProps;
+export type TextProps = NativeTextProps &
+    ColorProps &
+    SpaceProps &
+    LayoutProps &
+    FlexboxProps &
+    BordersProps &
+    TypographyProps;
 
-const StyledText = styled.Text<Props>`
+const StyledText = styled.Text<TextProps>`
     ${color}
     ${space}
     ${layout}
@@ -30,21 +38,19 @@ const StyledText = styled.Text<Props>`
     ${typography}
 `;
 
-export const Text: FC<Props> = ({
-    padding = Spacing.tiny,
-    fontFamily = FontFamily.regular,
-    color: textColor,
-    ...props
-}) => {
-    const { pallette } = useTheme();
+/** Styled Text component, built on top of React-Native Text component */
+export const Text: FC<TextProps> = memo(
+    ({ padding = Spacing.tiny, fontFamily = FontFamily.regular, color: textColor, ...props }) => {
+        const { pallette } = useTheme();
 
-    return (
-        <StyledText
-            color={textColor || pallette.black}
-            fontSize={FontSize.medium}
-            fontFamily={fontFamily}
-            padding={padding}
-            {...props}
-        />
-    );
-};
+        return (
+            <StyledText
+                color={textColor || pallette.black}
+                fontSize={FontSize.medium}
+                fontFamily={fontFamily}
+                padding={padding}
+                {...props}
+            />
+        );
+    }
+);

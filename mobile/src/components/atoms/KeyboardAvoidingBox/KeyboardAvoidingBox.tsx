@@ -1,4 +1,5 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, memo, PropsWithChildren } from "react";
+
 import { KeyboardAvoidingViewProps } from "react-native";
 import styled from "styled-components/native";
 import {
@@ -26,6 +27,7 @@ const StyledKeyboardAvoidingBox = styled.KeyboardAvoidingView<Props>`
     ${borders}
 `;
 
-export const KeyboardAvoidingBox: FC<PropsWithChildren<Props>> = ({ flex = 1, ...props }) => {
+/** Styled Keyboard avoiding View, built on top of React-Native KeyboardAvoidingView component */
+export const KeyboardAvoidingBox: FC<PropsWithChildren<Props>> = memo(({ flex = 1, ...props }) => {
     return <StyledKeyboardAvoidingBox flex={flex} behavior={IsIOS ? "padding" : "height"} {...props} />;
-};
+});

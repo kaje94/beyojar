@@ -8,8 +8,6 @@ export enum FontFamily {
     bold = "rubik-bold",
 }
 
-// todo: try replacing require with imports and remove eslint
-
 export const loadFonts = async () => {
     await Font.loadAsync({
         [FontFamily.light]: require("./Rubik-Light.ttf"),

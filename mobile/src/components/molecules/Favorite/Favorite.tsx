@@ -1,44 +1,45 @@
 import React, { FC, useEffect, useRef } from "react";
-import { GestureResponderEvent } from "react-native";
-import { Transition, Transitioning, TransitioningView } from "react-native-reanimated";
+
+import { useTranslation } from "react-i18next";
+import { Transitioning, TransitioningView } from "react-native-reanimated";
 import { useTheme } from "styled-components";
 
 import { StarFilledIcon, StarIcon } from "@src/assets/icons";
-import { AnimationDuration, IconSize, Opacity } from "@src/common/theme";
-import { Touchable } from "@src/components/atoms";
+import { IconSize, Opacity } from "@src/common/theme";
+import { getTransition } from "@src/common/transitions";
+import { Touchable, TouchableProps } from "@src/components/atoms";
 
-interface Props {
+interface Props extends TouchableProps {
+    /** To show filled star icon or unfilled one */
     isFavorite?: boolean;
-    onPress?: (event: GestureResponderEvent) => void;
+    /** Size of the icon */
+    size?: IconSize;
 }
 
-const slideInRightTransition = (
-    <Transition.Together>
-        <Transition.Out type="scale" durationMs={AnimationDuration.fast} />
-        <Transition.Change interpolation="easeInOut" />
-        <Transition.In type="scale" durationMs={AnimationDuration.fast} />
-    </Transition.Together>
-);
-
-export const Favorite: FC<Props> = ({ isFavorite = false, onPress }) => {
+/** Controlled Favorite component to be shown for each note */
+export const Favorite: FC<Props> = ({ isFavorite = false, size, ...rest }) => {
     const ref = useRef<TransitioningView | null>(null);
     const { pallette } = useTheme();
+    const { t } = useTranslation();
 
-    useEffect(() => {
-        ref.current?.animateNextTransition();
-    }, [isFavorite]);
+    useEffect(() => ref.current?.animateNextTransition(), [isFavorite]);
 
     return (
         <Touchable
-            //  todo
-            accessibilityRole="button"
-            onPress={onPress}
+            accessibilityRole="checkbox"
+            accessibilityLabel={t(`components.favorite.${isFavorite ? "isFavorite" : "isNotFavorite"}`)}
+            accessibilityHint={t("components.favorite.allyHint")}
+            {...rest}
         >
-            <Transitioning.View ref={ref} transition={slideInRightTransition}>
+            <Transitioning.View ref={ref} transition={getTransition("scale")}>
                 {isFavorite ? (
-                    <StarFilledIcon size={IconSize.large} color={pallette.grey} secondaryColor={pallette.black} />
+                    <StarFilledIcon
+                        size={size || IconSize.medium}
+                        color={pallette.grey}
+                        secondaryColor={pallette.black}
+                    />
                 ) : (
-                    <StarIcon size={IconSize.large} color={pallette.grey} opacity={Opacity.barelyVisible} />
+                    <StarIcon size={size || IconSize.medium} color={pallette.grey} opacity={Opacity.barelyVisible} />
                 )}
             </Transitioning.View>
         </Touchable>
