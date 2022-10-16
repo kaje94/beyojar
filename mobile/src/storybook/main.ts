@@ -9,6 +9,8 @@ const config: StorybookConfig = {
         "@storybook/addon-react-native-web",
         "storybook-react-i18next",
         "@storybook/addon-a11y",
+        "@storybook/addon-interactions",
+        "@storybook/addon-coverage",
     ],
     features: { interactionsDebugger: true },
     framework: "@storybook/react",
