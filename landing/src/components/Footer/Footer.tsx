@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 
+/** Footer component of the landing page */
 export const Footer = component$(() => {
     return (
         <footer className="bg-gray-800  w-full">
