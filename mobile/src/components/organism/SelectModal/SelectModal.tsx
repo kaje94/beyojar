@@ -44,7 +44,7 @@ export const SelectModal: FC<Props> = ({ isVisible, onClose, title, selectedId, 
                             bg={isSelected ? pallette.secondary.light : pallette.white}
                             borderColor={pallette.secondary.light}
                             borderRadius={BorderRadius.medium}
-                            borderWidth={BorderWidth.small}
+                            borderWidth={BorderWidth.medium}
                             my={Spacing.tiny}
                             onPress={() => onClose(item.id)}
                             px={Spacing.small}

@@ -6,6 +6,7 @@ import { ColorSchemeName, useColorScheme } from "react-native";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 import { loadFonts } from "@src/assets/fonts";
+import { getInvertedColorMode, setNavigationTheme } from "@src/common/helpers";
 import { ThemePallets } from "@src/common/theme";
 import { useSettingsStore } from "@src/store";
 
@@ -24,6 +25,8 @@ export const ThemeProvider = ({ defaultMode, children }: Props) => {
     const systemThemeMode = useColorScheme() as NonNullable<ColorSchemeName>;
     const [fontsLoading, setFontsLoading] = useState(true);
     const { persistedTheme } = useSettingsStore();
+    const selectedMode = defaultMode || persistedTheme || systemThemeMode || "light";
+    const selectedTheme = ThemePallets[selectedMode];
 
     useEffect(() => {
         // Load fonts when the app is loaded
@@ -33,17 +36,17 @@ export const ThemeProvider = ({ defaultMode, children }: Props) => {
     useEffect(() => {
         if (!fontsLoading) {
             // Hide splash screen once the fonts are loaded
-            setTimeout(() => SplashScreen.hideAsync(), 1000);
+            setTimeout(() => {
+                SplashScreen.hideAsync();
+                setNavigationTheme(selectedMode);
+            }, 1000);
         }
-    }, [fontsLoading]);
-
-    const selectedMode = defaultMode || persistedTheme || systemThemeMode || "light";
-    const selectedTheme = ThemePallets[selectedMode];
+    }, [fontsLoading, selectedMode]);
 
     return (
         <StyledThemeProvider theme={{ mode: selectedMode, pallette: selectedTheme }}>
             {!fontsLoading && children}
-            <StatusBar animated style={selectedMode === "light" ? "dark" : "light"} translucent />
+            <StatusBar animated style={getInvertedColorMode(selectedMode)} translucent />
         </StyledThemeProvider>
     );
 };

@@ -91,10 +91,8 @@
                 "clearSearchA11yHint": "Clear search input",
                 "createNewLabelA11yLabel": "Create new label",
                 "createNewLabelA11yHint": "Create new label as {{label}} and automatically select it",
-                "labelItemA11yLabel": "Edit label {{label}}",
-                "labelItemA11yHint": "Mark {{label}} selected {{selected}} for the note",
-                "deleteLabelA11yLabel": "Delete label {{label}}",
-                "deleteLabelA11yHint": "Open delete label confirm modal for {{label}}"
+                "labelItemA11yLabel": "Select label {{label}}",
+                "labelItemA11yHint": "Mark {{label}} selected {{selected}} for the note"
             },
             "labelManage": {
                 "deleteLabelMessage": "Do you really want to delete this label? \nThis action cannot be undone.",
@@ -116,7 +114,9 @@
                 "addButtonA11yLabel": "Add new Label",
                 "addButtonA11yHint": "Open a new modal to input new label name",
                 "labelItemA11yLabel": "Edit Label {{label}}",
-                "labelItemA11yHint": "Open edit label modal to edit label {{label}}"
+                "labelItemA11yHint": "Open edit label modal to edit label {{label}}",
+                "deleteLabelA11yLabel": "Delete label {{label}}",
+                "deleteLabelA11yHint": "Open delete label confirm modal for {{label}}"
             },
             "settings": {
                 "theme": {

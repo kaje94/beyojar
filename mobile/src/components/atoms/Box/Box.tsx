@@ -17,6 +17,8 @@ import {
     SpaceProps,
 } from "styled-system";
 
+import { WithShadow, WithShadowProps } from "@src/components/hoc/WithShadow";
+
 export type BoxProps = ViewProps & ColorProps & SpaceProps & LayoutProps & FlexboxProps & BordersProps & PositionProps;
 
 const StyledBox = styled.View<BoxProps>`
@@ -29,6 +31,8 @@ const StyledBox = styled.View<BoxProps>`
 `;
 
 /** Styled  View, built on top of React-Native View component */
-export const Box: FC<PropsWithChildren<BoxProps>> = memo((props) => {
-    return <StyledBox {...props} />;
-});
+export const Box: FC<PropsWithChildren<BoxProps & WithShadowProps>> = memo(
+    WithShadow((props) => {
+        return <StyledBox {...props} />;
+    })
+);

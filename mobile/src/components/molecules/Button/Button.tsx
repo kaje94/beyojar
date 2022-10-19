@@ -22,7 +22,7 @@ export const Button: FC<Props> = ({ text = "Button", textColor, disabled = false
             bg={pallette.primary.dark}
             borderColor={pallette.primary.dark}
             borderRadius={BorderRadius.huge}
-            borderWidth={BorderWidth.small}
+            borderWidth={BorderWidth.medium}
             disabled={disabled}
             flex={1}
             mx={Spacing.small}

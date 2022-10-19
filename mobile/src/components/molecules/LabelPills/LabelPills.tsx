@@ -33,7 +33,7 @@ export const LabelPills: FC<Props> = ({ note, variant = "normal", onPress }) => 
                     accessibilityRole="button"
                     borderColor={pallette.grey}
                     borderRadius={BorderRadius.large}
-                    borderWidth={BorderWidth.small}
+                    borderWidth={BorderWidth.medium}
                     m={Spacing.tiny}
                     onPress={onPress}
                     opacity={variant === "small" ? Opacity.partiallyVisible : Opacity.mostlyVisible}

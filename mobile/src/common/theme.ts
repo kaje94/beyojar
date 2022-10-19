@@ -29,7 +29,8 @@ export enum AnimationDuration {
 /** Standard border widths to be used throughout the app */
 export enum BorderWidth {
     none = 0,
-    small = 1,
+    small = 0.5,
+    medium = 1,
 }
 
 /** Standard border radius variants to be used throughout the app */
@@ -62,6 +63,7 @@ export enum IconSize {
 
 /** Standard stroke width or thickness of icons */
 export enum IconStrokeWidth {
+    small = 1.7,
     default = 2,
     large = 2.5,
 }
@@ -134,10 +136,10 @@ export const ThemePallets: IThemePallets = {
 export const noteColors: INoteColors[] = [
     { dark: "#000000", id: "color_white", light: "#ffffff" },
     { dark: "#5C2B29", id: "color_red", light: "#F28B82" },
-    { dark: "#614A19", id: "color_orange", light: "#FBBC04" },
+    { dark: "#614A19", id: "color_orange", light: "#ffd34e" },
     { dark: "#635D19", id: "color_yellow", light: "#FFF475" },
     { dark: "#345920", id: "color_green", light: "#CCFF90" },
-    { dark: "#16504B", id: "color_teal", light: "#A7FFEB" },
+    { dark: "#16504B", id: "color_teal", light: "#cafff3" },
     { dark: "#2D555E", id: "color_blue", light: "#CBF0F8" },
     { dark: "#1E3A5F", id: "color_darkBlue", light: "#AECBFA" },
     { dark: "#42275E", id: "color_purple", light: "#D7AEFB" },

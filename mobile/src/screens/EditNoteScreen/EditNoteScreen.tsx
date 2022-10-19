@@ -11,9 +11,9 @@ import { useTheme } from "styled-components";
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
 import { Screens } from "@src/common/constants";
-import { setStatusBarBgColor } from "@src/common/helpers";
+import { getInvertedColorMode, setStatusBarBgColor } from "@src/common/helpers";
 import { INoteColors, Label, Note } from "@src/common/interfaces";
-import { FontSize, IconSize, noteColors, Spacing } from "@src/common/theme";
+import { BorderWidth, FontSize, IconSize, IconStrokeWidth, noteColors, Spacing } from "@src/common/theme";
 import { Box, FlexBox, KeyboardAvoidingBox, SafeAreaBox, ScrollBox, Text, TextInput } from "@src/components/atoms";
 import { Favorite, HeaderBar, LabelPills } from "@src/components/molecules";
 import { ColorPickerModal, ConfirmModal } from "@src/components/organism";
@@ -112,7 +112,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     const bgColor = noteState.color[mode];
 
     /** Update the statusbar color in Android with a slight delay */
-    useTimeout(() => setStatusBarBgColor(bgColor), 100, [bgColor]);
+    useTimeout(() => setStatusBarBgColor(bgColor, mode), 100, [bgColor]);
 
     /** Persist the note details in the store and navigate back to previous screen */
     const saveNewNote = useCallback(() => {
@@ -211,9 +211,9 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 </KeyboardAvoidingBox>
             </SafeAreaBox>
             <FlexBox
-                bg={pallette.grey}
-                borderTopLeftRadius={Spacing.large}
-                borderTopRightRadius={Spacing.large}
+                bg={pallette.background}
+                borderColor={pallette.grey}
+                borderTopWidth={BorderWidth.small}
                 bottom={0}
                 height={bottomBarHight}
                 pb={insets.bottom}
@@ -222,8 +222,9 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 width="100%"
             >
                 <TagsIcon
-                    color={pallette.white}
+                    color={pallette.secondary.dark}
                     size={IconSize.medium}
+                    strokeWidth={IconStrokeWidth.small}
                     touchable={{
                         accessibilityHint: t("screens.editNote.openLabelsA11yHint"),
                         accessibilityLabel: t("screens.editNote.openLabelsA11yLabel"),
@@ -232,8 +233,9 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     }}
                 />
                 <ThemeIcon
-                    color={bgColor}
+                    color={noteState.color[getInvertedColorMode(mode)]}
                     size={IconSize.medium}
+                    strokeWidth={IconStrokeWidth.small}
                     touchable={{
                         accessibilityHint: t("screens.editNote.openColorModalA11yHint"),
                         accessibilityLabel: t("screens.editNote.openColorModalA11yLabel"),
@@ -242,7 +244,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     }}
                 />
                 <Text
-                    color={pallette.white}
+                    color={pallette.grey}
                     flex={1}
                     fontFamily={FontFamily.light}
                     fontSize={FontSize.small}
@@ -253,6 +255,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 <TrashIcon
                     color={pallette.error.main}
                     size={IconSize.medium}
+                    strokeWidth={IconStrokeWidth.small}
                     touchable={{
                         accessibilityHint: t("screens.editNote.openDeleteA11yHint"),
                         accessibilityLabel: t("screens.editNote.openDeletesA11yLabel"),

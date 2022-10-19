@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { FlatList } from "react-native";
 
 import { Screens } from "@src/common/constants";
-import { SafeAreaBox } from "@src/components/atoms";
+import { Box, SafeAreaBox } from "@src/components/atoms";
 import { CardItem, EmptyPlaceholder, FloatingButton } from "@src/components/molecules";
 import { NavigatorParamList } from "@src/navigation";
 import { useNotesStore } from "@src/store";
@@ -59,6 +59,7 @@ export const NotesListScreen: FC<DrawerScreenProps<NavigatorParamList, Screens.n
             <NotesSearchBar onFocusChange={setSearchInFocus} onSearchChange={setSearchText} />
             <FlatList
                 ListEmptyComponent={<EmptyPlaceholder text={emptyNoteText} />}
+                ListFooterComponent={<Box height={100} />}
                 data={searchedNotes}
                 keyExtractor={(item, index) => item.id || `${index}`}
                 renderItem={({ item }) => (

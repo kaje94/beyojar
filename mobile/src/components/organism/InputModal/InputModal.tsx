@@ -85,7 +85,7 @@ export const InputModal: FC<Props> = ({
                     autoFocus
                     borderColor={isInvalid ? pallette.error.main : pallette.secondary.main}
                     borderRadius={BorderRadius.tiny}
-                    borderWidth={BorderWidth.small}
+                    borderWidth={BorderWidth.medium}
                     mt={Spacing.large}
                     onBlur={handleBlur("field")}
                     onChangeText={handleChange("field")}

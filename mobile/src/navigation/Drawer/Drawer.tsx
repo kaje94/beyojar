@@ -71,7 +71,7 @@ export const Drawer: FC<DrawerContentComponentProps> = ({ navigation: { navigate
                 <Box height={Spacing.small} />
             </ScrollBox>
 
-            <Box bg={pallette.secondary.light} height={1} />
+            <Box bg={pallette.secondary.light} height={Spacing.tiny} />
 
             <Box bg={pallette.background} px={Spacing.small}>
                 <DrawerItem
