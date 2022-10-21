@@ -53,10 +53,11 @@ interface NoteChangeAction {
 const initialNote: Note = {
     color: noteColors[0],
     content: "",
+    createdAt: 0,
     favorite: false,
     labels: [],
     title: "",
-    ts: 0,
+    updatedAt: 0,
 };
 
 const noteEditReducer = (state: Note, action: NoteChangeAction) => {
@@ -65,15 +66,15 @@ const noteEditReducer = (state: Note, action: NoteChangeAction) => {
         case NoteChangeKind.Initialize:
             return (payload as Note) || initialNote;
         case NoteChangeKind.Title:
-            return { ...state, title: payload as string, ts: Date.now() };
+            return { ...state, title: payload as string, updatedAt: Date.now() };
         case NoteChangeKind.Content:
-            return { ...state, content: payload as string, ts: Date.now() };
+            return { ...state, content: payload as string, updatedAt: Date.now() };
         case NoteChangeKind.Color:
-            return { ...state, color: payload as INoteColors, ts: Date.now() };
+            return { ...state, color: payload as INoteColors, updatedAt: Date.now() };
         case NoteChangeKind.isFavorite:
             return { ...state, favorite: !state.favorite };
         case NoteChangeKind.Labels:
-            return { ...state, labels: payload as Label[], ts: Date.now() };
+            return { ...state, labels: payload as Label[], updatedAt: Date.now() };
         default:
             return initialNote;
     }
@@ -121,7 +122,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
             updateNote(noteState);
         } else if (noteState.title || noteState.content) {
             /** Create a new note if title or content exists */
-            addNote({ ...noteState, id: nanoid() });
+            addNote({ ...noteState, createdAt: Date.now(), id: nanoid() });
         } else {
             /** Show a note discarded message, If its a new note without a title or content */
             showMessage({ icon: <InfoIcon />, message: t("screens.editNote.noteDiscarded") });
@@ -250,7 +251,8 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     fontSize={FontSize.small}
                     textAlign="center"
                 >
-                    {!!noteState.ts && t("screens.editNote.editedTime", { time: formatDistance(noteState.ts) })}
+                    {!!noteState.updatedAt &&
+                        t("screens.editNote.editedTime", { time: formatDistance(noteState.updatedAt) })}
                 </Text>
                 <TrashIcon
                     color={pallette.error.main}

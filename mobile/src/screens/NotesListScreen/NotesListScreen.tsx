@@ -33,7 +33,10 @@ export const NotesListScreen: FC<DrawerScreenProps<NavigatorParamList, Screens.n
 
     /** Labeled notes, containing the search keywords either in the title or content/bod */
     const searchedNotes = useMemo(
-        () => labeledNotes.filter((item) => item.title.includes(searchText) || item.content.includes(searchText)),
+        () =>
+            labeledNotes
+                .filter((item) => item.title.includes(searchText) || item.content.includes(searchText))
+                .sort((a, b) => Number(b.favorite) - Number(a.favorite)),
         [labeledNotes, searchText]
     );
 

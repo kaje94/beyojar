@@ -11,13 +11,14 @@ const defaultNoteItem: Note = {
     color: noteColors[0],
     content:
         "amet consectetur adipiscing elit duis tristique sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula ipsum a arcu cursus vitae",
+    createdAt: 0,
     favorite: false,
     labels: [
         { id: "1", name: "Grocery" },
         { id: "2", name: "work" },
     ],
     title: "Title of the card",
-    ts: 0,
+    updatedAt: 0,
 };
 
 export default {

@@ -2,7 +2,8 @@ import React from "react";
 
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { Favorite } from "../Favorite/Favorite";
+import { Favorite } from "@src/components/molecules/Favorite";
+
 import { HeaderBar } from "./HeaderBar";
 
 export default {

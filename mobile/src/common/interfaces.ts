@@ -24,6 +24,8 @@ export interface Note {
     color: INoteColors;
     /** Content/Body of the note */
     content: string;
+    /** Timestamp at which the note was created */
+    createdAt: number;
     /** Is note marked as a favorite */
     favorite: boolean;
     /** Unique ID of the note */
@@ -33,7 +35,7 @@ export interface Note {
     /** Title of the note */
     title: string;
     /** Last updated timestamp of the note */
-    ts: number;
+    updatedAt: number;
 }
 
 interface IThemeColorGroup {

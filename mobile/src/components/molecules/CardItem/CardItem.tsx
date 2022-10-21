@@ -5,10 +5,10 @@ import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { Note } from "@src/common/interfaces";
-import { BorderRadius, FontSize, Opacity, Shadow, Spacing } from "@src/common/theme";
+import { BorderRadius, FontSize, IconSize, Opacity, Shadow, Spacing } from "@src/common/theme";
 import { Box, Text, Touchable, TouchableProps } from "@src/components/atoms";
-
-import { LabelPills } from "../LabelPills";
+import { Favorite } from "@src/components/molecules/Favorite";
+import { LabelPills } from "@src/components/molecules/LabelPills";
 
 interface Props extends TouchableProps {
     /** Note details to be displayed in the card */
@@ -40,6 +40,16 @@ export const CardItem: FC<Props> = ({ noteItem, onPress, ...props }) => {
                 </Text>
             ) : (
                 <>
+                    <Favorite
+                        disabled
+                        isFavorite={noteItem.favorite}
+                        opacity={Opacity.barelyVisible}
+                        p={Spacing.none}
+                        position="absolute"
+                        right={Spacing.tiny}
+                        size={IconSize.small}
+                        top={Spacing.tiny}
+                    />
                     {noteItem.title && (
                         <Text color={pallette.secondary.dark} fontFamily={FontFamily.medium}>
                             {noteItem.title}

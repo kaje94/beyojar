@@ -10,6 +10,7 @@ import { LabelPills } from "./LabelPills";
 const defaultNoteItem: Note = {
     color: noteColors[0],
     content: "",
+    createdAt: 0,
     favorite: false,
     labels: [
         { id: "1", name: "Grocery" },
@@ -19,7 +20,7 @@ const defaultNoteItem: Note = {
         { id: "5", name: "Passion" },
     ],
     title: "",
-    ts: 0,
+    updatedAt: 0,
 };
 
 export default {
