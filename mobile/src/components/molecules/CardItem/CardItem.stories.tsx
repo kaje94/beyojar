@@ -56,6 +56,14 @@ OnlyContent.args = {
     },
 };
 
+export const Favorite = Template.bind({});
+Favorite.args = {
+    noteItem: {
+        ...defaultNoteItem,
+        favorite: true,
+    },
+};
+
 export const Empty = Template.bind({});
 Empty.args = {
     noteItem: {
