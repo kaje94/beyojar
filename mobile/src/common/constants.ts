@@ -22,4 +22,5 @@ export enum Screens {
     labelManage = "labelManage",
     drawer = "drawer",
     settings = "settings",
+    welcome = "welcome",
 }

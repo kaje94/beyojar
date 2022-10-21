@@ -138,8 +138,35 @@
                 "deleteAccount": {
                     "title": "Reset account",
                     "message": "Do you really want to reset your account? \nThis will delete all your notes/labels and cannot be undone",
-                    "a11yHint": "Open reset account modal"
+                    "a11yHint": "Open reset account modal",
+                    "successMessage": "Your notes and labels have been deleted successfully"
                 }
+            },
+            "welcome": {
+                "slides": {
+                    "welcome": {
+                        "title": "Welcome",
+                        "subTitle": "Welcome to Beyojar, an open source notes taking application that helps you keep your notes organized"
+                    },
+                    "labels": {
+                        "title": "Labels & Colors",
+                        "subTitle": "Use labels and colors to categorize your notes so that you can find them easily"
+                    },
+                    "favorite": {
+                        "title": "Favorite",
+                        "subTitle": "Mark important notes, so that you don't loose track of them"
+                    },
+                    "themes": {
+                        "title": "Themes",
+                        "subTitle": "Toggle between light and dark themes, based on your preference"
+                    }
+                },
+                "nextButtonText": "Next",
+                "nextButtonA11yLabel": "Go to next slide",
+                "nextButtonA11yHint": "Navigate to next welcome slide of slide number {{slideNo}} out of {{slideCount}}",
+                "getStartedButtonText": "Get Started",
+                "getStartedButtonA11yLabel": "Get started with the app",
+                "getStartedButtonA11yHint": "Complete the welcome slides and enter into Beyojar application"
             }
         }
     }

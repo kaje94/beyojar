@@ -16,3 +16,4 @@ export { EditIcon } from "./iconsax/EditIcon";
 export { InfoIcon } from "./iconsax/InfoIcon";
 export { UserRemoveIcon } from "./iconsax/UserRemoveIcon";
 export { LanguageIcon } from "./iconsax/LanguageIcon";
+export { LogoIcon } from "./iconsax/LogoIcon";

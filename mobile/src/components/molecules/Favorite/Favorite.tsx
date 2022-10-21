@@ -34,12 +34,18 @@ export const Favorite: FC<Props> = ({ isFavorite = false, size, ...rest }) => {
             <Transitioning.View ref={ref} transition={getTransition("scale")}>
                 {isFavorite ? (
                     <StarFilledIcon
+                        key="star-filled"
                         color={pallette.grey}
                         secondaryColor={pallette.black}
                         size={size || IconSize.medium}
                     />
                 ) : (
-                    <StarIcon color={pallette.grey} opacity={Opacity.barelyVisible} size={size || IconSize.medium} />
+                    <StarIcon
+                        key="star-unfilled"
+                        color={pallette.grey}
+                        opacity={Opacity.barelyVisible}
+                        size={size || IconSize.medium}
+                    />
                 )}
             </Transitioning.View>
         </Touchable>

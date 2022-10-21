@@ -16,7 +16,15 @@ import { Screens } from "@src/common/constants";
 import { Label, Note } from "@src/common/interfaces";
 import { Box } from "@src/components/atoms";
 import { ToastComponent } from "@src/components/molecules";
-import { EditNoteScreen, LabelManageScreen, LabelSelectScreen, NotesListScreen, SettingsScreen } from "@src/screens";
+import {
+    EditNoteScreen,
+    LabelManageScreen,
+    LabelSelectScreen,
+    NotesListScreen,
+    SettingsScreen,
+    WelcomeScreen,
+} from "@src/screens";
+import { useSettingsStore } from "@src/store";
 
 import { Drawer as DrawerComponent } from "./Drawer";
 
@@ -27,6 +35,7 @@ export type NavigatorParamList = {
     labelSelect: { noteItem: Note };
     notesList: { label: Label };
     settings: undefined;
+    welcome: undefined;
 };
 
 const HomeStack = createNativeStackNavigator<NavigatorParamList>();
@@ -42,8 +51,13 @@ const DrawerNavigator: FC = () => {
 
 const NotesStackNavigator: FC = () => {
     const { pallette } = useTheme();
+    const { introViewed } = useSettingsStore();
     return (
-        <HomeStack.Navigator screenOptions={{ headerShown: false, statusBarColor: pallette.background }}>
+        <HomeStack.Navigator
+            initialRouteName={introViewed ? Screens.drawer : Screens.welcome}
+            screenOptions={{ headerShown: false, statusBarColor: pallette.background }}
+        >
+            <HomeStack.Screen component={WelcomeScreen} name={Screens.welcome} />
             <HomeStack.Screen component={DrawerNavigator} name={Screens.drawer} />
             <HomeStack.Screen component={LabelManageScreen} name={Screens.labelManage} />
             <HomeStack.Screen component={EditNoteScreen} name={Screens.editNote} />

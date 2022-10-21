@@ -58,7 +58,8 @@ export enum IconSize {
     normal = 24,
     medium = 30,
     large = 45,
-    huge = 80,
+    huge = 100,
+    massive = 150,
 }
 
 /** Standard stroke width or thickness of icons */

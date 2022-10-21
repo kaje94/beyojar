@@ -23,6 +23,8 @@ interface NotesState {
     updateLabel: (updatedLabel: Label) => void;
     /** Delete a label from the persisted labels as well as from any notes that are referring it */
     deleteLabel: (LabelId: string) => void;
+    /** Deletes all notes and labels permanently */
+    resetNotes: () => void;
 }
 
 /** Zustand hook to manage notes and labels state */
@@ -53,6 +55,7 @@ export const useNotesStore = create<NotesState>()(
                             labels: item.labels.filter((label) => label.id !== LabelId),
                         })),
                     })),
+                resetNotes: () => set(() => ({ labels: [], notes: [] })),
             }),
             { name: "notes-storage", getStorage: () => persistHelper }
         )

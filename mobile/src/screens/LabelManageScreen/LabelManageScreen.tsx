@@ -119,7 +119,7 @@ export const LabelManageScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
     const onModalHide = useCallback(() => stateDispatch({ type: ModalKind.HideModal }), []);
 
     return (
-        <SafeAreaBox bg={pallette.background}>
+        <SafeAreaBox>
             <HeaderBar title={t("components.drawer.manageLabels")} />
             <FlatList
                 ListEmptyComponent={<EmptyPlaceholder Icon={TagsIcon} text={t("screens.labelManage.noLabelsFound")} />}

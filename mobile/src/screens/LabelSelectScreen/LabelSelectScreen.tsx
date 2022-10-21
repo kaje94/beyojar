@@ -77,7 +77,7 @@ export const LabelSelectScreen: FC<NativeStackScreenProps<NavigatorParamList, Sc
     );
 
     return (
-        <SafeAreaBox bg={pallette.background}>
+        <SafeAreaBox>
             <HeaderBar
                 endIcon={
                     searchText.length > 0 && (

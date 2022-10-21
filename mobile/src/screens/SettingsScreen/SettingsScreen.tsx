@@ -4,10 +4,11 @@ import { NativeStackScreenProps } from "@react-navigation/native-stack";
 import { nativeApplicationVersion } from "expo-application";
 import { useTranslation } from "react-i18next";
 import { ColorSchemeName } from "react-native";
+import { showMessage } from "react-native-flash-message";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
-import { InfoIcon, LanguageIcon, ThemeIcon, UserRemoveIcon } from "@src/assets/icons";
+import { InfoIcon, LanguageIcon, ThemeIcon, TrashIcon, UserRemoveIcon } from "@src/assets/icons";
 import { Screens } from "@src/common/constants";
 import { IconProps } from "@src/common/interfaces";
 import { FontSize, Opacity, Spacing } from "@src/common/theme";
@@ -15,7 +16,7 @@ import { SafeAreaBox, ScrollBox, Text } from "@src/components/atoms";
 import { HeaderBar, ListItem } from "@src/components/molecules";
 import { ConfirmModal, SelectModal } from "@src/components/organism";
 import { NavigatorParamList } from "@src/navigation";
-import { useSettingsStore } from "@src/store";
+import { useNotesStore, useSettingsStore } from "@src/store";
 
 enum VisibleModal {
     /** Preferred theme(Light/dark/system default) selection modal */
@@ -49,6 +50,7 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     const { persistedTheme, setPersistedTheme } = useSettingsStore();
     const [selectedModal, setSelectedModal] = useState<VisibleModal | null>();
     const { t } = useTranslation();
+    const { resetNotes } = useNotesStore();
 
     /** Options listed in the settings screen */
     const settingsOptions: SettingsOption[] = useMemo(
@@ -95,8 +97,19 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
         setPersistedTheme(mode as ColorSchemeName);
     }, []);
 
+    /** Callback to be fired when user confirms to reset his/her account */
+    const onResetConfirm = useCallback(() => {
+        onCloseModal();
+        resetNotes();
+        showMessage({
+            backgroundColor: pallette.error.light,
+            icon: <TrashIcon />,
+            message: t("screens.settings.deleteAccount.successMessage"),
+        });
+    }, []);
+
     return (
-        <SafeAreaBox bg={pallette.background}>
+        <SafeAreaBox>
             <HeaderBar title={t("components.drawer.settings")} />
             <ScrollBox px={Spacing.medium}>
                 {settingsOptions.map((item) => (
@@ -128,7 +141,8 @@ export const SettingsScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 isVisible={selectedModal === VisibleModal.RemoveAccountModal}
                 message={t("screens.settings.deleteAccount.message")}
                 onClose={onCloseModal}
-                primaryBtnText={t("common.delete")}
+                onConfirmPress={onResetConfirm}
+                primaryBtnText={t("common.continue")}
                 title={t("common.confirm")}
             />
             <SelectModal

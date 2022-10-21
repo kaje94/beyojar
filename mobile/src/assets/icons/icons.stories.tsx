@@ -26,3 +26,4 @@ export const ThemeIcon: Story = (args) => <Icons.ThemeIcon {...args} />;
 export const TickIcon: Story = (args) => <Icons.TickIcon {...args} />;
 export const TrashIcon: Story = (args) => <Icons.TrashIcon {...args} />;
 export const UserRemoveIcon: Story = (args) => <Icons.UserRemoveIcon {...args} />;
+export const LogoIcon: Story = (args) => <Icons.LogoIcon {...args} />;
