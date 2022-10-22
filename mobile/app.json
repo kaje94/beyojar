@@ -1,8 +1,12 @@
 {
     "expo": {
-        "name": "mobile",
-        "slug": "mobile",
+        "name": "Bejojar",
+        "description": "An open source notes application",
+        "slug": "bejojar",
+        "owner": "kajendran",
         "version": "1.0.0",
+        "githubUrl": "https://github.com/kaje94/beyojar",
+        "primaryColor": "#7AB17C",
         "orientation": "portrait",
         "icon": "./src/assets/images/icon.png",
         "scheme": "myapp",
