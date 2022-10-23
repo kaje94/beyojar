@@ -12,7 +12,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import FlashMessage from "react-native-flash-message";
 import { useTheme } from "styled-components";
 
-import { Screens } from "@src/common/constants";
+import { IsAndroid, Screens } from "@src/common/constants";
 import { getInvertedColorMode } from "@src/common/helpers";
 import { Label, Note } from "@src/common/interfaces";
 import { Box } from "@src/components/atoms";
@@ -58,7 +58,7 @@ const NotesStackNavigator: FC = () => {
             initialRouteName={introViewed ? Screens.drawer : Screens.welcome}
             screenOptions={{
                 headerShown: false,
-                statusBarColor: pallette.background,
+                statusBarColor: IsAndroid ? pallette.background : undefined,
                 statusBarStyle: getInvertedColorMode(mode),
             }}
         >
