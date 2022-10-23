@@ -10,7 +10,7 @@ import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
-import { Screens } from "@src/common/constants";
+import { IsAndroid, Screens } from "@src/common/constants";
 import { getInvertedColorMode, setStatusBarBgColor } from "@src/common/helpers";
 import { INoteColors, Label, Note } from "@src/common/interfaces";
 import { BorderWidth, FontSize, IconSize, IconStrokeWidth, noteColors, Spacing } from "@src/common/theme";
@@ -180,7 +180,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     }
                     onBackPress={saveNewNote}
                 />
-                <KeyboardAvoidingBox mb={bottomBarHight}>
+                <KeyboardAvoidingBox mb={IsAndroid ? bottomBarHight : 0}>
                     <ScrollBox px={Spacing.medium}>
                         <TextInput
                             accessibilityHint={t("screens.editNote.titleA11yHint")}
@@ -211,61 +211,63 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     <LabelPills note={noteState} onPress={openLabelSelectScreen} />
                 </KeyboardAvoidingBox>
             </SafeAreaBox>
-            <FlexBox
-                bg={pallette.background}
-                borderColor={pallette.grey}
-                borderTopWidth={BorderWidth.small}
-                bottom={0}
-                height={bottomBarHight}
-                pb={insets.bottom}
-                position="absolute"
-                px={Spacing.medium}
-                width="100%"
-            >
-                <TagsIcon
-                    color={pallette.secondary.dark}
-                    size={IconSize.medium}
-                    strokeWidth={IconStrokeWidth.small}
-                    touchable={{
-                        accessibilityHint: t("screens.editNote.openLabelsA11yHint"),
-                        accessibilityLabel: t("screens.editNote.openLabelsA11yLabel"),
-                        mx: Spacing.tiny,
-                        onPress: openLabelSelectScreen,
-                    }}
-                />
-                <ThemeIcon
-                    color={noteState.color[getInvertedColorMode(mode)]}
-                    size={IconSize.medium}
-                    strokeWidth={IconStrokeWidth.small}
-                    touchable={{
-                        accessibilityHint: t("screens.editNote.openColorModalA11yHint"),
-                        accessibilityLabel: t("screens.editNote.openColorModalA11yLabel"),
-                        mx: Spacing.tiny,
-                        onPress: openColoPickerModal,
-                    }}
-                />
-                <Text
-                    color={pallette.grey}
-                    flex={1}
-                    fontFamily={FontFamily.light}
-                    fontSize={FontSize.small}
-                    textAlign="center"
+            <SafeAreaBox flex={0}>
+                <FlexBox
+                    bg={pallette.background}
+                    borderColor={pallette.grey}
+                    borderTopWidth={IsAndroid ? BorderWidth.small : BorderWidth.none}
+                    bottom={0}
+                    height={bottomBarHight}
+                    pb={insets.bottom}
+                    position="absolute"
+                    px={Spacing.medium}
+                    width="100%"
                 >
-                    {!!noteState.updatedAt &&
-                        t("screens.editNote.editedTime", { time: formatDistance(noteState.updatedAt) })}
-                </Text>
-                <TrashIcon
-                    color={pallette.error.main}
-                    size={IconSize.medium}
-                    strokeWidth={IconStrokeWidth.small}
-                    touchable={{
-                        accessibilityHint: t("screens.editNote.openDeleteA11yHint"),
-                        accessibilityLabel: t("screens.editNote.openDeletesA11yLabel"),
-                        mx: Spacing.tiny,
-                        onPress: openDeleteConfirmModal,
-                    }}
-                />
-            </FlexBox>
+                    <TagsIcon
+                        color={pallette.secondary.dark}
+                        size={IconSize.medium}
+                        strokeWidth={IconStrokeWidth.small}
+                        touchable={{
+                            accessibilityHint: t("screens.editNote.openLabelsA11yHint"),
+                            accessibilityLabel: t("screens.editNote.openLabelsA11yLabel"),
+                            mx: Spacing.tiny,
+                            onPress: openLabelSelectScreen,
+                        }}
+                    />
+                    <ThemeIcon
+                        color={noteState.color[getInvertedColorMode(mode)]}
+                        size={IconSize.medium}
+                        strokeWidth={IconStrokeWidth.small}
+                        touchable={{
+                            accessibilityHint: t("screens.editNote.openColorModalA11yHint"),
+                            accessibilityLabel: t("screens.editNote.openColorModalA11yLabel"),
+                            mx: Spacing.tiny,
+                            onPress: openColoPickerModal,
+                        }}
+                    />
+                    <Text
+                        color={pallette.grey}
+                        flex={1}
+                        fontFamily={FontFamily.light}
+                        fontSize={FontSize.small}
+                        textAlign="center"
+                    >
+                        {!!noteState.updatedAt &&
+                            t("screens.editNote.editedTime", { time: formatDistance(noteState.updatedAt) })}
+                    </Text>
+                    <TrashIcon
+                        color={pallette.error.main}
+                        size={IconSize.medium}
+                        strokeWidth={IconStrokeWidth.small}
+                        touchable={{
+                            accessibilityHint: t("screens.editNote.openDeleteA11yHint"),
+                            accessibilityLabel: t("screens.editNote.openDeletesA11yLabel"),
+                            mx: Spacing.tiny,
+                            onPress: openDeleteConfirmModal,
+                        }}
+                    />
+                </FlexBox>
+            </SafeAreaBox>
             <ConfirmModal
                 Icon={TrashIcon}
                 color={pallette.error.dark}

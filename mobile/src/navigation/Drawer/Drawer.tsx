@@ -3,6 +3,7 @@ import React, { FC } from "react";
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
 import { RouteProp } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
@@ -20,6 +21,7 @@ export const Drawer: FC<DrawerContentComponentProps> = ({ navigation: { navigate
     const { pallette } = useTheme();
     const { labels } = useNotesStore();
     const { t } = useTranslation();
+    const insets = useSafeAreaInsets();
 
     const selectedLabel = (state.routes[0] as RouteProp<NavigatorParamList, Screens.notesList>)?.params?.label?.id;
 
@@ -30,7 +32,7 @@ export const Drawer: FC<DrawerContentComponentProps> = ({ navigation: { navigate
                 fontFamily={FontFamily.bold}
                 fontSize={FontSize.huge}
                 m={Spacing.medium}
-                mt={Spacing.large}
+                mt={Spacing.large + insets.top}
             >
                 {t("title")}
             </Text>
@@ -82,6 +84,7 @@ export const Drawer: FC<DrawerContentComponentProps> = ({ navigation: { navigate
                     accessibilityLabel={t("components.drawer.settings")}
                     name={t("components.drawer.settings")}
                     onPress={() => navigate(Screens.settings)}
+                    pb={insets.bottom}
                 />
             </Box>
         </Box>
