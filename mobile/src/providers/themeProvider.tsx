@@ -2,6 +2,7 @@ import React, { PropsWithChildren, useEffect, useState } from "react";
 
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
+import * as SystemUI from "expo-system-ui";
 import { ColorSchemeName, useColorScheme } from "react-native";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
@@ -35,13 +36,14 @@ export const ThemeProvider = ({ defaultMode, children }: Props) => {
 
     useEffect(() => {
         if (!fontsLoading) {
-            // Hide splash screen once the fonts are loaded
-            setTimeout(() => {
-                SplashScreen.hideAsync();
-                setNavigationTheme(selectedMode);
-            }, 1000);
+            // Hide splash screen and set system ui colors once the fonts are loaded
+            (async () => {
+                await SplashScreen.hideAsync();
+                await setNavigationTheme(selectedMode);
+                await SystemUI.setBackgroundColorAsync(selectedTheme.background);
+            })();
         }
-    }, [fontsLoading, selectedMode]);
+    }, [fontsLoading, selectedMode, selectedTheme]);
 
     return (
         <StyledThemeProvider theme={{ mode: selectedMode, pallette: selectedTheme }}>

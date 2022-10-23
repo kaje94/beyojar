@@ -13,6 +13,7 @@ import FlashMessage from "react-native-flash-message";
 import { useTheme } from "styled-components";
 
 import { Screens } from "@src/common/constants";
+import { getInvertedColorMode } from "@src/common/helpers";
 import { Label, Note } from "@src/common/interfaces";
 import { Box } from "@src/components/atoms";
 import { ToastComponent } from "@src/components/molecules";
@@ -50,12 +51,16 @@ const DrawerNavigator: FC = () => {
 };
 
 const NotesStackNavigator: FC = () => {
-    const { pallette } = useTheme();
+    const { pallette, mode } = useTheme();
     const { introViewed } = useSettingsStore();
     return (
         <HomeStack.Navigator
             initialRouteName={introViewed ? Screens.drawer : Screens.welcome}
-            screenOptions={{ headerShown: false, statusBarColor: pallette.background }}
+            screenOptions={{
+                headerShown: false,
+                statusBarColor: pallette.background,
+                statusBarStyle: getInvertedColorMode(mode),
+            }}
         >
             <HomeStack.Screen component={WelcomeScreen} name={Screens.welcome} />
             <HomeStack.Screen component={DrawerNavigator} name={Screens.drawer} />

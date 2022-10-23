@@ -1,37 +1,46 @@
 {
-    "expo": {
-        "name": "Bejojar",
-        "description": "An open source notes application",
-        "slug": "bejojar",
-        "owner": "kajendran",
-        "version": "1.0.0",
-        "githubUrl": "https://github.com/kaje94/beyojar",
-        "primaryColor": "#7AB17C",
-        "orientation": "portrait",
-        "icon": "./src/assets/images/icon.png",
-        "scheme": "myapp",
-        "userInterfaceStyle": "automatic",
-        "splash": {
-            "image": "./src/assets/images/splash.png",
-            "resizeMode": "contain",
-            "backgroundColor": "#7AB17C"
-        },
-        "updates": {
-            "fallbackToCacheTimeout": 0
-        },
-        "assetBundlePatterns": ["**/*"],
-        "ios": {
-            "supportsTablet": true
-        },
-        "android": {
-            "adaptiveIcon": {
-                "foregroundImage": "./src/assets/images/adaptive-icon.png",
-                "backgroundColor": "#7AB17C"
-            }
-        },
-        "web": {
-            "favicon": "./src/assets/images/favicon.png",
-            "bundler": "metro"
-        }
+  "expo": {
+    "name": "Beyojar",
+    "description": "An open source notes application",
+    "slug": "beyojar",
+    "owner": "kajendran",
+    "version": "1.0.0",
+    "githubUrl": "https://github.com/kaje94/beyojar",
+    "primaryColor": "#7AB17C",
+    "orientation": "portrait",
+    "icon": "./src/assets/images/icon.png",
+    "scheme": "myapp",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./src/assets/images/splash.png",
+      "resizeMode": "cover",
+      "backgroundColor": "#7AB17C"
+    },
+    "updates": {
+      "fallbackToCacheTimeout": 0
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.beyojar"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/images/adaptive-icon.png",
+        "backgroundColor": "#7AB17C"
+      },
+      "package": "com.beyojar"
+    },
+    "web": {
+      "favicon": "./src/assets/images/favicon.png",
+      "bundler": "metro"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "97aedb3f-f9b0-4a9e-94e1-8937b14f0dd9"
+      }
     }
+  }
 }
