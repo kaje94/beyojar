@@ -10,7 +10,7 @@ import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
-import { IsAndroid, Screens } from "@src/common/constants";
+import { Screens } from "@src/common/constants";
 import { getInvertedColorMode, setStatusBarBgColor } from "@src/common/helpers";
 import { INoteColors, Label, Note } from "@src/common/interfaces";
 import { BorderWidth, FontSize, IconSize, IconStrokeWidth, noteColors, Spacing } from "@src/common/theme";
@@ -20,8 +20,6 @@ import { ColorPickerModal, ConfirmModal } from "@src/components/organism";
 import { useBackPress, useTimeout } from "@src/hooks";
 import { NavigatorParamList } from "@src/navigation";
 import { useNotesStore } from "@src/store";
-
-const bottomBarHight = 60;
 
 enum VisibleModal {
     /** Show the delete confirm modal for the selected note */
@@ -180,7 +178,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     }
                     onBackPress={saveNewNote}
                 />
-                <KeyboardAvoidingBox mb={IsAndroid ? bottomBarHight : 0}>
+                <KeyboardAvoidingBox flex={1}>
                     <ScrollBox px={Spacing.medium}>
                         <TextInput
                             accessibilityHint={t("screens.editNote.titleA11yHint")}
@@ -208,20 +206,16 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                             value={noteState.content}
                         />
                     </ScrollBox>
-                    <LabelPills note={noteState} onPress={openLabelSelectScreen} />
                 </KeyboardAvoidingBox>
-            </SafeAreaBox>
-            <SafeAreaBox flex={0}>
+
+                <LabelPills note={noteState} onPress={openLabelSelectScreen} />
+
                 <FlexBox
                     bg={pallette.background}
                     borderColor={pallette.grey}
                     borderTopWidth={BorderWidth.small}
-                    bottom={0}
-                    height={bottomBarHight}
-                    mb={insets.bottom}
-                    position="absolute"
                     px={Spacing.medium}
-                    width="100%"
+                    py={Spacing.small}
                 >
                     <TagsIcon
                         color={pallette.secondary.dark}
@@ -268,6 +262,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                     />
                 </FlexBox>
             </SafeAreaBox>
+
             <ConfirmModal
                 Icon={TrashIcon}
                 color={pallette.error.dark}
@@ -278,6 +273,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 primaryBtnText={t("common.delete")}
                 title={t("common.confirm")}
             />
+
             <ColorPickerModal
                 isVisible={openedModal === VisibleModal.ColorPicker}
                 onClose={(selectedColor) => onCloseColorPickerModal(selectedColor)}
