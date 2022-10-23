@@ -215,10 +215,10 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
                 <FlexBox
                     bg={pallette.background}
                     borderColor={pallette.grey}
-                    borderTopWidth={IsAndroid ? BorderWidth.small : BorderWidth.none}
+                    borderTopWidth={BorderWidth.small}
                     bottom={0}
                     height={bottomBarHight}
-                    pb={insets.bottom}
+                    mb={insets.bottom}
                     position="absolute"
                     px={Spacing.medium}
                     width="100%"

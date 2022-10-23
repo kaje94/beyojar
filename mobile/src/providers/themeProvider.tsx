@@ -7,7 +7,7 @@ import { ColorSchemeName, useColorScheme } from "react-native";
 import { ThemeProvider as StyledThemeProvider } from "styled-components";
 
 import { loadFonts } from "@src/assets/fonts";
-import { getInvertedColorMode, setNavigationTheme } from "@src/common/helpers";
+import { delay, getInvertedColorMode, setNavigationTheme } from "@src/common/helpers";
 import { ThemePallets } from "@src/common/theme";
 import { useSettingsStore } from "@src/store";
 
@@ -49,6 +49,7 @@ export const ThemeProvider = ({ defaultMode, children }: Props) => {
         // Set system ui colors whenever theme changes
         if (splashHidden) {
             (async () => {
+                await delay(1000);
                 await SystemUI.setBackgroundColorAsync(selectedTheme.background);
                 await setNavigationTheme(selectedMode);
             })();
