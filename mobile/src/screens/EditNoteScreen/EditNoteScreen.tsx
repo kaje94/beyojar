@@ -10,7 +10,7 @@ import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
-import { Screens } from "@src/common/constants";
+import { IsAndroid, Screens } from "@src/common/constants";
 import { getInvertedColorMode, setStatusBarBgColor } from "@src/common/helpers";
 import { INoteColors, Label, Note } from "@src/common/interfaces";
 import { BorderWidth, FontSize, IconSize, IconStrokeWidth, noteColors, Spacing } from "@src/common/theme";
@@ -212,6 +212,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
 
                 <FlexBox
                     bg={pallette.background}
+                    borderBottomWidth={IsAndroid ? BorderWidth.none : BorderWidth.small}
                     borderColor={pallette.grey}
                     borderTopWidth={BorderWidth.small}
                     px={Spacing.medium}
