@@ -25,6 +25,7 @@ interface Props extends PropsWithChildren {
 export const ThemeProvider = ({ defaultMode, children }: Props) => {
     const systemThemeMode = useColorScheme() as NonNullable<ColorSchemeName>;
     const [fontsLoading, setFontsLoading] = useState(true);
+    const [splashHidden, setSplashHidden] = useState(false);
     const { persistedTheme } = useSettingsStore();
     const selectedMode = defaultMode || persistedTheme || systemThemeMode || "light";
     const selectedTheme = ThemePallets[selectedMode];
@@ -36,14 +37,23 @@ export const ThemeProvider = ({ defaultMode, children }: Props) => {
 
     useEffect(() => {
         if (!fontsLoading) {
-            // Hide splash screen and set system ui colors once the fonts are loaded
+            // Hide splash screen once the fonts are loaded
             (async () => {
                 await SplashScreen.hideAsync();
-                await setNavigationTheme(selectedMode);
-                await SystemUI.setBackgroundColorAsync(selectedTheme.background);
+                setSplashHidden(true);
             })();
         }
-    }, [fontsLoading, selectedMode, selectedTheme]);
+    }, [fontsLoading]);
+
+    useEffect(() => {
+        // Set system ui colors whenever theme changes
+        if (splashHidden) {
+            (async () => {
+                await SystemUI.setBackgroundColorAsync(selectedTheme.background);
+                await setNavigationTheme(selectedMode);
+            })();
+        }
+    }, [splashHidden, selectedMode, selectedTheme]);
 
     return (
         <StyledThemeProvider theme={{ mode: selectedMode, pallette: selectedTheme }}>

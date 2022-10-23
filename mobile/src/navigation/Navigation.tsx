@@ -59,7 +59,6 @@ const NotesStackNavigator: FC = () => {
             screenOptions={{
                 headerShown: false,
                 statusBarColor: IsAndroid ? pallette.background : undefined,
-                statusBarStyle: getInvertedColorMode(mode),
             }}
         >
             <HomeStack.Screen component={WelcomeScreen} name={Screens.welcome} />
