@@ -1,6 +1,7 @@
 {
   "cli": {
-    "version": ">= 2.4.1"
+    "version": ">= 2.4.1",
+    "promptToConfigurePushNotifications": false
   },
   "build": {
     "development": {
