@@ -9,6 +9,9 @@ export const Footer = component$(() => {
                     <a href="/">
                         <div className="mt-2 hover:text-gray-500 duration-300">© 2022 Copyright: Beyojar</div>
                     </a>
+                    <a href="/privacy_policy">
+                        <div className="mt-2 hover:text-gray-500 duration-300">Privacy Policy</div>
+                    </a>
                     <a href="/terms_and_conditions">
                         <div className="mt-2 hover:text-gray-500 duration-300">Terms & Conditions</div>
                     </a>

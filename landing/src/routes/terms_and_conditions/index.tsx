@@ -2,9 +2,6 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Footer } from "~/components/Footer";
 
-// Terms and condition generated using freeprivacypolicy.com
-// https://app.freeprivacypolicy.com/download/149cb4e3-2e6b-4d5e-98f6-cabc8b4d3dfe
-
 /**
  * Terms and condition page required for legal purposes.
  * Generated using freeprivacypolicy.com.
