@@ -1,5 +1,6 @@
 {
     "name": "beyojar-landing-page",
+    "version": "1.0.0",
     "description": "Landing page to showcase beyojar application",
     "engines": {
         "node": ">=15.0.0"

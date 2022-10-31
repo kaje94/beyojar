@@ -1,28 +1,16 @@
 {
     "name": "beyojar",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "private": true,
     "scripts": {
-        "start": "sst start",
-        "build": "sst build",
-        "deploy": "sst deploy",
-        "remove": "sst remove",
-        "console": "sst console",
-        "typecheck": "tsc --noEmit",
-        "test": "sst load-config -- vitest run",
         "format": "npx prettier --ignore-path .gitignore --write ."
     },
     "devDependencies": {
-        "@serverless-stack/cli": "^1.12.2",
-        "@serverless-stack/resources": "^1.12.2",
-        "@tsconfig/node16": "^1.0.3",
-        "aws-cdk-lib": "2.32.0",
-        "prettier": "2.7.1",
-        "typescript": "^4.8.3",
-        "vitest": "^0.23.1"
+        "@tsconfig/node16": "^1.0.3"
     },
     "workspaces": [
-        "services"
+        "mobile",
+        "landing"
     ],
     "prettier": {
         "tabWidth": 4,
