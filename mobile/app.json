@@ -30,7 +30,8 @@
                 "foregroundImage": "./src/assets/images/adaptive-icon.png",
                 "backgroundColor": "#7AB17C"
             },
-            "package": "com.beyojar"
+            "package": "com.beyojar",
+            "versionCode": "2"
         },
         "web": {
             "favicon": "./src/assets/images/favicon.png",
