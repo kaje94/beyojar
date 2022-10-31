@@ -15,7 +15,7 @@
         "isolatedModules": true,
         "types": ["node", "vite/client"],
         "paths": {
-            "~/*": ["./src/*"]
+            "@src/*": ["./src/*"]
         }
     },
     "include": ["src"]

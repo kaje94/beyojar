@@ -1,9 +1,9 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { DownloadButton } from "~/components/DownloadButton";
-import { FeatureItem } from "~/components/FeatureItem";
-import { Footer } from "~/components/Footer";
-import { Github } from "~/components/icons/Github";
+import { DownloadButton } from "@src/components/DownloadButton";
+import { FeatureItem } from "@src/components/FeatureItem";
+import { Footer } from "@src/components/Footer";
+import { Github } from "@src/components/icons/Github";
 
 export default component$(() => {
     return (

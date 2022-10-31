@@ -1,6 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { Footer } from "~/components/Footer";
+import { Footer } from "@src/components/Footer";
 
 /**
  * Privacy policy page required for legal purposes by Apple store.

@@ -1,5 +1,5 @@
 import { component$ } from "@builder.io/qwik";
-import * as icons from "~/components/icons";
+import * as icons from "@src/components/icons";
 
 interface Props {
     title: string;
