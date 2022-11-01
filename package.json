@@ -10,6 +10,7 @@
         "start:expo": "npm run start --workspace=mobile",
         "start:android": "npm run android --workspace=mobile",
         "start:ios": "npm run ios --workspace=mobile",
+        "start:web": "npm run web --workspace=mobile",
         "storybook:mobile": "npm run storybook --workspace=mobile",
         "storybook-test:mobile": "npm run test-storybook --workspace=mobile",
         "storybook-build:mobile": "npm run build-storybook --workspace=mobile",

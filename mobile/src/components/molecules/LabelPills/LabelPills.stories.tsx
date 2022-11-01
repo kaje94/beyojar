@@ -2,31 +2,12 @@ import React from "react";
 
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
-import { Note } from "@src/common/interfaces";
-import { noteColors } from "@src/common/theme";
+import { defaultLabels, defaultNoteItem } from "@src/common/mocks";
 
 import { LabelPills } from "./LabelPills";
 
-const defaultNoteItem: Note = {
-    color: noteColors[0],
-    content: "",
-    createdAt: 0,
-    favorite: false,
-    labels: [
-        { id: "1", name: "Grocery" },
-        { id: "2", name: "work" },
-        { id: "3", name: "Study" },
-        { id: "4", name: "Home" },
-        { id: "5", name: "Passion" },
-    ],
-    title: "",
-    updatedAt: 0,
-};
-
 export default {
-    args: {
-        note: defaultNoteItem,
-    },
+    args: { note: { ...defaultNoteItem, labels: defaultLabels } },
     component: LabelPills,
     title: "molecules/LabelPills",
 } as ComponentMeta<typeof LabelPills>;

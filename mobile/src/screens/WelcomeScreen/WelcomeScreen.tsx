@@ -8,7 +8,7 @@ import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { LogoIcon, StarFilledIcon, TagsIcon, ThemeIcon } from "@src/assets/icons";
-import { Screens } from "@src/common/constants";
+import { IsMobile, Screens } from "@src/common/constants";
 import { delay, setNavigationTheme } from "@src/common/helpers";
 import { IconProps } from "@src/common/interfaces";
 import { FontSize, IconSize, Spacing } from "@src/common/theme";
@@ -97,12 +97,18 @@ export const WelcomeScreen: FC<NativeStackScreenProps<NavigatorParamList, Screen
                 endFillColor={pallette.secondary.dark}
                 keyExtractor={(item) => item.key}
                 onSlideChange={(index) => setActiveIndex(index)}
-                overScrollMode="never"
                 ref={(ref) => {
                     sliderRef.current = ref;
                 }}
                 renderItem={({ item: { title, subTitle, Icon, key } }) => (
-                    <Box key={key} alignItems="center" flex={1} justifyContent="center" p={Spacing.medium}>
+                    <Box
+                        key={key}
+                        alignItems="center"
+                        flex={1}
+                        justifyContent="center"
+                        mt={IsMobile ? 0 : "100%"}
+                        p={Spacing.medium}
+                    >
                         <Icon color={pallette.primary.dark} size={IconSize.massive} />
                         <Text
                             color={pallette.primary.dark}
