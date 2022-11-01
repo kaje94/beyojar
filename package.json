@@ -3,20 +3,20 @@
     "version": "1.0.0",
     "private": true,
     "scripts": {
-        "format": "npx prettier --ignore-path .gitignore --write ."
-    },
-    "devDependencies": {
-        "@tsconfig/node16": "^1.0.3"
+        "lint": "npm run lint --workspaces",
+        "lint:fix": "npm run lint --workspaces",
+        "build:landing": "npm run build --workspace=landing",
+        "start:landing": "npm run start --workspace=landing",
+        "start:expo": "npm run start --workspace=mobile",
+        "start:android": "npm run android --workspace=mobile",
+        "start:ios": "npm run ios --workspace=mobile",
+        "storybook:mobile": "npm run storybook --workspace=mobile",
+        "storybook-test:mobile": "npm run test-storybook --workspace=mobile",
+        "storybook-build:mobile": "npm run build-storybook --workspace=mobile",
+        "storybook-test-ci:mobile": "npm run test-storybook:ci --workspace=mobile"
     },
     "workspaces": [
         "mobile",
         "landing"
-    ],
-    "prettier": {
-        "tabWidth": 4,
-        "printWidth": 120
-    },
-    "dependencies": {
-        "nanoid": "^4.0.0"
-    }
+    ]
 }

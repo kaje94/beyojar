@@ -4,6 +4,7 @@ import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { TrashIcon } from "@src/assets/icons";
+import { FlexBox } from "@src/components/atoms";
 import { Button } from "@src/components/molecules/Button";
 
 import { ConfirmModal, Props } from "./ConfirmModal";
@@ -18,7 +19,9 @@ const Template: ComponentStory<typeof ConfirmModal> = (_) => {
     const [args, updateArgs] = useArgs();
     return (
         <>
-            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <FlexBox>
+                <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            </FlexBox>
             <ConfirmModal {...(args as Props)} onClose={() => updateArgs({ isVisible: false })} />
         </>
     );

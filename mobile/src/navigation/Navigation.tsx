@@ -13,7 +13,6 @@ import FlashMessage from "react-native-flash-message";
 import { useTheme } from "styled-components";
 
 import { IsAndroid, Screens } from "@src/common/constants";
-import { getInvertedColorMode } from "@src/common/helpers";
 import { Label, Note } from "@src/common/interfaces";
 import { Box } from "@src/components/atoms";
 import { ToastComponent } from "@src/components/molecules";
@@ -51,7 +50,7 @@ const DrawerNavigator: FC = () => {
 };
 
 const NotesStackNavigator: FC = () => {
-    const { pallette, mode } = useTheme();
+    const { pallette } = useTheme();
     const { introViewed } = useSettingsStore();
     return (
         <HomeStack.Navigator

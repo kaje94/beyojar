@@ -5,7 +5,6 @@ import formatDistance from "date-fns/formatDistanceToNow";
 import { nanoid } from "nanoid/non-secure";
 import { useTranslation } from "react-i18next";
 import { showMessage } from "react-native-flash-message";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
@@ -85,7 +84,6 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
         params: { initialLabels = [], noteItem },
     },
 }) => {
-    const insets = useSafeAreaInsets();
     const { pallette, mode } = useTheme();
     const { t } = useTranslation();
     const { deleteNote } = useNotesStore();

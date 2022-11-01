@@ -4,6 +4,7 @@ import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
 import { noteColors } from "@src/common/theme";
+import { FlexBox } from "@src/components/atoms";
 import { Button } from "@src/components/molecules/Button";
 
 import { ColorPickerModal, Props } from "./ColorPickerModal";
@@ -19,7 +20,9 @@ const Template: ComponentStory<typeof ColorPickerModal> = (_) => {
 
     return (
         <>
-            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <FlexBox>
+                <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            </FlexBox>
             <ColorPickerModal
                 {...(args as Props)}
                 onClose={(color) => updateArgs({ isVisible: false, selectedColor: color })}

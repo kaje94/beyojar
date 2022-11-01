@@ -1,3 +1,25 @@
 {
-    "cSpell.words": ["beyojar", "dynamoose"]
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
+    },
+    "editor.defaultFormatter": "dbaeumer.vscode-eslint",
+    "cSpell.words": [
+        "beyojar",
+        "Formik",
+        "iconsax",
+        "immer",
+        "iphonex",
+        "iphonexsmax",
+        "pixelxl",
+        "relativetime",
+        "viewports",
+        "zustand"
+    ],
+    "search.exclude": {
+        "**/.expo": true
+    },
+    "eslint.workingDirectories": ["landing", "mobile"],
+    "prettier.printWidth": 120,
+    "prettier.tabWidth": 4,
+    "editor.formatOnSave": false
 }

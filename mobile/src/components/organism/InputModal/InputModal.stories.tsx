@@ -4,6 +4,7 @@ import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import * as Yup from "yup";
 
+import { FlexBox } from "@src/components/atoms";
 import { Button } from "@src/components/molecules/Button";
 
 import { InputModal, Props } from "./InputModal";
@@ -16,7 +17,9 @@ const Template: ComponentStory<typeof InputModal> = (_) => {
     const [args, updateArgs] = useArgs();
     return (
         <>
-            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <FlexBox>
+                <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            </FlexBox>
             <InputModal {...(args as Props)} onClose={() => updateArgs({ isVisible: false })} />
         </>
     );

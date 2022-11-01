@@ -3,6 +3,7 @@ import React, { FC, PropsWithChildren } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { INITIAL_VIEWPORTS } from "@storybook/addon-viewport";
 import { addDecorator } from "@storybook/react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import { useDarkMode } from "storybook-dark-mode";
 
 import { i18n } from "@src/lang/i18n";
@@ -15,7 +16,9 @@ const ThemeWrapper: FC<PropsWithChildren> = ({ children }) => {
 export const decorators: Parameters<typeof addDecorator>[0][] = [
     (renderStory) => (
         <ThemeWrapper>
-            <NavigationContainer>{renderStory()}</NavigationContainer>
+            <SafeAreaProvider>
+                <NavigationContainer>{renderStory()}</NavigationContainer>
+            </SafeAreaProvider>
         </ThemeWrapper>
     ),
 ];

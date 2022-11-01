@@ -4,6 +4,8 @@ import { expect } from "@storybook/jest";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { userEvent, within } from "@storybook/testing-library";
 
+import { FlexBox } from "@src/components/atoms";
+
 import { Button } from "./Button";
 
 export default {
@@ -13,7 +15,11 @@ export default {
     title: "molecules/Button",
 } as ComponentMeta<typeof Button>;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: ComponentStory<typeof Button> = (args) => (
+    <FlexBox>
+        <Button {...args} />
+    </FlexBox>
+);
 
 export const Default = Template.bind({});
 Default.play = async ({ args, canvasElement }) => {

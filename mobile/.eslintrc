@@ -1,4 +1,5 @@
 {
+    "root": true,
     "plugins": ["@typescript-eslint", "react", "react-native", "prettier", "sort-keys-fix", "typescript-sort-keys"],
     "extends": [
         "airbnb",
@@ -52,7 +53,10 @@
         "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
         "react/function-component-definition": [
             "error",
-            { "namedComponents": "arrow-function", "unnamedComponents": "arrow-function" }
+            {
+                "namedComponents": "arrow-function",
+                "unnamedComponents": "arrow-function"
+            }
         ]
     },
     "settings": { "import/resolver": { "typescript": true } }

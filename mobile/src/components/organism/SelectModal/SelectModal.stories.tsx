@@ -3,6 +3,7 @@ import React from "react";
 import { useArgs } from "@storybook/client-api";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 
+import { FlexBox } from "@src/components/atoms";
 import { Button } from "@src/components/molecules/Button";
 
 import { Props, SelectModal } from "./SelectModal";
@@ -26,7 +27,9 @@ const Template: ComponentStory<typeof SelectModal> = (_) => {
 
     return (
         <>
-            <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            <FlexBox>
+                <Button onPress={() => updateArgs({ isVisible: true })} text="Open Modal" />
+            </FlexBox>
             <SelectModal {...(args as Props)} onClose={(id) => updateArgs({ isVisible: false, selectedId: id })} />
         </>
     );
