@@ -5,11 +5,12 @@ import formatDistance from "date-fns/formatDistanceToNow";
 import { nanoid } from "nanoid/non-secure";
 import { useTranslation } from "react-i18next";
 import { showMessage } from "react-native-flash-message";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "styled-components";
 
 import { FontFamily } from "@src/assets/fonts";
 import { InfoIcon, TagsIcon, ThemeIcon, TrashIcon } from "@src/assets/icons";
-import { IsAndroid, Screens } from "@src/common/constants";
+import { Screens } from "@src/common/constants";
 import { getInvertedColorMode, setStatusBarBgColor } from "@src/common/helpers";
 import { INoteColors, Label, Note } from "@src/common/interfaces";
 import { BorderWidth, FontSize, IconSize, IconStrokeWidth, noteColors, Spacing } from "@src/common/theme";
@@ -88,6 +89,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
     const { t } = useTranslation();
     const { deleteNote } = useNotesStore();
     const { addNote, updateNote } = useNotesStore();
+    const insets = useSafeAreaInsets();
     const [openedModal, setOpenedModal] = useState<VisibleModal | null>(null);
 
     /** Local note state reducer */
@@ -210,7 +212,7 @@ export const EditNoteScreen: FC<NativeStackScreenProps<NavigatorParamList, Scree
 
                 <FlexBox
                     bg={pallette.background}
-                    borderBottomWidth={IsAndroid ? BorderWidth.none : BorderWidth.small}
+                    borderBottomWidth={insets.bottom ? BorderWidth.small : BorderWidth.none}
                     borderColor={pallette.grey}
                     borderTopWidth={BorderWidth.small}
                     px={Spacing.medium}

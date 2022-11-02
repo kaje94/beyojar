@@ -10,7 +10,7 @@ import { Box, Text, Touchable, TouchableProps } from "@src/components/atoms";
 import { Favorite } from "@src/components/molecules/Favorite";
 import { LabelPills } from "@src/components/molecules/LabelPills";
 
-interface Props extends TouchableProps {
+export interface Props extends TouchableProps {
     /** Note details to be displayed in the card */
     noteItem: Note;
 }

@@ -59,5 +59,6 @@
             }
         ]
     },
-    "settings": { "import/resolver": { "typescript": true } }
+    "settings": { "import/resolver": { "typescript": true } },
+    "ignorePatterns":["storybook-static", "node_modules",".expo"]
 }

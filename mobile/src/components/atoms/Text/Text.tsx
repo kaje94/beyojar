@@ -45,6 +45,7 @@ export const Text: FC<TextProps> = memo(
 
         return (
             <StyledText
+                accessibilityRole="text"
                 color={textColor || pallette.black}
                 fontFamily={fontFamily}
                 fontSize={FontSize.medium}

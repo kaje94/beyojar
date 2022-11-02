@@ -1,6 +1,8 @@
 import React from "react";
 
+import { expect } from "@storybook/jest";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { screen, waitFor } from "@storybook/testing-library";
 
 import { EmptyPlaceholder } from "./EmptyPlaceholder";
 
@@ -14,3 +16,7 @@ const Template: ComponentStory<typeof EmptyPlaceholder> = (args) => {
 
 export const Default = Template.bind({});
 Default.args = { text: "Get started by adding your first item" };
+Default.play = async ({ args }) => {
+    // Check if EmptyPlaceholder contains the text prop
+    await waitFor(() => expect(screen.queryByText(`${args.text}`)).not.toBeNull());
+};

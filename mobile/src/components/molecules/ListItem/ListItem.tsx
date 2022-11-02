@@ -5,7 +5,7 @@ import { useTheme } from "styled-components";
 import { Opacity, Spacing } from "@src/common/theme";
 import { Text, TextProps, Touchable, TouchableProps } from "@src/components/atoms";
 
-interface Props extends TouchableProps {
+export interface Props extends TouchableProps {
     /** Text prefix component */
     Prefix?: ReactElement;
     /** Text suffix component */

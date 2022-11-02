@@ -24,7 +24,7 @@ export const Checkbox: FC<Props> = ({ checked = false, onPress, ...rest }) => {
     useEffect(() => ref.current?.animateNextTransition(), [checked]);
 
     return (
-        <Transitioning.View ref={ref} transition={getTransition("slide-right")}>
+        <Transitioning.View ref={ref} testID="checkbox" transition={getTransition("slide-right")}>
             {checked ? (
                 <TickIcon
                     circleColor={pallette.secondary.main}

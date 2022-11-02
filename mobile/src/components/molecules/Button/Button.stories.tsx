@@ -2,7 +2,7 @@ import React from "react";
 
 import { expect } from "@storybook/jest";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { userEvent, within } from "@storybook/testing-library";
+import { screen, userEvent } from "@storybook/testing-library";
 
 import { FlexBox } from "@src/components/atoms";
 
@@ -22,9 +22,9 @@ const Template: ComponentStory<typeof Button> = (args) => (
 );
 
 export const Default = Template.bind({});
-Default.play = async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = await canvas.findByRole("button");
+Default.play = async ({ args }) => {
+    // Check if button contains text and the onPress callback gets fired accordingly
+    const button = await screen.findByRole("button");
     expect(button.textContent).toEqual(args.text);
     userEvent.click(button);
     expect(args.onPress).toHaveBeenCalled();
@@ -32,8 +32,8 @@ Default.play = async ({ args, canvasElement }) => {
 
 export const Disabled = Template.bind({});
 Disabled.args = { disabled: true };
-Disabled.play = async ({ canvasElement }) => {
-    const canvas = within(canvasElement);
-    const button = await canvas.findByRole("button");
+Disabled.play = async () => {
+    // Check the button behavior when its disabled
+    const button = await screen.findByRole("button");
     expect(button).toHaveAttribute("aria-disabled");
 };
