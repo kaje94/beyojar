@@ -1,0 +1,59 @@
+{
+    "home": {
+        "header": {
+            "line1": "An ",
+            "line2": "open source",
+            "line3": " notes taking app to organize your life better"
+        },
+        "downloadButton": {
+            "ios": {
+                "title": "Download on the",
+                "store": "App Store"
+            },
+            "android": {
+                "title": "Download on",
+                "store": "Google Play"
+            }
+        },
+        "features": {
+            "header": {
+                "line1": "Why is it so",
+                "line2": " great?"
+            },
+            "description": "Beyojar has a number of features that makes it an awesome app to keep track of your notes",
+            "itemsLength": "6",
+            "items": {
+                "0": {
+                    "title": "Open source",
+                    "description": "Absolute transparency in how the app works and encourages collaboration to continuously improve the app"
+                },
+                "1": {
+                    "title": "Simple",
+                    "description": "A simple and familiar user interface to get you going in no time"
+                },
+                "2": {
+                    "title": "Reliable",
+                    "description": "Tested for robustness to ensure that the the app is fully reliably"
+                },
+                "3": {
+                    "title": "Privacy",
+                    "description": "Data persisted locally to ensure that your data fully secure"
+                },
+                "4": {
+                    "title": "Light & Dark Themes",
+                    "description": "Support for for light and dark themes based on your preference"
+                },
+                "5": {
+                    "title": "Keep your notes organized",
+                    "description": "Assign labels and colors in order to organize your notes better"
+                }
+            }
+        },
+        "github": {
+            "title": "Github",
+            "sourceCode": "Source code",
+            "featureRequest": "Feature request",
+            "reportBug": "Report bug"
+        }
+    }
+}
