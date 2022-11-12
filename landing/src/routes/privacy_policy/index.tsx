@@ -1,5 +1,6 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
+import { Header, SubHeader, Paragraph } from "@src/components/Document/Document";
 import { Footer } from "@src/components/Footer";
 import { $translate as t } from "qwik-speak";
 
@@ -15,16 +16,12 @@ export default component$(() => {
                 <div className="container bg-gray-100 p-7 my-8 rounded-lg">
                     <h1 className="my-4 text-3xl text-left lg:text-4xl font-bold">{t("common.privacyPolicy")}</h1>
                     <p className="font-thin">{t("privacyPolicy.lastUpdated")}</p>
-                    <p className="whitespace-pre-line">{t("privacyPolicy.description")}</p>
-                    <h1 className="mt-4 mb-2 text-3xl text-left lg:text-4xl">{t("privacyPolicy.section1.title")}</h1>
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section1.subSection1.title")}
-                    </h2>
-                    <p>{t("privacyPolicy.section1.subSection1.content")}</p>
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section1.subSection2.title")}
-                    </h2>
-                    <p>{t("privacyPolicy.section1.subSection2.content")}</p>
+                    <Paragraph text={t("privacyPolicy.description")} />
+                    <Header text={t("privacyPolicy.section1.title")} />
+                    <SubHeader text={t("privacyPolicy.section1.subSection1.title")} />
+                    <Paragraph text={t("privacyPolicy.section1.subSection1.content")} />
+                    <SubHeader text={t("privacyPolicy.section1.subSection2.title")} />
+                    <Paragraph text={t("privacyPolicy.section1.subSection2.content")} />
                     <ul className="list-disc pl-3">
                         {Array.from(Array(Number(t("privacyPolicy.section1.subSection2.itemsLength")))).map((_, i) => (
                             <li>
@@ -35,17 +32,11 @@ export default component$(() => {
                             </li>
                         ))}
                     </ul>
-
-                    <h1 className="mt-4 mb-2 text-3xl text-left lg:text-4xl">{t("privacyPolicy.section2.title")}</h1>
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection1.title")}
-                    </h2>
-                    <p className="whitespace-pre-line">{t("privacyPolicy.section2.subSection1.content")}</p>
-
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection2.title")}
-                    </h2>
-                    <p>{t("privacyPolicy.section2.subSection2.description")}</p>
+                    <Header text={t("privacyPolicy.section2.title")} />
+                    <SubHeader text={t("privacyPolicy.section2.subSection1.title")} />
+                    <Paragraph text={t("privacyPolicy.section2.subSection1.content")} />
+                    <SubHeader text={t("privacyPolicy.section2.subSection2.title")} />
+                    <Paragraph text={t("privacyPolicy.section2.subSection2.description")} />
                     <ul className="list-disc pl-3">
                         {Array.from(Array(Number(t("privacyPolicy.section2.subSection2.itemsLength")))).map((_, i) => (
                             <li>
@@ -53,7 +44,7 @@ export default component$(() => {
                             </li>
                         ))}
                     </ul>
-                    <p>{t("privacyPolicy.section2.subSection2.description2")}</p>
+                    <Paragraph text={t("privacyPolicy.section2.subSection2.description2")} />
                     <ul className="list-disc pl-3">
                         {Array.from(Array(Number(t("privacyPolicy.section2.subSection2.itemsLength2")))).map((_, i) => (
                             <li>
@@ -61,31 +52,20 @@ export default component$(() => {
                             </li>
                         ))}
                     </ul>
-
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection3.title")}
-                    </h2>
-                    <p className="whitespace-pre-line">{t("privacyPolicy.section2.subSection3.content")}</p>
-
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection4.title")}
-                    </h2>
-                    <p className="whitespace-pre-line">{t("privacyPolicy.section2.subSection4.content")}</p>
-
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection5.title")}
-                    </h2>
-                    <p className="whitespace-pre-line">{t("privacyPolicy.section2.subSection5.content")}</p>
-
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection6.title")}
-                    </h2>
+                    <SubHeader text={t("privacyPolicy.section2.subSection3.title")} />
+                    <Paragraph text={t("privacyPolicy.section2.subSection3.content")} />
+                    <SubHeader text={t("privacyPolicy.section2.subSection4.title")} />
+                    <Paragraph text={t("privacyPolicy.section2.subSection4.content")} />
+                    <SubHeader text={t("privacyPolicy.section2.subSection5.title")} />
+                    <Paragraph text={t("privacyPolicy.section2.subSection5.content")} />
+                    <SubHeader text={t("privacyPolicy.section2.subSection6.title")} />
                     <h3 className="text-xl"> {t("privacyPolicy.section2.subSection6.subSection1.title")}</h3>
-                    <p>{t("privacyPolicy.section2.subSection6.subSection1.content")}</p>
+                    <Paragraph text={t("privacyPolicy.section2.subSection6.subSection1.content")} />
                     <h3 className="text-xl">{t("privacyPolicy.section2.subSection6.subSection2.title")}</h3>
-                    <p>{t("privacyPolicy.section2.subSection6.subSection2.content")}</p>
+                    <Paragraph text={t("privacyPolicy.section2.subSection6.subSection2.content")} />
+
                     <h3 className="text-xl">{t("privacyPolicy.section2.subSection6.subSection3.title")}</h3>
-                    <p>{t("privacyPolicy.section2.subSection6.subSection3.content")}</p>
+                    <Paragraph text={t("privacyPolicy.section2.subSection6.subSection3.content")} />
                     <ul className="list-disc pl-3">
                         {Array.from(Array(Number(t("privacyPolicy.section2.subSection6.subSection3.itemsLength")))).map(
                             (_, i) => (
@@ -95,22 +75,16 @@ export default component$(() => {
                             )
                         )}
                     </ul>
-                    <h2 className="mt-2 mb-1 text-2xl text-left lg:text-2xl">
-                        {t("privacyPolicy.section2.subSection7.title")}
-                    </h2>
-                    <p className="whitespace-pre-line">{t("privacyPolicy.section2.subSection7.content")}</p>
-
-                    <h1 className="mt-4 mb-2 text-3xl text-left lg:text-4xl">{t("privacyPolicy.section3.title")}</h1>
-                    <p>{t("privacyPolicy.section3.content")}</p>
-
-                    <h1 className="mt-4 mb-2 text-3xl text-left lg:text-4xl">{t("privacyPolicy.section4.title")}</h1>
-                    <p>{t("privacyPolicy.section4.content")}</p>
-
-                    <h1 className="mt-4 mb-2 text-3xl text-left lg:text-4xl">{t("privacyPolicy.section5.title")}</h1>
-                    <p>{t("privacyPolicy.section5.content")}</p>
-
-                    <h1 className="mt-4 mb-2 text-3xl text-left lg:text-4xl">{t("privacyPolicy.section6.title")}</h1>
-                    <p>{t("privacyPolicy.section6.content")}</p>
+                    <SubHeader text={t("privacyPolicy.section2.subSection7.title")} />
+                    <Paragraph text={t("privacyPolicy.section2.subSection7.content")} />
+                    <Header text={t("privacyPolicy.section3.title")} />
+                    <Paragraph text={t("privacyPolicy.section3.content")} />
+                    <Header text={t("privacyPolicy.section4.title")} />
+                    <Paragraph text={t("privacyPolicy.section4.content")} />
+                    <Header text={t("privacyPolicy.section5.title")} />
+                    <Paragraph text={t("privacyPolicy.section5.content")} />
+                    <Header text={t("privacyPolicy.section6.title")} />
+                    <Paragraph text={t("privacyPolicy.section6.content")} />
                     <ul className="list-disc pl-3">
                         <li>{t("privacyPolicy.section6.contactEmail", { email: "a.kajendran@gmail.com" })}</li>
                     </ul>
