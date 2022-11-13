@@ -1,5 +1,5 @@
 name: Lint and storybook checks
-on: [push, pull_request, workflow_dispatch]
+on: [pull_request, workflow_dispatch]
 jobs:
     lint:
         name: Lint

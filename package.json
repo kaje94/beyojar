@@ -16,7 +16,7 @@
         "storybook-build:mobile": "npm run build-storybook --workspace=mobile",
         "storybook-test-ci:mobile": "npm run test-storybook:ci --workspace=mobile",
         "format-rest": "npx prettier --ignore-path .gitignore --write \"**/*.{css,md,json,yml}\" \"!package-lock.json\"",
-        "prepare": "husky install"
+        "prepare": "is-ci || husky install"
     },
     "workspaces": [
         "mobile",
@@ -24,6 +24,7 @@
     ],
     "devDependencies": {
         "husky": "^8.0.2",
+        "is-ci": "^3.0.1",
         "lint-staged": "^13.0.3",
         "prettier": "2.7.1"
     },
