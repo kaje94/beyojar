@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren } from "react";
+import React, { FC, memo, PropsWithChildren } from "react";
 
 import RnModal from "react-native-modal";
 import { useTheme } from "styled-components";
@@ -14,7 +14,7 @@ export interface Props {
 }
 
 /** Bottom Sheet built on top of react-native-modal */
-export const BottomSheetModal: FC<PropsWithChildren<Props>> = ({ isVisible, onClose, children }) => {
+export const BottomSheetModal: FC<PropsWithChildren<Props>> = memo(({ isVisible, onClose, children }) => {
     const { pallette } = useTheme();
     return (
         <RnModal
@@ -40,4 +40,4 @@ export const BottomSheetModal: FC<PropsWithChildren<Props>> = ({ isVisible, onCl
             </Box>
         </RnModal>
     );
-};
+});

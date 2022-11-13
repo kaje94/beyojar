@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { useTheme } from "styled-components";
 
@@ -13,7 +13,7 @@ interface Props extends TouchableProps {
 }
 
 /** Standard button component to be used throughout the application */
-export const Button: FC<Props> = ({ text = "Button", textColor, disabled = false, ...rest }) => {
+export const Button: FC<Props> = memo(({ text = "Button", textColor, disabled = false, ...rest }) => {
     const { pallette } = useTheme();
 
     return (
@@ -36,4 +36,4 @@ export const Button: FC<Props> = ({ text = "Button", textColor, disabled = false
             </Text>
         </Touchable>
     );
-};
+});

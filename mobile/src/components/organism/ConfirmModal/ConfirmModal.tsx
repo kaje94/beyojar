@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -29,54 +29,56 @@ export interface Props extends BottomSheetModalProps {
 }
 
 /** Modal to get user's confirmation before performing critical actions */
-export const ConfirmModal: FC<Props> = ({
-    isVisible,
-    onClose,
-    onConfirmPress,
-    title,
-    message,
-    primaryBtnText,
-    secondaryBtnText,
-    color,
-    Icon = InfoIcon,
-}) => {
-    const { t } = useTranslation();
-    const { pallette } = useTheme();
-    const primaryColor = color || pallette.primary.dark;
+export const ConfirmModal: FC<Props> = memo(
+    ({
+        isVisible,
+        onClose,
+        onConfirmPress,
+        title,
+        message,
+        primaryBtnText,
+        secondaryBtnText,
+        color,
+        Icon = InfoIcon,
+    }) => {
+        const { t } = useTranslation();
+        const { pallette } = useTheme();
+        const primaryColor = color || pallette.primary.dark;
 
-    return (
-        <BottomSheetModal isVisible={isVisible} onClose={onClose}>
-            <Box my={Spacing.medium}>
-                <Icon color={primaryColor} size={IconSize.huge} />
-            </Box>
-            <Text fontFamily={FontFamily.medium} fontSize={FontSize.large} textAlign="center">
-                {title}
-            </Text>
-            <Text color={pallette.grey} fontSize={FontSize.small} textAlign="center">
-                {message}
-            </Text>
+        return (
+            <BottomSheetModal isVisible={isVisible} onClose={onClose}>
+                <Box my={Spacing.medium}>
+                    <Icon color={primaryColor} size={IconSize.huge} />
+                </Box>
+                <Text fontFamily={FontFamily.medium} fontSize={FontSize.large} textAlign="center">
+                    {title}
+                </Text>
+                <Text color={pallette.grey} fontSize={FontSize.small} textAlign="center">
+                    {message}
+                </Text>
 
-            <FlexBox mt={Spacing.medium} width="100%">
-                <Button
-                    accessibilityHint={`${secondaryBtnText || t("common.continue")} ${message}`}
-                    accessibilityLabel={`${secondaryBtnText || t("common.continue")} ${title}`}
-                    accessibilityRole="button"
-                    bg={pallette.white}
-                    borderColor={pallette.grey}
-                    onPress={onClose}
-                    text={secondaryBtnText || t("common.cancel")}
-                    textColor={pallette.grey}
-                />
-                <Button
-                    accessibilityHint={`${primaryBtnText || t("common.continue")} ${message}`}
-                    accessibilityLabel={`${primaryBtnText || t("common.continue")} ${title}`}
-                    accessibilityRole="button"
-                    bg={primaryColor}
-                    borderColor={primaryColor}
-                    onPress={onConfirmPress}
-                    text={primaryBtnText || t("common.continue")}
-                />
-            </FlexBox>
-        </BottomSheetModal>
-    );
-};
+                <FlexBox mt={Spacing.medium} width="100%">
+                    <Button
+                        accessibilityHint={`${secondaryBtnText || t("common.continue")} ${message}`}
+                        accessibilityLabel={`${secondaryBtnText || t("common.continue")} ${title}`}
+                        accessibilityRole="button"
+                        bg={pallette.white}
+                        borderColor={pallette.grey}
+                        onPress={onClose}
+                        text={secondaryBtnText || t("common.cancel")}
+                        textColor={pallette.grey}
+                    />
+                    <Button
+                        accessibilityHint={`${primaryBtnText || t("common.continue")} ${message}`}
+                        accessibilityLabel={`${primaryBtnText || t("common.continue")} ${title}`}
+                        accessibilityRole="button"
+                        bg={primaryColor}
+                        borderColor={primaryColor}
+                        onPress={onConfirmPress}
+                        text={primaryBtnText || t("common.continue")}
+                    />
+                </FlexBox>
+            </BottomSheetModal>
+        );
+    }
+);

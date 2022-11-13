@@ -27,11 +27,13 @@ export default component$(() => {
                                 title={t("home.downloadButton.ios.title")}
                                 subtitle={t("home.downloadButton.ios.store")}
                                 iconName="AppStore"
+                                url="https://apps.apple.com/us/app/beyojar/id6443962955"
                             />
                             <DownloadButton
                                 title={t("home.downloadButton.android.title")}
                                 subtitle={t("home.downloadButton.android.store")}
                                 iconName="GooglePlay"
+                                url="https://play.google.com/store/apps/details?id=com.beyojar"
                             />
                         </div>
                     </div>
@@ -113,7 +115,6 @@ const description = "An open source notes taking app to organize your life bette
 
 export const head: DocumentHead = {
     title,
-    links: [{ href: "URL", rel: "canonical" }],
     meta: [
         { name: "og:title", content: title, key: "og:title" },
         { name: "twitter:title", content: title, key: "twitter:title" },

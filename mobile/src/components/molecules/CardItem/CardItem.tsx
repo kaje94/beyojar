@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -16,7 +16,7 @@ export interface Props extends TouchableProps {
 }
 
 /** Card item to be listed in note listing screens */
-export const CardItem: FC<Props> = ({ noteItem, onPress, ...props }) => {
+export const CardItem: FC<Props> = memo(({ noteItem, onPress, ...props }) => {
     const { pallette, mode } = useTheme();
     const { t } = useTranslation();
 
@@ -75,4 +75,4 @@ export const CardItem: FC<Props> = ({ noteItem, onPress, ...props }) => {
             <LabelPills note={noteItem} onPress={onPress} variant="small" />
         </Touchable>
     );
-};
+});

@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, memo, ReactNode } from "react";
 
 import { useNavigation } from "@react-navigation/native";
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 /** Navigation Header component */
-export const HeaderBar: FC<Props> = ({ title, endIcon, onBackPress }) => {
+export const HeaderBar: FC<Props> = memo(({ title, endIcon, onBackPress }) => {
     const { pallette } = useTheme();
     const navigation = useNavigation();
     const { t } = useTranslation();
@@ -50,4 +50,4 @@ export const HeaderBar: FC<Props> = ({ title, endIcon, onBackPress }) => {
             </FlexBox>
         </FlexBox>
     );
-};
+});

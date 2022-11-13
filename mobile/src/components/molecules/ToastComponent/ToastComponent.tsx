@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { MessageComponentProps } from "react-native-flash-message";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -8,7 +8,7 @@ import { BorderRadius, Spacing } from "@src/common/theme";
 import { FlexBox, Text } from "@src/components/atoms";
 
 /** Custom toast message to be shown for the showMessage function of react-native-flash-message */
-export const ToastComponent: FC<MessageComponentProps> = ({ message, icon }) => {
+export const ToastComponent: FC<MessageComponentProps> = memo(({ message, icon }) => {
     const { pallette } = useTheme();
     const insets = useSafeAreaInsets();
 
@@ -31,4 +31,4 @@ export const ToastComponent: FC<MessageComponentProps> = ({ message, icon }) => 
             </>
         </FlexBox>
     );
-};
+});

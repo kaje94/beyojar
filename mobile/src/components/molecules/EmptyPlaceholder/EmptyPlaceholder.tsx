@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { useTheme } from "styled-components";
 
@@ -20,7 +20,7 @@ interface Props extends BoxProps {
 }
 
 /** Empty placeholder to be displayed when there aren't any items to display */
-export const EmptyPlaceholder: FC<Props> = ({ text, color, Icon = SearchIcon, textProps, ...rest }) => {
+export const EmptyPlaceholder: FC<Props> = memo(({ text, color, Icon = SearchIcon, textProps, ...rest }) => {
     const { pallette } = useTheme();
 
     return (
@@ -47,4 +47,4 @@ export const EmptyPlaceholder: FC<Props> = ({ text, color, Icon = SearchIcon, te
             </Text>
         </Box>
     );
-};
+});

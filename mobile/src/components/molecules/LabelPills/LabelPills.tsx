@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { GestureResponderEvent } from "react-native";
@@ -19,7 +19,7 @@ interface Props {
 }
 
 /** Label Tags/Pills to be shown in notes */
-export const LabelPills: FC<Props> = ({ note, variant = "normal", onPress }) => {
+export const LabelPills: FC<Props> = memo(({ note, variant = "normal", onPress }) => {
     const { pallette } = useTheme();
     const { t } = useTranslation();
 
@@ -51,4 +51,4 @@ export const LabelPills: FC<Props> = ({ note, variant = "normal", onPress }) => 
             ))}
         </FlexBox>
     );
-};
+});

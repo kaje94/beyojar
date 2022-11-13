@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, memo, useEffect, useRef } from "react";
 
 import { GestureResponderEvent } from "react-native";
 import { Transitioning, TransitioningView } from "react-native-reanimated";
@@ -24,39 +24,34 @@ interface Props extends TouchableProps {
 }
 
 /** Floating action button to be used on item listing screens */
-export const FloatingButton: FC<Props> = ({
-    Icon = AddIcon,
-    iconSize = IconSize.large,
-    iconColor,
-    onPress,
-    visible = true,
-    ...rest
-}) => {
-    const ref = useRef<TransitioningView | null>(null);
-    const { pallette } = useTheme();
+export const FloatingButton: FC<Props> = memo(
+    ({ Icon = AddIcon, iconSize = IconSize.large, iconColor, onPress, visible = true, ...rest }) => {
+        const ref = useRef<TransitioningView | null>(null);
+        const { pallette } = useTheme();
 
-    useEffect(() => ref.current?.animateNextTransition(), [visible]);
+        useEffect(() => ref.current?.animateNextTransition(), [visible]);
 
-    return (
-        <Transitioning.View ref={ref} transition={getTransition("scale")}>
-            {visible && (
-                <Touchable
-                    accessibilityRole="button"
-                    alignItems="center"
-                    alignSelf="center"
-                    backgroundColor={pallette.primary.dark}
-                    borderRadius={iconSize}
-                    bottom={Spacing.large}
-                    justifyContent="center"
-                    onPress={onPress}
-                    p={Spacing.small}
-                    position="absolute"
-                    shadow={Shadow.large}
-                    {...rest}
-                >
-                    <Icon color={iconColor || pallette.background} size={iconSize} />
-                </Touchable>
-            )}
-        </Transitioning.View>
-    );
-};
+        return (
+            <Transitioning.View ref={ref} transition={getTransition("scale")}>
+                {visible && (
+                    <Touchable
+                        accessibilityRole="button"
+                        alignItems="center"
+                        alignSelf="center"
+                        backgroundColor={pallette.primary.dark}
+                        borderRadius={iconSize}
+                        bottom={Spacing.large}
+                        justifyContent="center"
+                        onPress={onPress}
+                        p={Spacing.small}
+                        position="absolute"
+                        shadow={Shadow.large}
+                        {...rest}
+                    >
+                        <Icon color={iconColor || pallette.background} size={iconSize} />
+                    </Touchable>
+                )}
+            </Transitioning.View>
+        );
+    }
+);

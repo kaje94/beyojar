@@ -1,4 +1,4 @@
-import React, { FC, ReactElement } from "react";
+import React, { FC, memo, ReactElement } from "react";
 
 import { useTheme } from "styled-components";
 
@@ -17,7 +17,7 @@ export interface Props extends TouchableProps {
 }
 
 /** List item component to be used in list views and scroll views */
-export const ListItem: FC<Props> = ({ text, Suffix, Prefix, onPress, textProps, ...rest }) => {
+export const ListItem: FC<Props> = memo(({ text, Suffix, Prefix, onPress, textProps, ...rest }) => {
     const { pallette } = useTheme();
 
     return (
@@ -39,4 +39,4 @@ export const ListItem: FC<Props> = ({ text, Suffix, Prefix, onPress, textProps, 
             {Suffix}
         </Touchable>
     );
-};
+});
