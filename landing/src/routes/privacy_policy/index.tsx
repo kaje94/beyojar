@@ -27,7 +27,8 @@ export default component$(() => {
                             <li>
                                 <p>
                                     <strong>{t(`privacyPolicy.section1.subSection2.items.${i}.key`)}</strong>
-                                    {` ${t(`privacyPolicy.section1.subSection2.items.${i}.value`)}`}
+                                    <span> </span>
+                                    {t(`privacyPolicy.section1.subSection2.items.${i}.value`)}
                                 </p>
                             </li>
                         ))}
