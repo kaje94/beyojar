@@ -22,12 +22,12 @@ export const RouterHead = component$(() => {
 
             <meta name="theme-color" content="#7ab17c" />
             <meta name="og:type" content="website" />
-            <meta name="og:image" content="/product_shot.png" />
+            <meta name="og:image" content="/social_preview.jpg" />
             <meta name="og:url" content="https://beyojar.com" />
             <meta name="twitter:card" content="summary" />
             <meta name="twitter:domain" content="beyojar.com" />
             <meta name="twitter:url" content="https://beyojar.com" />
-            <meta name="twitter:image" content="/product_shot.png" />
+            <meta name="twitter:image" content="/social_preview.jpg" />
 
             {head.meta.map((m) => (
                 <meta {...m} />
