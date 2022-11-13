@@ -28,17 +28,8 @@
         "prettier": "2.7.1"
     },
     "lint-staged": {
-        "mobile/**/*.{js,jsx,ts,tsx}": [
-            "npm run lint:fix --workspace=mobile",
-            "git add"
-        ],
-        "landing/**/*.{js,jsx,ts,tsx}": [
-            "npm run lint:fix --workspace=landing",
-            "git add"
-        ],
-        "*.{css,md,json}": [
-            "npm run format-rest",
-            "git add"
-        ]
+        "mobile/**/*.{js,jsx,ts,tsx}": "npm run lint:fix --workspace=mobile",
+        "landing/**/*.{js,jsx,ts,tsx}": "npm run lint:fix --workspace=landing",
+        "*.{css,md,json}": "npm run format-rest"
     }
 }
