@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, memo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -22,7 +22,7 @@ export interface Props {
 }
 
 /** Select modal that behaves similar to radio buttons */
-export const SelectModal: FC<Props> = ({ isVisible, onClose, title, selectedId, options }) => {
+export const SelectModal: FC<Props> = memo(({ isVisible, onClose, title, selectedId, options }) => {
     const { pallette } = useTheme();
     const { t } = useTranslation();
 
@@ -63,4 +63,4 @@ export const SelectModal: FC<Props> = ({ isVisible, onClose, title, selectedId, 
             </Box>
         </BottomSheetModal>
     );
-};
+});

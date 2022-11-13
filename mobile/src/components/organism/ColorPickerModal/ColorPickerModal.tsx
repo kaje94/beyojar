@@ -1,4 +1,4 @@
-import React, { FC, useMemo } from "react";
+import React, { FC, memo, useMemo } from "react";
 
 import { useTranslation } from "react-i18next";
 import { useTheme } from "styled-components";
@@ -24,7 +24,7 @@ export interface Props {
 }
 
 /** Modal to allow users to select their preferred color for a selected note */
-export const ColorPickerModal: FC<Props> = ({ isVisible, selectedColor, onClose }) => {
+export const ColorPickerModal: FC<Props> = memo(({ isVisible, selectedColor, onClose }) => {
     const { t } = useTranslation();
     const { pallette, mode } = useTheme();
 
@@ -66,4 +66,4 @@ export const ColorPickerModal: FC<Props> = ({ isVisible, selectedColor, onClose 
             </Box>
         </BottomSheetModal>
     );
-};
+});

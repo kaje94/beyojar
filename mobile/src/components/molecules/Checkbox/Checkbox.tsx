@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, memo, useEffect, useRef } from "react";
 
 import { GestureResponderEvent } from "react-native";
 import { Transitioning, TransitioningView } from "react-native-reanimated";
@@ -17,7 +17,7 @@ export interface Props extends IconProps {
 }
 
 /** Controlled Checkbox component to show checked and unchecked state */
-export const Checkbox: FC<Props> = ({ checked = false, onPress, ...rest }) => {
+export const Checkbox: FC<Props> = memo(({ checked = false, onPress, ...rest }) => {
     const ref = useRef<TransitioningView | null>(null);
     const { pallette } = useTheme();
 
@@ -43,4 +43,4 @@ export const Checkbox: FC<Props> = ({ checked = false, onPress, ...rest }) => {
             )}
         </Transitioning.View>
     );
-};
+});

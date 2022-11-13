@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useRef } from "react";
+import React, { FC, memo, useEffect, useRef } from "react";
 
 import { useTranslation } from "react-i18next";
 import { Transitioning, TransitioningView } from "react-native-reanimated";
@@ -17,7 +17,7 @@ export interface Props extends TouchableProps {
 }
 
 /** Controlled Favorite component to be shown for each note */
-export const Favorite: FC<Props> = ({ isFavorite = false, size, ...rest }) => {
+export const Favorite: FC<Props> = memo(({ isFavorite = false, size, ...rest }) => {
     const ref = useRef<TransitioningView | null>(null);
     const { pallette } = useTheme();
     const { t } = useTranslation();
@@ -50,4 +50,4 @@ export const Favorite: FC<Props> = ({ isFavorite = false, size, ...rest }) => {
             </Transitioning.View>
         </Touchable>
     );
-};
+});
