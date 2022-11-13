@@ -4,7 +4,7 @@
     "private": true,
     "scripts": {
         "lint": "npm run lint --workspaces",
-        "lint:fix": "npm run lint --workspaces",
+        "lint:fix": "npm run lint:fix --workspaces",
         "build:landing": "npm run build --workspace=landing",
         "start:landing": "npm run start --workspace=landing",
         "start:expo": "npm run start --workspace=mobile",
@@ -14,10 +14,31 @@
         "storybook:mobile": "npm run storybook --workspace=mobile",
         "storybook-test:mobile": "npm run test-storybook --workspace=mobile",
         "storybook-build:mobile": "npm run build-storybook --workspace=mobile",
-        "storybook-test-ci:mobile": "npm run test-storybook:ci --workspace=mobile"
+        "storybook-test-ci:mobile": "npm run test-storybook:ci --workspace=mobile",
+        "format-rest": "npx prettier --print-width 120 --tab-width 4 --ignore-path .gitignore --write \"**/*.{css,md,json}\" \"!package-lock.json\"",
+        "prepare": "husky install"
     },
     "workspaces": [
         "mobile",
         "landing"
-    ]
+    ],
+    "devDependencies": {
+        "husky": "^8.0.2",
+        "lint-staged": "^13.0.3",
+        "prettier": "2.7.1"
+    },
+    "lint-staged": {
+        "mobile/**/*.{js,jsx,ts,tsx}": [
+            "npm run lint:fix --workspace=mobile",
+            "git add"
+        ],
+        "landing/**/*.{js,jsx,ts,tsx}": [
+            "npm run lint:fix --workspace=landing",
+            "git add"
+        ],
+        "*.{css,md,json}": [
+            "npm run format-rest",
+            "git add"
+        ]
+    }
 }
