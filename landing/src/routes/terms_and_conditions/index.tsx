@@ -28,7 +28,8 @@ export default component$(() => {
                                 <li>
                                     <p>
                                         <strong>{t(`termsAndConditions.section1.subSection2.items.${i}.key`)}</strong>
-                                        {` ${t(`termsAndConditions.section1.subSection2.items.${i}.value`)}`}
+                                        <span> </span>
+                                        {t(`termsAndConditions.section1.subSection2.items.${i}.value`)}
                                     </p>
                                 </li>
                             )

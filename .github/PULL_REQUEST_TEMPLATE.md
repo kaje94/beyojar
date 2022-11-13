@@ -1,7 +1,7 @@
 -   **Please check if the PR fulfills these requirements**
 
 *   [ ] The commit message follows our contribution guidelines
-*   [ ] This change does not contain any possible security variabilities
+*   [ ] This change does not contain any possible security vulnerabilities
 
 -   **What kind of change does this PR introduce?** (Bug fix, feature, docs update, ...)
 
