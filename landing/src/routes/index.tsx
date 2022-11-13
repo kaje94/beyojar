@@ -27,11 +27,13 @@ export default component$(() => {
                                 title={t("home.downloadButton.ios.title")}
                                 subtitle={t("home.downloadButton.ios.store")}
                                 iconName="AppStore"
+                                url="https://apps.apple.com/us/app/beyojar/id6443962955"
                             />
                             <DownloadButton
                                 title={t("home.downloadButton.android.title")}
                                 subtitle={t("home.downloadButton.android.store")}
                                 iconName="GooglePlay"
+                                url="https://play.google.com/store/apps/details?id=com.beyojar"
                             />
                         </div>
                     </div>
