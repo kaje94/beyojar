@@ -6,11 +6,11 @@ export const Footer = component$(() => {
     return (
         <footer className="bg-gray-800  w-full">
             <div className="pt-2">
-                <div className="flex justify-between pb-5 px-3 m-auto pt-5 border-t border-gray-500 text-gray-400 text-sm flex-col md:flex-row max-w-6xl">
-                    <a href="/">
+                <div className="flex pb-5  m-auto pt-5 border-t border-gray-500 text-gray-400 text-sm flex-col md:flex-row container">
+                    <a href="/" className="flex-1">
                         <div className="mt-2 hover:text-gray-500 duration-300">{t("common.copyRights")}</div>
                     </a>
-                    <a href="/privacy_policy">
+                    <a href="/privacy_policy" className="mr-10">
                         <div className="mt-2 hover:text-gray-500 duration-300">{t("common.privacyPolicy")}</div>
                     </a>
                     <a href="/terms_and_conditions">
