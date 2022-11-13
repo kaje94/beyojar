@@ -115,7 +115,6 @@ const description = "An open source notes taking app to organize your life bette
 
 export const head: DocumentHead = {
     title,
-    links: [{ href: "URL", rel: "canonical" }],
     meta: [
         { name: "og:title", content: title, key: "og:title" },
         { name: "twitter:title", content: title, key: "twitter:title" },
