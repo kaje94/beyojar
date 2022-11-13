@@ -20,6 +20,15 @@ export const RouterHead = component$(() => {
             <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
             <link href="https://fonts.googleapis.com/css?family=Rubik" rel="stylesheet" />
 
+            <meta name="theme-color" content="#7ab17c" />
+            <meta name="og:type" content="website" />
+            <meta name="og:image" content="/product_shot.png" />
+            <meta name="og:url" content="https://beyojar.com" />
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:domain" content="beyojar.com" />
+            <meta name="twitter:url" content="https://beyojar.com" />
+            <meta name="twitter:image" content="/product_shot.png" />
+
             {head.meta.map((m) => (
                 <meta {...m} />
             ))}

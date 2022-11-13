@@ -83,4 +83,16 @@ export default component$(() => {
     );
 });
 
-export const head: DocumentHead = { title: "Beyojar: Terms & Conditions" };
+const title = "Beyojar: Terms & Conditions";
+const description = "The Terms and conditions that needs to be agreed before using Beyojar";
+
+export const head: DocumentHead = {
+    title,
+    meta: [
+        { name: "og:title", content: title, key: "og:title" },
+        { name: "twitter:title", content: title, key: "twitter:title" },
+        { name: "description", content: description, key: "description" },
+        { name: "og:description", content: description, key: "og:description" },
+        { name: "twitter:description", content: description, key: "twitter:description" },
+    ],
+};

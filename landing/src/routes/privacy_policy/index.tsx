@@ -95,6 +95,16 @@ export default component$(() => {
     );
 });
 
+const title = "Beyojar: Privacy Policy";
+const description = "This privacy policy page contains information on how Beyojar handles customer data";
+
 export const head: DocumentHead = {
-    title: "Beyojar: Terms & Conditions",
+    title,
+    meta: [
+        { name: "og:title", content: title, key: "og:title" },
+        { name: "twitter:title", content: title, key: "twitter:title" },
+        { name: "description", content: description, key: "description" },
+        { name: "og:description", content: description, key: "og:description" },
+        { name: "twitter:description", content: description, key: "twitter:description" },
+    ],
 };

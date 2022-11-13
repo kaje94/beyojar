@@ -108,4 +108,17 @@ export default component$(() => {
     );
 });
 
-export const head: DocumentHead = { title: "Beyojar" };
+const title = "Beyojar";
+const description = "An open source notes taking app to organize your life better";
+
+export const head: DocumentHead = {
+    title,
+    links: [{ href: "URL", rel: "canonical" }],
+    meta: [
+        { name: "og:title", content: title, key: "og:title" },
+        { name: "twitter:title", content: title, key: "twitter:title" },
+        { name: "description", content: description, key: "description" },
+        { name: "og:description", content: description, key: "og:description" },
+        { name: "twitter:description", content: description, key: "twitter:description" },
+    ],
+};
