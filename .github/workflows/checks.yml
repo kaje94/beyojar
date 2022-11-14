@@ -1,9 +1,5 @@
-name: Lint and storybook checks
-on:
-    push:
-        branches: ["main"]
-    pull_request:
-    workflow_dispatch:
+name: Checks
+on: [push, pull_request, workflow_dispatch]
 jobs:
     lint:
         name: Lint
@@ -16,14 +12,3 @@ jobs:
                   cache: "npm"
             - run: npm install
             - run: npm run lint
-    storybook_mobile:
-        name: Storybook (Mobile)
-        runs-on: ubuntu-latest
-        steps:
-            - uses: actions/checkout@v3
-            - uses: actions/setup-node@v3
-              with:
-                  node-version: 16
-                  cache: "npm"
-            - run: npm install
-            - run: npm run storybook-test-ci:mobile
