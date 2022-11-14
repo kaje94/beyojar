@@ -76,8 +76,8 @@
 ## Prerequisite
 
 -   [Git](https://git-scm.com)
--   [Node.js 16+](<(https://nodejs.org/en/download/)>)
--   [NPM 7+](<(http://npmjs.com)>)
+-   [Node.js 16+](https://nodejs.org/en/download/)
+-   [NPM 7+](http://npmjs.com)
 -   [Android Studio](https://developer.android.com/studio) (Needed only if you want to run the app in an Android emulator)
 -   [Xcode](https://developer.apple.com/xcode/) (Needed only if you want to run the app in an iOS emulator)
 
