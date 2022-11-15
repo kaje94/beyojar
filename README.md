@@ -1,12 +1,18 @@
 <br>
 <h1 align="center"> <b>Beyojar</b> </h1> 
-<h4 align="center">A minimal, open source notes app built with <a href="https://reactnative.dev" target="_blank">React-Native</a>.</h4>
+<h4 align="center">A minimal, open source notes app built with <a href="https://reactnative.dev" target="_blank">React-Native</a> & <a href="https://docs.expo.dev" target="_blank">Expo</a>.</h4>
 <br>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">
-  <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white">
-  <img src="https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo">
+  <a href="https://reactnative.dev">
+    <img src="https://img.shields.io/badge/react_native-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB">
+  </a>
+  <a href="https://www.typescriptlang.org">
+    <img src="https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white">
+  </a>
+  <a href="https://docs.expo.dev">
+    <img src="https://img.shields.io/badge/expo-1C1E24?style=for-the-badge&logo=expo">
+  </a>
 </p>
 
 <p align="center">
@@ -64,7 +70,7 @@
 
 ## Introduction
 
--   Beyojar is a simple notes taking application built for Android & IOS using [React-Native](https://reactnative.dev/) & [Expo](https://expo.dev/)
+-   Beyojar is a simple notes taking application built for Android & IOS using [React-Native](https://reactnative.dev/) & [Expo](https://docs.expo.dev)
 -   The [mobile](mobile) workspace contains all the code related to the mobile application
 -   -   This app provides a simple and familiar interface that allows users to to get started immediately
 -   -   Allows users to keep their notes organized with labels and colors
@@ -104,9 +110,11 @@ $ npm run start:expo
 
 # Start the expo development server and launch the Android app by running:
 $ npm run start:android
+# Either an android emulator or an android device with usb-debugging turned on, must be available
 
 # Start the expo development server and launch the IOS app by running:
 $ npm run start:ios
+# Xcode must to available in order to run this command
 
 # Start the expo development server and launch the expo app in a browser by running:
 $ npm run start:web
@@ -120,6 +128,10 @@ $ npm run start:landing
 
 # Build the landing page in production mode by running:
 $ npm run build:landing
+
+# Deploy the landing page build files in localhost by running:
+$ npx http-server landing/dist
+# Can also use alternatives such as Browsersync, lite-server, serve or static-server
 ```
 
 Scripts related to linting and formatting:

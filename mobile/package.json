@@ -1,6 +1,7 @@
 {
     "name": "beyojar-mobile",
     "version": "1.0.0",
+    "description": "Mobile app workspace of Beyojar",
     "main": "index.ts",
     "scripts": {
         "start": "expo start",

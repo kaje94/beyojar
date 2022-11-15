@@ -1,66 +1,65 @@
-# Qwik App ⚡️
+<br>
+<h1 align="center"> <b>Beyojar</b> : Landing page </h1>
 
--   [Qwik Docs](https://qwik.builder.io/)
--   [Discord](https://qwik.builder.io/chat)
--   [Qwik GitHub](https://github.com/BuilderIO/qwik)
--   [@QwikDev](https://twitter.com/QwikDev)
--   [Vite](https://vitejs.dev/)
--   [Partytown](https://partytown.builder.io/)
--   [Mitosis](https://github.com/BuilderIO/mitosis)
--   [Builder.io](https://www.builder.io/)
+<p align="center">
+  <a href="#introduction">Introduction</a> •
+  <a href="#folder-structure">Folder structure</a> •
+  <a href="#how-to-use">How To Use</a> •
+  <a href="#contributing">Contributing</a>
+</p>
 
----
+## Introduction
 
-## Project Structure
+-   The landing page has been built using [Qwik](https://qwik.builder.io) as its perfect for pre-rendered content and offers awesome performance due to its focus on resumability and lazy loading.
+-   [Tailwind CSS](https://tailwindcss.com) has been used to style the user interface as it provides flexibility to developers by providing simple utility-first CSS classes.
+-   [Qwik Speak](https://github.com/robisim74/qwik-speak) has been used for internationalization as it is easy to be integrated with [Qwik](https://qwik.builder.io).
+-   Using [Qwik](https://qwik.builder.io) has allowed search engines to easily understand the contents of the page and also reach a [Google Lighthouse](https://github.com/GoogleChrome/lighthouse) score of <b>100</b>.
 
-Inside your project, you'll see the following directory structure:
+## Folder structure
 
-```
-├── public/
-│   └── ...
-└── src/
-    ├── components/
-    │   └── ...
-    └── routes/
-        └── ...
-```
+Following is the folder structure of the landing page workspace
 
--   `src/routes`: Provides the directory based routing, which can include a hierarchy of `layout.tsx` layout files, and an `index.tsx` file as the page. Additionally, `index.ts` files are endpoints. Please see the [routing docs](https://qwik.builder.io/qwikcity/routing/overview/) for more info.
+    ├── public                  # Any static assets, like images, can be placed in the public directory
+    │   └── i18n                # Language files for different languages
+    ├── src
+    │   ├── components          # Recommended directory for components
+    │   └── routes              # Provides directory based routing
+    ├── .eslintrc               # Contains all the lint rules
+    ├── tailwind.config.js      # Tailwind css config
+    ├── tsconfig.json           # Required compiler options
+    ├── vite.config.ts          # Vite configurations
+    └── package.json            # All the dependencies & scripts needed to run the landing page
 
--   `src/components`: Recommended directory for components.
+## How To Use
 
--   `public`: Any static assets, like images, can be placed in the public directory. Please see the [Vite public directory](https://vitejs.dev/guide/assets.html#the-public-directory) for more info.
+Scripts related to building and running the landing page
 
-## Add Integrations
+```bash
+# Start the landing page in dev mode by running:
+$ npm run start
 
-Use the `npm run qwik add` command to add additional integrations. Some examples of integrations include: Cloudflare, Netlify or Vercel server, and the [Static Site Generator (SSG)](https://qwik.builder.io/qwikcity/static-site-generation/static-site-config/).
+# Build the landing page in production mode by running:
+$ npm run build
 
-```shell
-npm run qwik add # or `yarn qwik add`
-```
+# Deploy the landing page build files in localhost by running:
+$ npx http-server dist
+# Can also use alternatives such as Browsersync, lite-server, serve or static-server
 
-## Development
-
-Development mode uses [Vite's development server](https://vitejs.dev/). During development, the `dev` command will server-side render (SSR) the output.
-
-```shell
-npm run dev # or `yarn dev`
-```
-
-> Note: during dev mode, Vite may request a significant number of `.js` files. This does not represent a Qwik production build.
-
-## Preview
-
-The preview command will create a production build of the client modules, a production build of `src/entry.preview.tsx`, and run a local server. The preview server is only for convenience to locally preview a production build, and it should not be used as a production server.
-
-```shell
-npm run preview # or `yarn preview`
+# Directly build & run the landing page in production mode by running:
+$ npm run preview
+# The preview server is only for convenience to locally preview a production build, and it should not be used as a production server.
 ```
 
-## Production
+Scripts related to linting and formatting:
 
-The production build will generate client and server modules by running both client and server build commands. Additionally, the build command will use Typescript to run a type check on the source code.
+```bash
+# Check if there are any linting issues by running:
+$ npm run lint
 
-```shell
-npm run build # or `yarn build`
+# Check & fix fixable linting issues by running:
+$ npm run lint:fix
 ```
+
+## Contributing
+
+Please refer the [Contributing.md](../.github/CONTRIBUTING.md) in order to contribute towards this project
