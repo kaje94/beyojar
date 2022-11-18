@@ -2,18 +2,10 @@
     "home": {
         "header": {
             "line1": "An ",
-            "line2": "open source",
-            "line3": " notes taking app to organize your life better"
-        },
-        "downloadButton": {
-            "ios": {
-                "title": "Download on the",
-                "store": "App Store"
-            },
-            "android": {
-                "title": "Download on",
-                "store": "Google Play"
-            }
+            "line1Word1": "open source",
+            "line1Word2": "effortless",
+            "line1Word3": "awesome",
+            "line2": " notes taking application to organize your life better"
         },
         "features": {
             "header": {
@@ -25,27 +17,27 @@
             "items": {
                 "0": {
                     "title": "Open source",
-                    "description": "Absolute transparency in how the app works and encourages collaboration to continuously improve the app"
+                    "description": "Absolute transparency in how the application works and encourages collaboration to continuously improve the application"
                 },
                 "1": {
                     "title": "Simple",
-                    "description": "A simple and familiar user interface to get you going in no time"
+                    "description": "A simple and familiar user interface to get you going in no time. The user interface has been designed with minimalism in mind"
                 },
                 "2": {
                     "title": "Reliable",
-                    "description": "Tested for robustness to ensure that the the app is fully reliably"
+                    "description": "Tested for robustness to ensure that the the application is fault tolerant and fully reliably"
                 },
                 "3": {
                     "title": "Privacy",
-                    "description": "Data persisted locally to ensure that your data fully secure"
+                    "description": "Data will not be shared with other services and the note related data will be persisted locally to ensure that your data fully secure"
                 },
                 "4": {
                     "title": "Light & Dark Themes",
-                    "description": "Support for for light and dark themes based on your preference"
+                    "description": "Support for for light and dark themes based on your preference. You can either let the app pick the default theme or override it within the settings"
                 },
                 "5": {
                     "title": "Keep your notes organized",
-                    "description": "Assign labels and colors in order to organize your notes better"
+                    "description": "Assign labels and colors in order to organize your notes better. Mark important notes so that you will never miss them out"
                 }
             }
         },

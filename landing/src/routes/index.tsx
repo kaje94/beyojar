@@ -1,6 +1,5 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
-import { DownloadButton } from "@src/components/DownloadButton";
 import { FeatureItem } from "@src/components/FeatureItem";
 import { Footer } from "@src/components/Footer";
 import { Github } from "@src/components/icons/Github";
@@ -9,91 +8,107 @@ import { $translate as t } from "qwik-speak";
 export default component$(() => {
     return (
         <>
-            <main className="flex flex-col items-center justify-center bg-gray-50">
-                <section className="flex flex-wrap items-center px-4 mx-auto w-full container pb-4 ">
-                    <div className="px-3 w-full lg:w-2/5">
-                        <div className="mx-auto mb-8 text-center lg:mx-0 lg:text-left">
-                            <h1 className="mb-4 text-5xl font-bold text-left lg:text-5xl  text-teal-800 leading-relaxeds">
-                                {t("common.title")}
-                            </h1>
-                            <h2 className="mb-4 text-2xl text-left lg:text-3xl">
-                                {t("home.header.line1")}
-                                <span className="font-bold">{t("home.header.line2")}</span>
-                                {t("home.header.line3")}
-                            </h2>
+            <main className="flex flex-col items-center justify-center bg-gradient-to-b from-primary-300 to-secondary-500">
+                <section className="px-4 py-16 mx-auto container md:px-24 lg:px-8 lg:py-20 flex align-middle flex-col overflow-hidden h-screen">
+                    <div className="flex flex-col items-center  w-full lg:flex-row flex-1">
+                        <div className="lg:max-w-lg lg:pr-5 flex-1  animate-fadeInUp">
+                            <div className="max-w-xl mb-3 xl:mb-6">
+                                <h1 className="mb-1 xl:mb-4 -ml-1 text-5xl font-bold text-left lg:text-7xl  text-primary-900 leading-relaxed flex">
+                                    {t("common.title")}
+                                </h1>
+                                <h2 className="text-left text-3xl text-secondary-800">
+                                    <div className="overflow-hidden relative">
+                                        <div>{t("home.header.line1")}</div>
+                                        <div className="ml-11 absolute whitespace-nowrap overflow-hidden font-bold text-secondary-900 animate-textOpenClose">
+                                            <div>{t("home.header.line1Word1")}</div>
+                                            <div>{t("home.header.line1Word2")}</div>
+                                            <div>{t("home.header.line1Word3")}</div>
+                                        </div>
+                                    </div>
+                                    <div>{t("home.header.line2")}</div>
+                                </h2>
+                            </div>
+                            <div className="flex items-center space-x-3">
+                                <a
+                                    href="https://apps.apple.com/us/app/beyojar/id6443962955"
+                                    className="w-32 transition duration-300 hover:shadow-lg transform hover:scale-105"
+                                    target="_blank"
+                                >
+                                    <img
+                                        src="/app-store.png"
+                                        className="object-cover object-top w-full h-auto mx-auto"
+                                        alt="apple-app-store-download-button"
+                                    />
+                                </a>
+                                <a
+                                    href="https://play.google.com/store/apps/details?id=com.beyojar"
+                                    className="w-32 transition duration-300 hover:shadow-lg transform hover:scale-105"
+                                    target="_blank"
+                                >
+                                    <img
+                                        src="/google-play.png"
+                                        className="object-cover object-top w-full h-auto mx-auto"
+                                        alt="google-play-store-download-button"
+                                    />
+                                </a>
+                            </div>
                         </div>
-                        <div className=" items-center space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
-                            <DownloadButton
-                                title={t("home.downloadButton.ios.title")}
-                                subtitle={t("home.downloadButton.ios.store")}
-                                iconName="AppStore"
-                                url="https://apps.apple.com/us/app/beyojar/id6443962955"
-                            />
-                            <DownloadButton
-                                title={t("home.downloadButton.android.title")}
-                                subtitle={t("home.downloadButton.android.store")}
-                                iconName="GooglePlay"
-                                url="https://play.google.com/store/apps/details?id=com.beyojar"
-                            />
-                        </div>
-                    </div>
-                    <div className="px-3 mb-12 w-full lg:mb-0 lg:w-3/5">
-                        <div className="flex justify-center items-center">
-                            <img src="./product_shot.png" alt="beyojar-product-shot" />
+                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none">
+                            <div className="w-2/5 duration-300 delay-150 transform hover:-translate-x-20 animate-fadeInLeft">
+                                <img className="object-cover scale-110" src="/product-shot-android.png" alt="" />
+                            </div>
+                            <div className="w-5/12 -ml-6 lg:-ml-16 duration-300 delay-300 transform hover:translate-x-20 animate-fadeInRight">
+                                <img className="object-cover scale-125" src="/product-shot-iphone.png" alt="" />
+                            </div>
                         </div>
                     </div>
                 </section>
 
                 <section
-                    className="flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center"
-                    style={{
-                        backgroundImage:
-                            "url(https://images.unsplash.com/photo-1455849318743-b2233052fcff?auto=format&fit=crop&w=880&q=80)",
-                    }}
+                    className={`flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center bg-[url('/parallax.jpg')]`}
                 >
-                    <div className="flex items-center mt-20 mb-10 ">
-                        <h1 className="text-slate-900 text-5xl font-sans font-semibold drop-shadow-lg">
-                            {t("home.github.title")}
-                        </h1>
+                    <div className="flex mt-20 mb-10 ">
+                        <h1 className="text-5xl font-sans font-semibold drop-shadow-lg">{t("home.github.title")}</h1>
                         <span className="h-full flex items-center ml-5 w-10">
                             <Github />
                         </span>
                     </div>
 
-                    <span className="text-center font-bold my-20 text-slate-800">
+                    <span className="text-center font-bold my-20 ">
                         <a href="https://github.com/kaje94/beyojar" target="_blank">
-                            <h2 className="text-2xl duration-300  hover:text-slate-500 drop-shadow-2xl">
+                            <h2 className="text-2xl duration-300  hover:text-secondary-700 drop-shadow-2xl">
                                 {t("home.github.sourceCode")}
                             </h2>
                         </a>
-                        <hr className="my-4 border-slate-600" />
+                        <hr className="my-4 border-secondary-600" />
                         <a href="https://github.com/kaje94/beyojar/issues/new" target="_blank">
-                            <h2 className="text-2xl duration-300 hover:text-slate-500 drop-shadow-2xl">
+                            <h2 className="text-2xl duration-300 hover:text-secondary-700 drop-shadow-2xl">
                                 {t("home.github.featureRequest")}
                             </h2>
                         </a>
-                        <hr className="my-4 border-slate-600" />
+                        <hr className="my-4 border-secondary-600" />
                         <a href="https://github.com/kaje94/beyojar/issues/new" target="_blank">
-                            <h2 className="text-2xl duration-300 hover:text-slate-500 drop-shadow-2xl">
+                            <h2 className="text-2xl duration-300 hover:text-secondary-700 drop-shadow-2xl">
                                 {t("home.github.reportBug")}
                             </h2>
                         </a>
                     </span>
                 </section>
-            </main>
 
-            <section className="mb-8 text-gray-800 container my-24  px-6 lg:px-32  mx-auto">
-                <div className="flex flex-wrap items-center">
-                    <div className="grow-0 shrink-0 basis-auto w-full lg:w-4/12 mb-6 md:mb-0 px-3">
-                        <h2 className="text-3xl font-bold mb-6">
-                            {t("home.features.header.line1")}
-                            <u className="text-teal-600">{t("home.features.header.line2")}</u>
-                        </h2>
-
-                        <p className="text-gray-500 mb-12">{t("home.features.description")}</p>
-                    </div>
-                    <div className="grow-0 shrink-0 basis-auto w-full lg:w-8/12 mb-6 mb-md-0 px-3">
-                        <div className="flex flex-wrap">
+                <section className="bg-white w-full ">
+                    <div className="px-4 py-16 lg:py-32 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8">
+                        <div className="max-w-xl md:mx-auto sm:text-center lg:max-w-2xl mb-10 lg:mb-20">
+                            <h2 className="max-w-lg mb-10  font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+                                <span>
+                                    {t("home.features.header.line1")}
+                                    <u className="text-primary-600">{t("home.features.header.line2")}</u>
+                                </span>
+                            </h2>
+                            <p className="text-base text-gray-700 md:text-lg px-0 md:px-10">
+                                {t("home.features.description")}
+                            </p>
+                        </div>
+                        <div className="grid max-w-screen-lg gap-10 row-gap-10 mx-auto lg:grid-cols-2">
                             {Array.from(Array(Number(t("home.features.itemsLength")))).map((_, i) => (
                                 <FeatureItem
                                     title={t(`home.features.items.${i}.title`)}
@@ -102,8 +117,8 @@ export default component$(() => {
                             ))}
                         </div>
                     </div>
-                </div>
-            </section>
+                </section>
+            </main>
 
             <Footer />
         </>

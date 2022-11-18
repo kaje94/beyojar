@@ -12,3 +12,13 @@
 body {
     font-family: "Rubik", serif;
 }
+
+body::-webkit-scrollbar {
+    width: 5px;
+    background-color: #428747;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #204524;
+    outline: 1px solid #204524;
+}

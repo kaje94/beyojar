@@ -3,6 +3,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { Footer } from "@src/components/Footer";
 import { $translate as t } from "qwik-speak";
 import { Header, SubHeader, Paragraph } from "@src/components/Document/Document";
+import { Navbar } from "@src/components/Navbar";
 
 /**
  * Terms and condition page required for legal purposes.
@@ -12,9 +13,12 @@ import { Header, SubHeader, Paragraph } from "@src/components/Document/Document"
 export default component$(() => {
     return (
         <>
+            <Navbar />
             <div className="flex flex-col items-center justify-center text-justify">
-                <div className="container bg-gray-100 p-7 my-8 rounded-lg">
-                    <h1 className="my-4 text-3xl text-left lg:text-4xl font-bold">{t("common.termsAndConditions")}</h1>
+                <div className="container bg-secondary-50 p-7 my-8 rounded-lg border">
+                    <h1 className="my-4 text-3xl text-left lg:text-4xl font-bold text-secondary-900">
+                        {t("common.termsAndConditions")}
+                    </h1>
                     <p className="font-thin">{t("termsAndConditions.lastUpdated")}</p>
                     <Paragraph text={t("termsAndConditions.pleaseReadText")} />
                     <Header text={t("termsAndConditions.section1.title")} />

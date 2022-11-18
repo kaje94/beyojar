@@ -5,6 +5,7 @@ import { RouterHead } from "./components/router-head/router-head";
 import { config, translateFn } from "./langConfig";
 
 import "./global.css";
+// import "animate.css";
 
 export default component$(() => {
     /**
