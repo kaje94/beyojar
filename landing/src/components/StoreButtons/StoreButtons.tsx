@@ -15,8 +15,8 @@ export const StoreButtons = component$(() => {
                         src="/images/app-store.png"
                         className="object-cover object-top w-full h-auto mx-auto"
                         alt="Apple app store download button"
-                        width="360"
-                        height="240"
+                        width="128"
+                        height="40"
                     />
                 </picture>
             </a>
@@ -31,6 +31,8 @@ export const StoreButtons = component$(() => {
                         src="/images/google-play.png"
                         className="object-cover object-top w-full h-auto mx-auto"
                         alt="Google play store download button"
+                        width="128"
+                        height="40"
                     />
                 </picture>
             </a>

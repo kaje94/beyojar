@@ -10,7 +10,7 @@ export default component$(() => {
     return (
         <>
             <main className="flex flex-col items-center justify-center bg-gradient-to-b from-primary-300 to-secondary-500">
-                <section className="px-4 py-16 mx-auto container md:px-24 lg:px-8 lg:py-20 flex align-middle flex-col overflow-hidden xl:min-h-screen">
+                <section className="px-4 py-16 mx-auto container md:px-24 lg:px-8 lg:py-20 flex align-middle flex-col xl:min-h-screen">
                     <div className="flex flex-col items-center  w-full lg:flex-row flex-1">
                         <div className="lg:max-w-lg lg:pr-5 flex-1  animate-fadeInUp">
                             <div className="max-w-xl mb-3 xl:mb-6">
@@ -33,7 +33,7 @@ export default component$(() => {
                                 <StoreButtons />
                             </div>
                         </div>
-                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none mt-32 mb-16  xl:my-8">
+                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none mt-32 mb-16  xl:my-16">
                             <div className="w-2/5 duration-300 delay-150 transform hover:-translate-x-20 animate-fadeInLeft">
                                 <picture>
                                     <source srcSet="/images/product-shot-android.avif" type="image/avif" />
@@ -41,6 +41,8 @@ export default component$(() => {
                                         className="object-cover scale-110 w-full"
                                         src="/images/product-shot-android.png"
                                         alt="Android product shot"
+                                        width="346"
+                                        height="707"
                                     />
                                 </picture>
                             </div>
@@ -51,6 +53,8 @@ export default component$(() => {
                                         className="object-cover scale-125"
                                         src="/images/product-shot-iphone.png"
                                         alt="Iphone product shot"
+                                        width="420"
+                                        height="850"
                                     />
                                 </picture>
                             </div>
