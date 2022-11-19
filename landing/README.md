@@ -20,7 +20,9 @@
 Following is the folder structure of the landing page workspace
 
     ├── public                  # Any static assets, like images, can be placed in the public directory
+    │   └── fonts               # Language files used in the landing page
     │   └── i18n                # Language files for different languages
+    │   └── images              # Images used throughout the landing page
     ├── src
     │   ├── components          # Recommended directory for components
     │   └── routes              # Provides directory based routing

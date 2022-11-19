@@ -33,27 +33,33 @@ export default component$(() => {
                                 <StoreButtons />
                             </div>
                         </div>
-                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none mt-32 mb-16  xl:my-auto">
+                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none mt-32 mb-16  xl:my-8">
                             <div className="w-2/5 duration-300 delay-150 transform hover:-translate-x-20 animate-fadeInLeft">
-                                <img
-                                    className="object-cover scale-110 w-full"
-                                    src="/product-shot-android.png"
-                                    alt="Android product shot"
-                                />
+                                <picture>
+                                    <source srcSet="/images/product-shot-android.avif" type="image/avif" />
+                                    <img
+                                        className="object-cover scale-110 w-full"
+                                        src="/images/product-shot-android.png"
+                                        alt="Android product shot"
+                                    />
+                                </picture>
                             </div>
                             <div className="w-5/12 -ml-6 lg:-ml-16 duration-300 delay-300 transform hover:translate-x-20 animate-fadeInRight">
-                                <img
-                                    className="object-cover scale-125"
-                                    src="/product-shot-iphone.png"
-                                    alt="Iphone product shot"
-                                />
+                                <picture>
+                                    <source srcSet="/images/product-shot-iphone.avif" type="image/avif" />
+                                    <img
+                                        className="object-cover scale-125"
+                                        src="/images/product-shot-iphone.png"
+                                        alt="Iphone product shot"
+                                    />
+                                </picture>
                             </div>
                         </div>
                     </div>
                 </section>
 
                 <section
-                    className={`flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center bg-[url('/parallax.jpg')]`}
+                    className={`flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center bg-[url('/images/parallax.avif')]`}
                 >
                     <div className="flex mt-20 mb-10 ">
                         <h1 className="text-5xl font-sans font-semibold drop-shadow-lg">{t("home.github.title")}</h1>

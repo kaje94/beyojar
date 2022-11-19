@@ -5,7 +5,7 @@ import { $translate as t } from "qwik-speak";
 export const Footer = component$(() => {
     return (
         <footer className="bg-secondary-800 ">
-            <div className="flex m-auto py-5 px-5 border-t align-middle border-secondary-500 text-secondary-100 text-sm flex-col md:flex-row justify-between align-middle container">
+            <div className="flex m-auto py-5 px-5 border-t align-middle border-secondary-500 text-secondary-100 text-sm flex-col md:flex-row justify-between container">
                 <a href="/" className="mt-2 hover:text-secondary-300 duration-300 h-12 text-center leading-10">
                     {t("common.copyRights")}
                 </a>

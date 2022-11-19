@@ -9,22 +9,30 @@ export const StoreButtons = component$(() => {
                 className="w-32 transition duration-300 hover:shadow-lg transform hover:scale-105"
                 target="_blank"
             >
-                <img
-                    src="/app-store.png"
-                    className="object-cover object-top w-full h-auto mx-auto"
-                    alt="Apple app store download button"
-                />
+                <picture>
+                    <source srcSet="/images/app-store.avif" type="image/avif" />
+                    <img
+                        src="/images/app-store.png"
+                        className="object-cover object-top w-full h-auto mx-auto"
+                        alt="Apple app store download button"
+                        width="360"
+                        height="240"
+                    />
+                </picture>
             </a>
             <a
                 href="https://play.google.com/store/apps/details?id=com.beyojar"
                 className="w-32 transition duration-300 hover:shadow-lg transform hover:scale-105"
                 target="_blank"
             >
-                <img
-                    src="/google-play.png"
-                    className="object-cover object-top w-full h-auto mx-auto"
-                    alt="Google play store download button"
-                />
+                <picture>
+                    <source srcSet="/images/google-play.avif" type="image/avif" />
+                    <img
+                        src="/images/google-play.png"
+                        className="object-cover object-top w-full h-auto mx-auto"
+                        alt="Google play store download button"
+                    />
+                </picture>
             </a>
         </>
     );

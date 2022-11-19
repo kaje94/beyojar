@@ -8,7 +8,7 @@ export const Navbar = component$(() => {
         <div class="px-4 py-5 mx-auto container md:px-24 lg:px-8 border-b-2 border-gray-300">
             <div class="relative grid lg:grid-cols-2 ">
                 <a href="/" className="flex items-center text-primary-900 duration-200 hover:text-secondary-600 w-min">
-                    <img src="/favicon.ico" className="rounded-md" alt="Logo" />
+                    <img src="/images/favicon.ico" className="rounded-md" alt="Logo" />
                     <h1 className="ml-3 text-3xl font-bold text-left lg:text-4xl leading-relaxed">
                         {t("common.title")}
                     </h1>

@@ -14,16 +14,16 @@ export const RouterHead = component$(() => {
 
             <link rel="canonical" href={loc.href} />
             <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-            <link rel="icon" type="image/x-icon" href="/favicon.ico?v=2" />
+            <link rel="icon" type="image/x-icon" href="/images/favicon.ico?v=2" />
 
             <meta name="theme-color" content="#7ab17c" />
             <meta name="og:type" content="website" />
-            <meta name="og:image" content="/social_preview.jpg" />
+            <meta name="og:image" content="/images/social_preview.jpg" />
             <meta name="og:url" content="https://beyojar.com" />
             <meta name="twitter:card" content="summary" />
             <meta name="twitter:domain" content="beyojar.com" />
             <meta name="twitter:url" content="https://beyojar.com" />
-            <meta name="twitter:image" content="/social_preview.jpg" />
+            <meta name="twitter:image" content="/images/social_preview.jpg" />
 
             {head.meta.map((m) => (
                 <meta {...m} />
