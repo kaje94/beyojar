@@ -59,11 +59,6 @@ module.exports = {
                     "0%": { opacity: 0 },
                     "100%": { opacity: 1 },
                 },
-                fadeIn: {
-                    "0%": { opacity: 0 },
-                    "50%": { opacity: 0 },
-                    "100%": { opacity: 1 },
-                },
                 fadeInLeft: {
                     "0%": { opacity: 0, transform: "translateX(-10%)" },
                     "100%": { opacity: 1, transform: "translateX(0%)" },

@@ -3,13 +3,14 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { FeatureItem } from "@src/components/FeatureItem";
 import { Footer } from "@src/components/Footer";
 import { Github } from "@src/components/icons/Github";
+import { StoreButtons } from "@src/components/StoreButtons";
 import { $translate as t } from "qwik-speak";
 
 export default component$(() => {
     return (
         <>
             <main className="flex flex-col items-center justify-center bg-gradient-to-b from-primary-300 to-secondary-500">
-                <section className="px-4 py-16 mx-auto container md:px-24 lg:px-8 lg:py-20 flex align-middle flex-col overflow-hidden h-screen">
+                <section className="px-4 py-16 mx-auto container md:px-24 lg:px-8 lg:py-20 flex align-middle flex-col overflow-hidden xl:min-h-screen">
                     <div className="flex flex-col items-center  w-full lg:flex-row flex-1">
                         <div className="lg:max-w-lg lg:pr-5 flex-1  animate-fadeInUp">
                             <div className="max-w-xl mb-3 xl:mb-6">
@@ -29,36 +30,23 @@ export default component$(() => {
                                 </h2>
                             </div>
                             <div className="flex items-center space-x-3">
-                                <a
-                                    href="https://apps.apple.com/us/app/beyojar/id6443962955"
-                                    className="w-32 transition duration-300 hover:shadow-lg transform hover:scale-105"
-                                    target="_blank"
-                                >
-                                    <img
-                                        src="/app-store.png"
-                                        className="object-cover object-top w-full h-auto mx-auto"
-                                        alt="apple-app-store-download-button"
-                                    />
-                                </a>
-                                <a
-                                    href="https://play.google.com/store/apps/details?id=com.beyojar"
-                                    className="w-32 transition duration-300 hover:shadow-lg transform hover:scale-105"
-                                    target="_blank"
-                                >
-                                    <img
-                                        src="/google-play.png"
-                                        className="object-cover object-top w-full h-auto mx-auto"
-                                        alt="google-play-store-download-button"
-                                    />
-                                </a>
+                                <StoreButtons />
                             </div>
                         </div>
-                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none">
+                        <div className="flex items-center justify-center lg:justify-end flex-1 lg:flex-none mt-32 mb-16  xl:my-auto">
                             <div className="w-2/5 duration-300 delay-150 transform hover:-translate-x-20 animate-fadeInLeft">
-                                <img className="object-cover scale-110" src="/product-shot-android.png" alt="" />
+                                <img
+                                    className="object-cover scale-110 w-full"
+                                    src="/product-shot-android.png"
+                                    alt="Android product shot"
+                                />
                             </div>
                             <div className="w-5/12 -ml-6 lg:-ml-16 duration-300 delay-300 transform hover:translate-x-20 animate-fadeInRight">
-                                <img className="object-cover scale-125" src="/product-shot-iphone.png" alt="" />
+                                <img
+                                    className="object-cover scale-125"
+                                    src="/product-shot-iphone.png"
+                                    alt="Iphone product shot"
+                                />
                             </div>
                         </div>
                     </div>
@@ -74,21 +62,21 @@ export default component$(() => {
                         </span>
                     </div>
 
-                    <span className="text-center font-bold my-20 ">
+                    <span className="text-center font-bold my-20 text-2xl">
                         <a href="https://github.com/kaje94/beyojar" target="_blank">
-                            <h2 className="text-2xl duration-300  hover:text-secondary-700 drop-shadow-2xl">
+                            <h2 className="duration-300  hover:text-secondary-700 drop-shadow-2xl">
                                 {t("home.github.sourceCode")}
                             </h2>
                         </a>
                         <hr className="my-4 border-secondary-600" />
                         <a href="https://github.com/kaje94/beyojar/issues/new" target="_blank">
-                            <h2 className="text-2xl duration-300 hover:text-secondary-700 drop-shadow-2xl">
+                            <h2 className="duration-300 hover:text-secondary-700 drop-shadow-2xl">
                                 {t("home.github.featureRequest")}
                             </h2>
                         </a>
                         <hr className="my-4 border-secondary-600" />
                         <a href="https://github.com/kaje94/beyojar/issues/new" target="_blank">
-                            <h2 className="text-2xl duration-300 hover:text-secondary-700 drop-shadow-2xl">
+                            <h2 className="duration-300 hover:text-secondary-700 drop-shadow-2xl">
                                 {t("home.github.reportBug")}
                             </h2>
                         </a>
