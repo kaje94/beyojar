@@ -10,7 +10,7 @@
 @tailwind utilities;
 
 body {
-    font-family: "Rubik", serif;
+    font-family: "Rubik", Helvetica, Arial, sans-serif;
 }
 
 body::-webkit-scrollbar {
